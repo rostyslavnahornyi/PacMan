@@ -9,6 +9,7 @@ namespace PacMan
     {
         private static PacMan pacman = new PacMan();
         private static Enemy enemy = new Enemy();
+       
 
         public Threads()
         {
@@ -18,9 +19,10 @@ namespace PacMan
         private void Main()
         {
             Thread first = new Thread(pacman.EntityPacman);
-            Thread second = new Thread(enemy.EntityEnemy);
+            Thread second = new Thread(enemy.MovingMain);
             first.Start();
             second.Start();
+
         }
     }
 }

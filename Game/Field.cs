@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 namespace PacMan
 {
@@ -25,7 +26,12 @@ namespace PacMan
                     arr[i, j] = lines[j][i];
                 }
             }
+            PrintField();
+        }
 
+        public void PrintField()
+        {
+            Console.BackgroundColor = ConsoleColor.Black;
             Console.Clear();
             for (int y = 0; y < arr.GetUpperBound(1) + 1; y++)
             {

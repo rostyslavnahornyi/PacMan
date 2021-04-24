@@ -24,6 +24,8 @@ namespace PacMan
                         x = j;
                         y = i;
                     }
+                    if (arr[j, i] == '.') Scores.scoresMax++;
+                    if (arr[j, i] == 'o') Scores.scoresMax += 3;
                 }
             }
 
@@ -67,7 +69,7 @@ namespace PacMan
                                 Console.Write('<');
                                 Thread.Sleep(500);
                             }
-                            arr[x, y] = ' ';
+                            arr[x, y] = '@';
                             
                             if (Scores.lifes != 1)
                             {
@@ -89,33 +91,48 @@ namespace PacMan
                             Console.ForegroundColor = ConsoleColor.Black;
                             Console.Write('<');
                             Console.SetCursorPosition(x * 3, y);
-                            arr[x, y] = ' ';
+                            arr[x, y] = '@';
                             Scores.scores++;
-                        } else if (arr[x - 1, y] == 'o')
+                            new DisplayInfo().displayScore();
+                            if (Scores.scores == Scores.scoresMax)
+                            {
+                                new Win();
+                            }
+                        }
+                        else if (arr[x - 1, y] == 'o')
                         {
                             Console.SetCursorPosition(x * 3, y);
                             Console.BackgroundColor = ConsoleColor.Black;
                             Console.Write(" ");
                             Console.SetCursorPosition(x * 3, y);
+                            arr[x, y] = ' ';
                             x--;
                             Console.SetCursorPosition(x * 3, y);
                             Console.BackgroundColor = ConsoleColor.DarkYellow;
                             Console.ForegroundColor = ConsoleColor.Black;
                             Console.Write('<');
                             Console.SetCursorPosition(x * 3, y);
-                            arr[x, y] = ' ';
+                            arr[x, y] = '@';
                             Scores.scores += 3;
-                        } else if (arr[x - 1, y] == ' ')
+                            new DisplayInfo().displayScore();
+                            if (Scores.scores == Scores.scoresMax)
+                            {
+                                new Win();
+                            }
+                        }
+                        else if (arr[x - 1, y] == ' ')
                         {
                             Console.SetCursorPosition(x * 3, y);
                             Console.Write(" ");
                             Console.SetCursorPosition(x * 3, y);
+                            arr[x, y] = ' ';
                             x--;
                             Console.SetCursorPosition(x * 3, y);
                             Console.BackgroundColor = ConsoleColor.DarkYellow;
                             Console.ForegroundColor = ConsoleColor.Black;
                             Console.Write('<');
                             Console.SetCursorPosition(x * 3, y);
+                            arr[x, y] = '@';
                         }
                         direction = "LEFT";
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
@@ -153,7 +170,7 @@ namespace PacMan
                                 Console.Write('>');
                                 Thread.Sleep(500);
                             }
-                            arr[x, y] = ' ';
+                            arr[x, y] = '@';
 
                             if (Scores.lifes != 1)
                             {
@@ -176,34 +193,47 @@ namespace PacMan
                             Console.ForegroundColor = ConsoleColor.Black;
                             Console.Write('>');
                             Console.SetCursorPosition(x * 3, y);
-                            arr[x, y] = ' ';
+                            arr[x, y] = '@';
                             Scores.scores++;
+                            new DisplayInfo().displayScore();
+                            if (Scores.scores == Scores.scoresMax)
+                            {
+                                new Win();
+                            }
                         } else if (arr[x + 1, y] == 'o')
                         {
                             Console.SetCursorPosition(x * 3, y);
                             Console.BackgroundColor = ConsoleColor.Black;
                             Console.Write(" ");
                             Console.SetCursorPosition(x * 3, y);
+                            arr[x, y] = ' ';
                             x++;
                             Console.SetCursorPosition(x * 3, y);
                             Console.BackgroundColor = ConsoleColor.DarkYellow;
                             Console.ForegroundColor = ConsoleColor.Black;
                             Console.Write('>');
                             Console.SetCursorPosition(x * 3, y);
-                            arr[x, y] = ' ';
+                            arr[x, y] = '@';
                             Scores.scores += 3;
+                            new DisplayInfo().displayScore();
+                            if (Scores.scores == Scores.scoresMax)
+                            {
+                                new Win();
+                            }
                         }
                         if (arr[x + 1, y] == ' ')
                         {
                             Console.SetCursorPosition(x * 3, y);
                             Console.Write(" ");
                             Console.SetCursorPosition(x * 3, y);
+                            arr[x, y] = ' ';
                             x++;
                             Console.SetCursorPosition(x * 3, y);
                             Console.BackgroundColor = ConsoleColor.DarkYellow;
                             Console.ForegroundColor = ConsoleColor.Black;
                             Console.Write('>');
                             Console.SetCursorPosition(x * 3, y);
+                            arr[x, y] = '@';
                         }
                         direction = "RIGHT";
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
@@ -242,7 +272,7 @@ namespace PacMan
                                 Console.Write('^');
                                 Thread.Sleep(500);
                             }
-                            arr[x, y] = ' ';
+                            arr[x, y] = '@';
 
                             if (Scores.lifes != 1)
                             {
@@ -257,37 +287,51 @@ namespace PacMan
                             Console.SetCursorPosition(x * 3, y);
                             Console.Write(" ");
                             Console.SetCursorPosition(x * 3, y);
+                            arr[x, y] = ' ';
                             y--;
                             Console.SetCursorPosition(x * 3, y);
                             Console.BackgroundColor = ConsoleColor.DarkYellow;
                             Console.ForegroundColor = ConsoleColor.Black;
                             Console.Write('^');
                             Console.SetCursorPosition(x * 3, y);
-                            arr[x, y] = ' ';
+                            arr[x, y] = '@';
                             Scores.scores++;
+                            new DisplayInfo().displayScore();
+                            if (Scores.scores == Scores.scoresMax)
+                            {
+                                new Win();
+                            }
                         } else if (arr[x, y - 1] == 'o')
                         {
                             Console.SetCursorPosition(x * 3, y);
                             Console.BackgroundColor = ConsoleColor.Black;
                             Console.Write(" ");
                             Console.SetCursorPosition(x * 3, y);
+                            arr[x, y] = ' ';
                             y--;
                             Console.SetCursorPosition(x * 3, y);
                             Console.BackgroundColor = ConsoleColor.DarkYellow;
                             Console.ForegroundColor = ConsoleColor.Black;
                             Console.Write('^');
                             Console.SetCursorPosition(x * 3, y);
-                            arr[x, y] = ' ';
+                            arr[x, y] = '@';
                             Scores.scores += 3;
+                            new DisplayInfo().displayScore();
+                            if (Scores.scores == Scores.scoresMax)
+                            {
+                                new Win();
+                            }
                         } else if (arr[x, y - 1] == ' ')
                         {
                             Console.SetCursorPosition(x * 3, y);
                             Console.Write(" ");
                             Console.SetCursorPosition(x * 3, y);
+                            arr[x, y] = ' ';
                             y--;
                             Console.SetCursorPosition(x * 3, y);
                             Console.Write('^');
                             Console.SetCursorPosition(x * 3, y);
+                            arr[x, y] = '@';
                         }
                         direction = "UP";
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
@@ -326,7 +370,7 @@ namespace PacMan
                                 Console.Write('↓');
                                 Thread.Sleep(500);
                             }
-                            arr[x, y] = ' ';
+                            arr[x, y] = '@';
 
                             if (Scores.lifes != 1)
                             {
@@ -342,39 +386,53 @@ namespace PacMan
                             Console.SetCursorPosition(x * 3, y);
                             Console.Write(" ");
                             Console.SetCursorPosition(x * 3, y);
+                            arr[x, y] = ' ';
                             y++;
                             Console.SetCursorPosition(x * 3, y);
                             Console.BackgroundColor = ConsoleColor.DarkYellow;
                             Console.ForegroundColor = ConsoleColor.Black;
                             Console.Write('↓');
                             Console.SetCursorPosition(x * 3, y);
-                            arr[x, y] = ' ';
+                            arr[x, y] = '@';
                             Scores.scores++;
+                            new DisplayInfo().displayScore();
+                            if (Scores.scores == Scores.scoresMax)
+                            {
+                                new Win();
+                            }
                         } else if (arr[x, y + 1] == 'o')
                         {
                             Console.SetCursorPosition(x * 3, y);
                             Console.BackgroundColor = ConsoleColor.Black;
                             Console.Write(" ");
                             Console.SetCursorPosition(x * 3, y);
+                            arr[x, y] = ' ';
                             y++;
                             Console.SetCursorPosition(x * 3, y);
                             Console.BackgroundColor = ConsoleColor.DarkYellow;
                             Console.ForegroundColor = ConsoleColor.Black;
                             Console.Write('↓');
                             Console.SetCursorPosition(x * 3, y);
-                            arr[x, y] = ' ';
+                            arr[x, y] = '@';
                             Scores.scores += 3;
+                            new DisplayInfo().displayScore();
+                            if (Scores.scores == Scores.scoresMax)
+                            {
+                                new Win();
+                            }
                         } else if (arr[x, y + 1] == ' ')
                         {
                             Console.SetCursorPosition(x * 3, y);
                             Console.Write(" ");
                             Console.SetCursorPosition(x * 3, y);
+                            arr[x, y] = ' ';
                             y++;
                             Console.SetCursorPosition(x * 3, y);
                             Console.BackgroundColor = ConsoleColor.DarkYellow;
                             Console.ForegroundColor = ConsoleColor.Black;
                             Console.Write('↓');
                             Console.SetCursorPosition(x * 3, y);
+                            arr[x, y] = '@';
                         }
                         direction = "DOWN";
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
@@ -425,7 +483,7 @@ namespace PacMan
                             Console.Write('<');
                             Thread.Sleep(500);
                         }
-                        arr[x, y] = ' ';
+                        arr[x, y] = '@';
 
                         if (Scores.lifes != 1)
                         {
@@ -448,8 +506,13 @@ namespace PacMan
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.Write('<');
                         Console.SetCursorPosition(x * 3, y);
-                        arr[x, y] = ' ';
+                        arr[x, y] = '@';
                         Scores.scores++;
+                        new DisplayInfo().displayScore();
+                        if (Scores.scores == Scores.scoresMax)
+                        {
+                            new Win();
+                        }
                     }
                     else if (arr[x - 1, y] == 'o')
                     {
@@ -457,26 +520,34 @@ namespace PacMan
                         Console.BackgroundColor = ConsoleColor.Black;
                         Console.Write(" ");
                         Console.SetCursorPosition(x * 3, y);
+                        arr[x, y] = ' ';
                         x--;
                         Console.SetCursorPosition(x * 3, y);
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.Write('<');
                         Console.SetCursorPosition(x * 3, y);
-                        arr[x, y] = ' ';
+                        arr[x, y] = '@';
                         Scores.scores += 3;
+                        new DisplayInfo().displayScore();
+                        if (Scores.scores == Scores.scoresMax)
+                        {
+                            new Win();
+                        }
                     }
                     else if (arr[x - 1, y] == ' ')
                     {
                         Console.SetCursorPosition(x * 3, y);
                         Console.Write(" ");
                         Console.SetCursorPosition(x * 3, y);
+                        arr[x, y] = ' ';
                         x--;
                         Console.SetCursorPosition(x * 3, y);
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.Write('<');
                         Console.SetCursorPosition(x * 3, y);
+                        arr[x, y] = '@';
                     }
                     direction = "LEFT";
                     Console.BackgroundColor = ConsoleColor.DarkYellow;
@@ -509,7 +580,7 @@ namespace PacMan
                             Console.Write('>');
                             Thread.Sleep(500);
                         }
-                        arr[x, y] = ' ';
+                        arr[x, y] = '@';
 
                         if (Scores.lifes != 1)
                         {
@@ -532,8 +603,13 @@ namespace PacMan
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.Write('>');
                         Console.SetCursorPosition(x * 3, y);
-                        arr[x, y] = ' ';
+                        arr[x, y] = '@';
                         Scores.scores++;
+                        new DisplayInfo().displayScore();
+                        if (Scores.scores == Scores.scoresMax)
+                        {
+                            new Win();
+                        }
                     }
                     else if (arr[x + 1, y] == 'o')
                     {
@@ -541,26 +617,34 @@ namespace PacMan
                         Console.BackgroundColor = ConsoleColor.Black;
                         Console.Write(" ");
                         Console.SetCursorPosition(x * 3, y);
+                        arr[x, y] = ' ';
                         x++;
                         Console.SetCursorPosition(x * 3, y);
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.Write('>');
                         Console.SetCursorPosition(x * 3, y);
-                        arr[x, y] = ' ';
+                        arr[x, y] = '@';
                         Scores.scores += 3;
+                        new DisplayInfo().displayScore();
+                        if (Scores.scores == Scores.scoresMax)
+                        {
+                            new Win();
+                        }
                     }
                     if (arr[x + 1, y] == ' ')
                     {
                         Console.SetCursorPosition(x * 3, y);
                         Console.Write(" ");
                         Console.SetCursorPosition(x * 3, y);
+                        arr[x, y] = ' ';
                         x++;
                         Console.SetCursorPosition(x * 3, y);
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.Write('>');
                         Console.SetCursorPosition(x * 3, y);
+                        arr[x, y] = '@';
                     }
                     direction = "RIGHT";
                     Console.BackgroundColor = ConsoleColor.DarkYellow;
@@ -593,7 +677,7 @@ namespace PacMan
                             Console.Write('^');
                             Thread.Sleep(500);
                         }
-                        arr[x, y] = ' ';
+                        arr[x, y] = '@';
 
                         if (Scores.lifes != 1)
                         {
@@ -609,14 +693,20 @@ namespace PacMan
                         Console.SetCursorPosition(x * 3, y);
                         Console.Write(" ");
                         Console.SetCursorPosition(x * 3, y);
+                        arr[x, y] = ' ';
                         y--;
                         Console.SetCursorPosition(x * 3, y);
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.Write('^');
                         Console.SetCursorPosition(x * 3, y);
-                        arr[x, y] = ' ';
+                        arr[x, y] = '@';
                         Scores.scores++;
+                        new DisplayInfo().displayScore();
+                        if (Scores.scores == Scores.scoresMax)
+                        {
+                            new Win();
+                        }
                     }
                     else if (arr[x, y - 1] == 'o')
                     {
@@ -624,24 +714,32 @@ namespace PacMan
                         Console.BackgroundColor = ConsoleColor.Black;
                         Console.Write(" ");
                         Console.SetCursorPosition(x * 3, y);
+                        arr[x, y] = ' ';
                         y--;
                         Console.SetCursorPosition(x * 3, y);
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.Write('^');
                         Console.SetCursorPosition(x * 3, y);
-                        arr[x, y] = ' ';
+                        arr[x, y] = '@';
                         Scores.scores += 3;
+                        new DisplayInfo().displayScore();
+                        if (Scores.scores == Scores.scoresMax)
+                        {
+                            new Win();
+                        }
                     }
                     else if (arr[x, y - 1] == ' ')
                     {
                         Console.SetCursorPosition(x * 3, y);
                         Console.Write(" ");
                         Console.SetCursorPosition(x * 3, y);
+                        arr[x, y] = ' ';
                         y--;
                         Console.SetCursorPosition(x * 3, y);
                         Console.Write('^');
                         Console.SetCursorPosition(x * 3, y);
+                        arr[x, y] = '@';
                     }
                     direction = "UP";
                     Console.BackgroundColor = ConsoleColor.DarkYellow;
@@ -674,7 +772,7 @@ namespace PacMan
                             Console.Write('↓');
                             Thread.Sleep(500);
                         }
-                        arr[x, y] = ' ';
+                        arr[x, y] = '@';
 
                         if (Scores.lifes != 1)
                         {
@@ -690,14 +788,20 @@ namespace PacMan
                         Console.SetCursorPosition(x * 3, y);
                         Console.Write(" ");
                         Console.SetCursorPosition(x * 3, y);
+                        arr[x, y] = ' ';
                         y++;
                         Console.SetCursorPosition(x * 3, y);
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
                         Console.ForegroundColor = ConsoleColor.Black;
                         Console.Write('↓');
                         Console.SetCursorPosition(x * 3, y);
-                        arr[x, y] = ' ';
+                        arr[x, y] = '@';
                         Scores.scores++;
+                        new DisplayInfo().displayScore();
+                        if (Scores.scores == Scores.scoresMax)
+                        {
+                            new Win();
+                        }
                     }
                     else if (arr[x, y + 1] == 'o')
                     {
@@ -705,6 +809,7 @@ namespace PacMan
                         Console.BackgroundColor = ConsoleColor.Black;
                         Console.Write(" ");
                         Console.SetCursorPosition(x * 3, y);
+                        arr[x, y] = ' ';
                         y++;
                         Console.SetCursorPosition(x * 3, y);
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
@@ -713,12 +818,18 @@ namespace PacMan
                         Console.SetCursorPosition(x * 3, y);
                         arr[x, y] = ' ';
                         Scores.scores += 3;
+                        new DisplayInfo().displayScore();
+                        if (Scores.scores == Scores.scoresMax)
+                        {
+                            new Win();
+                        }
                     }
                     else if (arr[x, y + 1] == ' ')
                     {
                         Console.SetCursorPosition(x * 3, y);
                         Console.Write(" ");
                         Console.SetCursorPosition(x * 3, y);
+                        arr[x, y] = ' ';
                         y++;
                         Console.SetCursorPosition(x * 3, y);
                         Console.BackgroundColor = ConsoleColor.DarkYellow;
