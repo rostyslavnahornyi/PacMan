@@ -8,8 +8,16 @@ namespace PacMan
     {
         public void Run()
         {
-            new Field().BuildField();
             new CustomConsole();
+            new Start();
+
+            ConsoleKeyInfo key = Console.ReadKey();
+            if (key.Key == ConsoleKey.Enter)
+            {
+                new Field().BuildField();
+            }
+
+            new Threads();
         }
         
     }

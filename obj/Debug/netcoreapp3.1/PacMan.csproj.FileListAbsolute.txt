@@ -11,3 +11,16 @@ C:\Users\Rostyslav\source\repos\PacMan\obj\Debug\netcoreapp3.1\PacMan.csproj.Cor
 C:\Users\Rostyslav\source\repos\PacMan\obj\Debug\netcoreapp3.1\PacMan.dll
 C:\Users\Rostyslav\source\repos\PacMan\obj\Debug\netcoreapp3.1\PacMan.pdb
 C:\Users\Rostyslav\source\repos\PacMan\obj\Debug\netcoreapp3.1\PacMan.genruntimeconfig.cache
+C:\Users\Rostyslav\Desktop\GIT\PacMan\bin\Debug\netcoreapp3.1\PacMan.exe
+C:\Users\Rostyslav\Desktop\GIT\PacMan\bin\Debug\netcoreapp3.1\PacMan.deps.json
+C:\Users\Rostyslav\Desktop\GIT\PacMan\bin\Debug\netcoreapp3.1\PacMan.runtimeconfig.json
+C:\Users\Rostyslav\Desktop\GIT\PacMan\bin\Debug\netcoreapp3.1\PacMan.runtimeconfig.dev.json
+C:\Users\Rostyslav\Desktop\GIT\PacMan\bin\Debug\netcoreapp3.1\PacMan.dll
+C:\Users\Rostyslav\Desktop\GIT\PacMan\bin\Debug\netcoreapp3.1\PacMan.pdb
+C:\Users\Rostyslav\Desktop\GIT\PacMan\obj\Debug\netcoreapp3.1\PacMan.csprojAssemblyReference.cache
+C:\Users\Rostyslav\Desktop\GIT\PacMan\obj\Debug\netcoreapp3.1\PacMan.AssemblyInfoInputs.cache
+C:\Users\Rostyslav\Desktop\GIT\PacMan\obj\Debug\netcoreapp3.1\PacMan.AssemblyInfo.cs
+C:\Users\Rostyslav\Desktop\GIT\PacMan\obj\Debug\netcoreapp3.1\PacMan.csproj.CoreCompileInputs.cache
+C:\Users\Rostyslav\Desktop\GIT\PacMan\obj\Debug\netcoreapp3.1\PacMan.dll
+C:\Users\Rostyslav\Desktop\GIT\PacMan\obj\Debug\netcoreapp3.1\PacMan.pdb
+C:\Users\Rostyslav\Desktop\GIT\PacMan\obj\Debug\netcoreapp3.1\PacMan.genruntimeconfig.cache

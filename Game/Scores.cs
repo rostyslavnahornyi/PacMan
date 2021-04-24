@@ -4,11 +4,9 @@ using System.Text;
 
 namespace PacMan
 {
-    class Enemy
+    class Scores
     {
-        public void EntityEnemy()
-        {
-
-        }
+        public static int scores = 0;
+        public static int lifes = 3;
     }
 }

@@ -26,7 +26,7 @@ namespace PacMan
                 }
             }
 
-
+            Console.Clear();
             for (int y = 0; y < arr.GetUpperBound(1) + 1; y++)
             {
                 for (int x = 0; x < arr.GetUpperBound(0) + 1; x++)
@@ -52,7 +52,8 @@ namespace PacMan
                         Console.Write("A"); // const
                         Console.BackgroundColor = Black;
                         Console.Write("  ");
-                    } else if (arr[x, y] != '#') // const
+                    }
+                    else if (arr[x, y] != '#') // const
                     {
                         Console.BackgroundColor = Black;
                         Console.Write(arr[x, y] + "  ");
@@ -80,26 +81,7 @@ namespace PacMan
                         break;
                     }
                 }
-                for (int xConsole = 0; xConsole < arr.GetUpperBound(0) + 1; xConsole++)
-                {
-                    if (y != arr.GetUpperBound(1))
-                    {
-                        if (arr[xConsole, y] == arr[xConsole, y + 1] && arr[xConsole, y] == '#' && arr[xConsole, y + 1] == '#')
-                        {
-                            if (y != 0)
-                            {
-                                Console.SetCursorPosition(xConsole * 3, y * 2 - 1);
-                            }
-                            else
-                            {
-                                Console.SetCursorPosition(xConsole * 3, 1);
-                            }
-                            Console.BackgroundColor = Blue;
-                            Console.Write(" ");
-                        }
-                    }
-
-                }
+                Console.BackgroundColor = ConsoleColor.Black;
                 Console.WriteLine("");
             }
         }

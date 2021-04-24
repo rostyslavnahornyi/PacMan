@@ -4,7 +4,7 @@ using System.Text;
 
 namespace PacMan
 {
-    class CustomConsole : Field
+    class CustomConsole
     {
         public CustomConsole()
         {
@@ -13,11 +13,7 @@ namespace PacMan
 
         private void Main()
         {
-           int width = arr.GetUpperBound(0) + 1;
-           int height = arr.GetUpperBound(1) + 1;
-
-            Console.SetWindowSize(width * 3 + 1, height * 2 + 1);
-            Console.SetCursorPosition(0, 0);
+            Console.SetWindowSize(93, 27);
             Console.CursorVisible = Settings.CursorVisible;
         }
 

@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Rostyslav\\source\\repos\\PacMan\\PacMan.csproj",
+      "projectUniqueName": "C:\\Users\\Rostyslav\\Desktop\\GIT\\PacMan\\PacMan.csproj",
       "projectName": "PacMan",
-      "projectPath": "C:\\Users\\Rostyslav\\source\\repos\\PacMan\\PacMan.csproj",
+      "projectPath": "C:\\Users\\Rostyslav\\Desktop\\GIT\\PacMan\\PacMan.csproj",
       "packagesPath": "C:\\Users\\Rostyslav\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Rostyslav\\source\\repos\\PacMan\\obj\\",
+      "outputPath": "C:\\Users\\Rostyslav\\Desktop\\GIT\\PacMan\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Rostyslav\\AppData\\Roaming\\NuGet\\NuGet.Config",
