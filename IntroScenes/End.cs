@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading;
 
 namespace PacMan
 {
@@ -9,9 +8,7 @@ namespace PacMan
     {
         public End()
         {
-            Settings.Flag = false;
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ResetColor();
             Console.Clear();
             Console.WriteLine(@"
 
@@ -28,9 +25,19 @@ namespace PacMan
 
 
                                Thanks for the game!
+                               Press Enter to start again
+                               Press ESC to finish
 ");
             Console.ReadKey();
-            Console.ReadKey();
+            switch (Console.ReadKey().Key)
+            {
+                case ConsoleKey.Escape:
+                    Environment.Exit(0);
+                    break;
+                case ConsoleKey.Enter:
+                    new Runner().StartGame();
+                    break;
+            }
         }
     }
 }

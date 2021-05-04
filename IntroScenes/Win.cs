@@ -8,9 +8,7 @@ namespace PacMan
     {
         public Win()
         {
-            Settings.Flag = false;
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.White;
+            Console.ResetColor();
             Console.Clear();
             Console.WriteLine(@"
   /$$$$$$$$/$$                        /$$             /$$     /$$               
@@ -23,8 +21,19 @@ namespace PacMan
     |__/  |__/  |__/\_______|__/  |__|__/  \__/          |__/ \______/ \______/ 
                                                                                 
  
- You finished this game!");
-            Console.ReadKey();
+    You finished this game!
+    Press Enter to start again
+    Press ESC to finish
+");
+            switch (Console.ReadKey().Key)
+            {
+                case ConsoleKey.Escape:
+                    Environment.Exit(0);
+                    break;
+                case ConsoleKey.Enter:
+                    new Runner().StartGame();
+                    break;
+            }
         }
     }
 }

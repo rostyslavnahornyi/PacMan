@@ -6,16 +6,10 @@ namespace PacMan
 {
     class CustomConsole
     {
-        public CustomConsole()
+        public CustomConsole(int x, int y)
         {
-            Main();
-        }
-
-        private void Main()
-        {
-            Console.SetWindowSize(93, 27);
+            Console.SetWindowSize(x, y);
             Console.CursorVisible = Settings.CursorVisible;
         }
-
     }
 }

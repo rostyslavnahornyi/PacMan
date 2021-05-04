@@ -11,7 +11,7 @@ namespace PacMan
             Console.SetCursorPosition(70, 5);
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("Score: " + Scores.scores);
+            Console.Write("Score: " + Scores.coins);
         }
     }
 }

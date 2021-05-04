@@ -7,22 +7,22 @@ namespace PacMan
 {
     class Threads
     {
-        private static PacMan pacman = new PacMan();
-        private static Enemy enemy = new Enemy();
-       
-
         public Threads()
         {
-            Main();
-        }
+            PacMan PacMan = new PacMan();
+            Ghosts Ghosts = new Ghosts();
 
-        private void Main()
-        {
-            Thread first = new Thread(pacman.EntityPacman);
-            Thread second = new Thread(enemy.MovingMain);
-            first.Start();
-            second.Start();
+            Thread tr1 = new Thread(PacMan.Moving);
 
+            tr1.Start();
+
+            Thread enemy1 = new Thread(Ghosts.e1);
+            Thread enemy2 = new Thread(Ghosts.e2);
+            Thread enemy3 = new Thread(Ghosts.e3);
+
+            //enemy1.Start();
+            enemy2.Start();
+            //enemy3.Start();
         }
     }
 }
