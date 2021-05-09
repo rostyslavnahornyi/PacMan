@@ -10,6 +10,7 @@ namespace PacMan
         {
             Console.ResetColor();
             Console.Clear();
+            new Sound().ON_StartScene();
             Console.WriteLine(@"
 
 

@@ -22,11 +22,15 @@ namespace PacMan
         public void StartGame()
         {
             Settings.MovingGhosts = true;
+
             new CustomConsole(100, 16);
+
             Field Field = new Field();
             Field.Fill();
             Field.Print();
+
             new Scores();
+
             new DisplayInfo().displayScore();
 
             new Threads();

@@ -19,6 +19,8 @@ namespace PacMan
                 Console.Write("  ");
                 Console.SetCursorPosition(x * 3, y);
                 Console.ResetColor();
+                new DisplayInfo().displayScore();
+
             }
         }
     }

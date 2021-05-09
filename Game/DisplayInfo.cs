@@ -8,7 +8,7 @@ namespace PacMan
     {
         public void displayScore()
         {
-            Console.SetCursorPosition(70, 5);
+            Console.SetCursorPosition(64, 1);
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("Score: " + Scores.coins);

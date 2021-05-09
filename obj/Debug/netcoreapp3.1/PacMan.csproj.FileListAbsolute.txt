@@ -24,3 +24,11 @@ C:\Users\Rostyslav\Desktop\GIT\PacMan\obj\Debug\netcoreapp3.1\PacMan.csproj.Core
 C:\Users\Rostyslav\Desktop\GIT\PacMan\obj\Debug\netcoreapp3.1\PacMan.dll
 C:\Users\Rostyslav\Desktop\GIT\PacMan\obj\Debug\netcoreapp3.1\PacMan.pdb
 C:\Users\Rostyslav\Desktop\GIT\PacMan\obj\Debug\netcoreapp3.1\PacMan.genruntimeconfig.cache
+C:\Users\Rostyslav\Desktop\GIT\PacMan\bin\Debug\netcoreapp3.1\Microsoft.Win32.SystemEvents.dll
+C:\Users\Rostyslav\Desktop\GIT\PacMan\bin\Debug\netcoreapp3.1\System.Drawing.Common.dll
+C:\Users\Rostyslav\Desktop\GIT\PacMan\bin\Debug\netcoreapp3.1\System.Windows.Extensions.dll
+C:\Users\Rostyslav\Desktop\GIT\PacMan\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Rostyslav\Desktop\GIT\PacMan\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Rostyslav\Desktop\GIT\PacMan\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Rostyslav\Desktop\GIT\PacMan\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\Rostyslav\Desktop\GIT\PacMan\obj\Debug\netcoreapp3.1\PacMan.csproj.CopyComplete

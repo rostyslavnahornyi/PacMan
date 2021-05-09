@@ -22,8 +22,6 @@ namespace PacMan
         public static string direction3 = "U";
         public static char temp3 = ' ';
 
-        private static bool flag = false;
-
         private Random random = new Random();
 
         public void e1()

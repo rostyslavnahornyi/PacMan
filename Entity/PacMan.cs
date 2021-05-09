@@ -50,7 +50,7 @@ namespace PacMan
                             arr[x, y] = Constants.PacMan;
                             Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
                             Scores.coins++;
-                            new DisplayInfo().displayScore();
+                            new Sound().ON_GettedCoins();
                             if (Scores.coins == Scores.MaxCoins)
                             {
                                 Settings.MovingGhosts = false;
@@ -65,7 +65,7 @@ namespace PacMan
                             arr[x, y] = Constants.PacMan;
                             Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
                             Scores.coins += 3;
-                            new DisplayInfo().displayScore();
+                            new Sound().ON_GettedCoins();
                             if (Scores.coins == Scores.MaxCoins)
                             {
                                 Settings.MovingGhosts = false;
@@ -74,7 +74,8 @@ namespace PacMan
                         }
                         else if (arr[x - 1, y] == Constants.Ghost)
                         {
-                            // todo
+                            Settings.MovingGhosts = false;
+                            new End();
                         }
                         else if (arr[x - 1, y] == Constants.Space)
                         {
@@ -100,7 +101,7 @@ namespace PacMan
                             arr[x, y] = Constants.PacMan;
                             Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
                             Scores.coins++;
-                            new DisplayInfo().displayScore();
+                            new Sound().ON_GettedCoins();
                             if (Scores.coins == Scores.MaxCoins)
                             {
                                 Settings.MovingGhosts = false;
@@ -115,7 +116,7 @@ namespace PacMan
                             arr[x, y] = Constants.PacMan;
                             Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
                             Scores.coins += 3;
-                            new DisplayInfo().displayScore();
+                            new Sound().ON_GettedCoins();
                             if (Scores.coins == Scores.MaxCoins)
                             {
                                 Settings.MovingGhosts = false;
@@ -124,7 +125,8 @@ namespace PacMan
                         }
                         else if (arr[x + 1, y] == Constants.Ghost)
                         {
-                            // todo
+                            Settings.MovingGhosts = false;
+                            new End();
                         }
                         else if (arr[x + 1, y] == Constants.Space)
                         {
@@ -150,7 +152,7 @@ namespace PacMan
                             arr[x, y] = Constants.PacMan;
                             Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
                             Scores.coins++;
-                            new DisplayInfo().displayScore();
+                            new Sound().ON_GettedCoins();
                             if (Scores.coins == Scores.MaxCoins)
                             {
                                 Settings.MovingGhosts = false;
@@ -165,7 +167,7 @@ namespace PacMan
                             arr[x, y] = Constants.PacMan;
                             Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
                             Scores.coins += 3;
-                            new DisplayInfo().displayScore();
+                            new Sound().ON_GettedCoins();
                             if (Scores.coins == Scores.MaxCoins)
                             {
                                 Settings.MovingGhosts = false;
@@ -174,7 +176,8 @@ namespace PacMan
                         }
                         else if (arr[x, y - 1] == Constants.Ghost)
                         {
-                            // todo
+                            Settings.MovingGhosts = false;
+                            new End();
                         }
                         else if (arr[x, y - 1] == Constants.Space)
                         {
@@ -200,7 +203,7 @@ namespace PacMan
                             arr[x, y] = Constants.PacMan;
                             Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
                             Scores.coins++;
-                            new DisplayInfo().displayScore();
+                            new Sound().ON_GettedCoins();
                             if (Scores.coins == Scores.MaxCoins)
                             {
                                 Settings.MovingGhosts = false;
@@ -215,7 +218,7 @@ namespace PacMan
                             arr[x, y] = Constants.PacMan;
                             Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
                             Scores.coins += 3;
-                            new DisplayInfo().displayScore();
+                            new Sound().ON_GettedCoins();
                             if (Scores.coins == Scores.MaxCoins)
                             {
                                 Settings.MovingGhosts = false;
@@ -224,7 +227,8 @@ namespace PacMan
                         }
                         else if (arr[x, y + 1] == Constants.Ghost)
                         {
-                            // todo
+                            Settings.MovingGhosts = false;
+                            new End();
                         }
                         else if (arr[x, y + 1] == Constants.Space)
                         {

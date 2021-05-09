@@ -20,9 +20,9 @@ namespace PacMan
             Thread enemy2 = new Thread(Ghosts.e2);
             Thread enemy3 = new Thread(Ghosts.e3);
 
-            //enemy1.Start();
+            enemy1.Start();
             enemy2.Start();
-            //enemy3.Start();
+            enemy3.Start();
         }
     }
 }

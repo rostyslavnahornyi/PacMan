@@ -8,6 +8,7 @@ namespace PacMan
     {
         public End()
         {
+            new Sound().ON_GettedCoins();
             Console.ResetColor();
             Console.Clear();
             Console.WriteLine(@"
