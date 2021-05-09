@@ -29,7 +29,6 @@ namespace PacMan
                                Press Enter to start again
                                Press ESC to finish
 ");
-            Console.ReadKey();
             switch (Console.ReadKey().Key)
             {
                 case ConsoleKey.Escape:

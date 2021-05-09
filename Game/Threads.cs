@@ -12,14 +12,12 @@ namespace PacMan
             PacMan PacMan = new PacMan();
             Ghosts Ghosts = new Ghosts();
 
-            Thread tr1 = new Thread(PacMan.Moving);
-
-            tr1.Start();
+            Thread pacman = new Thread(PacMan.Moving);
+            pacman.Start();
 
             Thread enemy1 = new Thread(Ghosts.e1);
             Thread enemy2 = new Thread(Ghosts.e2);
             Thread enemy3 = new Thread(Ghosts.e3);
-
             enemy1.Start();
             enemy2.Start();
             enemy3.Start();
