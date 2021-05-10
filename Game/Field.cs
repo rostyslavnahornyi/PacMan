@@ -35,24 +35,19 @@ namespace PacMan
                 {
                     if (arr[x, y] == Constants.Coin)
                     {
-                        Console.BackgroundColor = ConsoleColor.Black;
-                        Console.Write(Constants.Coin);
-                        Console.BackgroundColor = ConsoleColor.Black;
-                        Console.Write(space);
+                        new Coin().Display();
+                    }
+                    else if (arr[x, y] == Constants.BigCoin)
+                    {
+                        new BigCoin().Display();
                     }
                     else if (arr[x, y] == Constants.PacMan)
                     {
-                        Console.BackgroundColor = ConsoleColor.DarkRed;
-                        Console.Write(Constants.PacMan);
-                        Console.BackgroundColor = ConsoleColor.Black;
-                        Console.Write(space);
+                        new PacMan().Display();
                     }
                     else if (arr[x, y] == Constants.Ghost)
                     {
-                        Console.BackgroundColor = ConsoleColor.DarkMagenta;
-                        Console.Write(Constants.Ghost);
-                        Console.BackgroundColor = ConsoleColor.Black;
-                        Console.Write(space);
+                        new Ghosts().Display();
                     }
                     else if (arr[x, y] != Constants.Wall)
                     {
@@ -64,15 +59,11 @@ namespace PacMan
                     {
                         if (arr[x, y] == Constants.Wall && arr[x + 1, y] == Constants.Wall)
                         {
-                            Console.BackgroundColor = ConsoleColor.DarkBlue;
-                            Console.Write(Constants.Wall + space);
+                            new Wall().DisplayFullColor();
                         }
                         else if (arr[x, y] == Constants.Wall)
                         {
-                            Console.BackgroundColor = ConsoleColor.DarkBlue;
-                            Console.Write(Constants.Wall);
-                            Console.BackgroundColor = ConsoleColor.Black;
-                            Console.Write(space);
+                            new Wall().Display();
                         }
                     }
                     else

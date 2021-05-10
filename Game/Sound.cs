@@ -11,7 +11,7 @@ namespace PacMan
         private SoundPlayer GettingCoins = new SoundPlayer(@"../../../Resources/coins.wav");
         private SoundPlayer EndScene = new SoundPlayer(@"../../../Resources/gettingCoins.wav");
 
-        
+            
         public void ON_StartScene()
         {
             StartScene.Play();

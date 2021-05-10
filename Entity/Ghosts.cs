@@ -5,8 +5,11 @@ using System.Threading;
 
 namespace PacMan
 {
-    class Ghosts : Field
+    class Ghosts : FieldBuilder
     {
+        private char ch = Constants.Ghost;
+        private ConsoleColor BG = ConsoleColor.DarkMagenta;
+
         public static int x1 = 9;
         public static int y1 = 7;
         public static string direction1 = "U";
@@ -23,6 +26,14 @@ namespace PacMan
         public static char temp3 = ' ';
 
         private Random random = new Random();
+
+        public override void Display()
+        {
+            Console.BackgroundColor = BG;
+            Console.Write(ch);
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.Write(space);
+        }
 
         public void e1()
         {
@@ -53,7 +64,7 @@ namespace PacMan
 
         public void Moving(int x, int y, int q, string direction, char temp)
         {
-            char[] directions = { arr[x - 1, y], arr[x + 1, y], arr[x, y - 1], arr[x, y + 1] };
+            char[] directions = { Field.arr[x - 1, y], Field.arr[x + 1, y], Field.arr[x, y - 1], Field.arr[x, y + 1] };
 
             string[] ways = new string[2];
             string toGo = null;
@@ -160,19 +171,19 @@ namespace PacMan
 
 
 
-            if (toGo == "L" && arr[x - 1, y] == 'A')
+            if (toGo == "L" && Field.arr[x - 1, y] == 'A')
             {
                 toGo = "stop";
             }
-            if (toGo == "R" && arr[x + 1, y] == 'A')
+            if (toGo == "R" && Field.arr[x + 1, y] == 'A')
             {
                 toGo = "stop";
             }
-            if (toGo == "U" && arr[x, y - 1] == 'A')
+            if (toGo == "U" && Field.arr[x, y - 1] == 'A')
             {
                 toGo = "stop";
             }
-            if (toGo == "D" && arr[x, y + 1] == 'A')
+            if (toGo == "D" && Field.arr[x, y + 1] == 'A')
             {
                 toGo = "stop";
             }
@@ -180,107 +191,107 @@ namespace PacMan
             direction = toGo;
             if (toGo == "L")
             {
-                arr[x, y] = temp;
+                Field.arr[x, y] = temp;
                 Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
                 x--;
                 Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
                 if (q == 1)
                 {
                     x1--;
-                    temp1 = arr[x, y];
+                    temp1 = Field.arr[x, y];
                     direction1 = "L";
                 }
                 if (q == 2)
                 {
                     x2--;
-                    temp2 = arr[x, y];
+                    temp2 = Field.arr[x, y];
                     direction2 = "L";
                 }
                 if (q == 3)
                 {
                     x3--;
-                    temp3 = arr[x, y];
+                    temp3 = Field.arr[x, y];
                     direction3 = "L";
                 }
-                arr[x, y] = 'A';
+                Field.arr[x, y] = 'A';
             }
             if (toGo == "R")
             {
-                arr[x, y] = temp;
+                Field.arr[x, y] = temp;
                 Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
                 x++;
                 Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
                 if (q == 1)
                 {
                     x1++;
-                    temp1 = arr[x, y];
+                    temp1 = Field.arr[x, y];
                     direction1 = "R";
                 }
                 if (q == 2)
                 {
                     x2++;
-                    temp2 = arr[x, y];
+                    temp2 = Field.arr[x, y];
                     direction2 = "R";
                 }
                 if (q == 3)
                 {
                     x3++;
-                    temp3 = arr[x, y];
+                    temp3 = Field.arr[x, y];
                     direction3 = "R";
                 }
-                arr[x, y] = 'A';
+                Field.arr[x, y] = 'A';
             }
             if (toGo == "U")
             {
-                arr[x, y] = temp;
+                Field.arr[x, y] = temp;
                 Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
                 y--;
                 Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
                 if (q == 1)
                 {
                     y1--;
-                    temp1 = arr[x, y];
+                    temp1 = Field.arr[x, y];
                     direction1 = "U";
                 }
                 if (q == 2)
                 {
                     y2--;
-                    temp2 = arr[x, y];
+                    temp2 = Field.arr[x, y];
                     direction2 = "U";
                 }
                 if (q == 3)
                 {
                     y3--;
-                    temp3 = arr[x, y];
+                    temp3 = Field.arr[x, y];
                     direction3 = "U";
                 }
-                arr[x, y] = 'A';
+                Field.arr[x, y] = 'A';
             }
             if (toGo == "D")
             {
-                arr[x, y] = temp;
+                Field.arr[x, y] = temp;
                 Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
                 y++;
                 Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
                 if (q == 1)
                 {
                     y1++;
-                    temp1 = arr[x, y];
+                    temp1 = Field.arr[x, y];
                     direction1 = "D";
                 }
                 if (q == 2)
                 {
                     y2++;
-                    temp2 = arr[x, y];
+                    temp2 = Field.arr[x, y];
                     direction2 = "D";
                 }
                 if (q == 3)
                 {
                     y3++;
-                    temp3 = arr[x, y];
+                    temp3 = Field.arr[x, y];
                     direction3 = "D";
                 }
-                arr[x, y] = 'A';
+                Field.arr[x, y] = 'A';
             }
         }
     }
