@@ -7,4 +7,4 @@ This game was created for the subject "Object Oriented Programming"
 * C#
 
 ### ScreenShots
-![Image alt](/Resource/Screenshot.png)
+![Image alt](/Resources/Screenshot.png)
