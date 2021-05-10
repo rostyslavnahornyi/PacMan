@@ -11,6 +11,7 @@ namespace PacMan
             new Sound().ON_GettedCoins();
             Console.ResetColor();
             Console.Clear();
+            new CustomConsole(100, 20);
             Console.WriteLine(@"
 
                 ▓██   ██▓ ▒█████   █    ██    ▓█████▄  ██▓▓█████ ▓█████▄ 
@@ -26,7 +27,7 @@ namespace PacMan
 
 
                                Thanks for the game!
-                               Press Enter to start again
+                               //Press Enter to start again
                                Press ESC to finish
 ");
             switch (Console.ReadKey().Key)
@@ -34,9 +35,9 @@ namespace PacMan
                 case ConsoleKey.Escape:
                     Environment.Exit(0);
                     break;
-                case ConsoleKey.Enter:
-                    new Runner().StartGame();
-                    break;
+                //case ConsoleKey.Enter:
+                //    new Runner().StartGame();
+                //    break;
             }
         }
     }

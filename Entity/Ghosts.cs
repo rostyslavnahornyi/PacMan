@@ -293,6 +293,10 @@ namespace PacMan
                 }
                 Field.arr[x, y] = 'A';
             }
+            if (Field.arr[x2, y2] == ' ')
+            {
+                Runner.Cell.UpdateCell(x2, y2, ' ', ConsoleColor.Black);
+            }
         }
     }
 }
