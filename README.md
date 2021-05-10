@@ -7,4 +7,4 @@ This game was created for the subject "Object Oriented Programming"
 * C#
 
 ### ScreenShots
-![Image alt](https://github.com/rostyslavnahornyi/PacMan/raw/lab1/Resources/Screenshot.png)
+![Image alt](/Screenshot.png)
