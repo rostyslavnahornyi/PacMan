@@ -192,7 +192,13 @@ namespace PacMan
             if (toGo == "L")
             {
                 Field.arr[x, y] = temp;
-                Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
+                if (temp == Constants.RandomTeleport)
+                {
+                    Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.DarkGreen);
+                } else
+                {
+                    Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
+                }
                 x--;
                 Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
                 if (q == 1)
@@ -218,7 +224,14 @@ namespace PacMan
             if (toGo == "R")
             {
                 Field.arr[x, y] = temp;
-                Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
+                if (temp == Constants.RandomTeleport)
+                {
+                    Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.DarkGreen);
+                }
+                else
+                {
+                    Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
+                }
                 x++;
                 Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
                 if (q == 1)
@@ -244,7 +257,14 @@ namespace PacMan
             if (toGo == "U")
             {
                 Field.arr[x, y] = temp;
-                Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
+                if (temp == Constants.RandomTeleport)
+                {
+                    Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.DarkGreen);
+                }
+                else
+                {
+                    Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
+                }
                 y--;
                 Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
                 if (q == 1)
@@ -270,7 +290,14 @@ namespace PacMan
             if (toGo == "D")
             {
                 Field.arr[x, y] = temp;
-                Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
+                if (temp == Constants.RandomTeleport)
+                {
+                    Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.DarkGreen);
+                }
+                else
+                {
+                    Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
+                }
                 y++;
                 Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
                 if (q == 1)

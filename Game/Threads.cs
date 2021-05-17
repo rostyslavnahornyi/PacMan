@@ -11,6 +11,7 @@ namespace PacMan
         {
             PacMan PacMan = new PacMan();
             Ghosts Ghosts = new Ghosts();
+            RandomTeleport RandomTeleport = new RandomTeleport();
 
             Thread pacman = new Thread(PacMan.Moving);
             pacman.Start();
@@ -21,6 +22,9 @@ namespace PacMan
             enemy1.Start();
             enemy2.Start();
             enemy3.Start();
+
+            Thread randomTeleport = new Thread(RandomTeleport.Create);
+            randomTeleport.Start();
         }
     }
 }

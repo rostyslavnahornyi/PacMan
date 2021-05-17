@@ -10,6 +10,7 @@ namespace PacMan
         public const char Coin = '.';
         public const char BigCoin = 'o';
         public const char Space = ' ';
+        public const char RandomTeleport = 'R';
 
         public const char Ghost = 'A';
         public const char PacMan = '@';

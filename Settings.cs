@@ -11,5 +11,6 @@ namespace PacMan
 
 
         public static int EnemySpeed = 1000;
+        public static int RandomTeleportRespawnTime = 10000;
     }
 }

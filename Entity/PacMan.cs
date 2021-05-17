@@ -96,6 +96,25 @@ namespace PacMan
                             Field.arr[x, y] = Constants.PacMan;
                             Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
                         }
+                        else if (Field.arr[x - 1, y] == Constants.RandomTeleport)
+                        {
+                            Field.arr[x, y] = Constants.Space;
+                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
+                            x--;
+                            Field.arr[x, y] = RandomTeleport.tempCell;
+                            Runner.Cell.UpdateCell(x, y, RandomTeleport.tempCell, ConsoleColor.Black);
+                            new RandomTeleport().Moving();
+                            x = RandomTeleport.randomX;
+                            y = RandomTeleport.randomY;
+                            if (Field.arr[x, y] == Constants.Coin)
+                            {
+                                Scores.coins++;
+                            } else if (Field.arr[x, y] == Constants.BigCoin) {
+                                Scores.coins += 3;
+                            }
+                            Field.arr[x, y] = Constants.PacMan;
+                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
+                        }
                     }
 
                     if (key.Key == ConsoleKey.RightArrow)
@@ -144,6 +163,27 @@ namespace PacMan
                             Field.arr[x, y] = Constants.Space;
                             Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
                             x++;
+                            Field.arr[x, y] = Constants.PacMan;
+                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
+                        }
+                        else if (Field.arr[x + 1, y] == Constants.RandomTeleport)
+                        {
+                            Field.arr[x, y] = Constants.Space;
+                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
+                            x++;
+                            Field.arr[x, y] = RandomTeleport.tempCell;
+                            Runner.Cell.UpdateCell(x, y, RandomTeleport.tempCell, ConsoleColor.Black);
+                            new RandomTeleport().Moving();
+                            x = RandomTeleport.randomX;
+                            y = RandomTeleport.randomY;
+                            if (Field.arr[x, y] == Constants.Coin)
+                            {
+                                Scores.coins++;
+                            }
+                            else if (Field.arr[x, y] == Constants.BigCoin)
+                            {
+                                Scores.coins += 3;
+                            }
                             Field.arr[x, y] = Constants.PacMan;
                             Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
                         }
@@ -198,6 +238,27 @@ namespace PacMan
                             Field.arr[x, y] = Constants.PacMan;
                             Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
                         }
+                        else if (Field.arr[x, y - 1] == Constants.RandomTeleport)
+                        {
+                            Field.arr[x, y] = Constants.Space;
+                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
+                            y--;
+                            Field.arr[x, y] = RandomTeleport.tempCell;
+                            Runner.Cell.UpdateCell(x, y, RandomTeleport.tempCell, ConsoleColor.Black);
+                            new RandomTeleport().Moving();
+                            x = RandomTeleport.randomX;
+                            y = RandomTeleport.randomY;
+                            if (Field.arr[x, y] == Constants.Coin)
+                            {
+                                Scores.coins++;
+                            }
+                            else if (Field.arr[x, y] == Constants.BigCoin)
+                            {
+                                Scores.coins += 3;
+                            }
+                            Field.arr[x, y] = Constants.PacMan;
+                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
+                        }
                     }
 
                     if (key.Key == ConsoleKey.DownArrow)
@@ -246,6 +307,27 @@ namespace PacMan
                             Field.arr[x, y] = Constants.Space;
                             Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
                             y++;
+                            Field.arr[x, y] = Constants.PacMan;
+                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
+                        }
+                        else if (Field.arr[x, y + 1] == Constants.RandomTeleport)
+                        {
+                            Field.arr[x, y] = Constants.Space;
+                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
+                            y++;
+                            Field.arr[x, y] = RandomTeleport.tempCell;
+                            Runner.Cell.UpdateCell(x, y, RandomTeleport.tempCell, ConsoleColor.Black);
+                            new RandomTeleport().Moving();
+                            x = RandomTeleport.randomX;
+                            y = RandomTeleport.randomY;
+                            if (Field.arr[x, y] == Constants.Coin)
+                            {
+                                Scores.coins++;
+                            }
+                            else if (Field.arr[x, y] == Constants.BigCoin)
+                            {
+                                Scores.coins += 3;
+                            }
                             Field.arr[x, y] = Constants.PacMan;
                             Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
                         }
