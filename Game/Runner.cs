@@ -7,6 +7,7 @@ namespace PacMan
     class Runner
     {
         public static Cell Cell = new Cell();
+        private DisplayInfo Info = new DisplayInfo();
         public void Run()
         {
             new CustomConsole(100, 25);
@@ -31,7 +32,8 @@ namespace PacMan
 
             new Scores();
 
-            new DisplayInfo().displayScore();
+            Info.Score();
+            Info.Coordinates();
 
             new Threads();
         }

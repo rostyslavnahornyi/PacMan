@@ -7,6 +7,7 @@ namespace PacMan
     class Cell
     {
         static object locker = new object();
+        private DisplayInfo Info = new DisplayInfo();
 
         public void UpdateCell(int x, int y, char ch, ConsoleColor color)
         {
@@ -19,8 +20,8 @@ namespace PacMan
                 Console.Write("  ");
                 Console.SetCursorPosition(x * 3, y);
                 Console.ResetColor();
-                new DisplayInfo().displayScore();
-
+                Info.Score();
+                Info.Coordinates();
             }
         }
     }

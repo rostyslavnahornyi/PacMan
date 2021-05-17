@@ -9,8 +9,8 @@ namespace PacMan
         private char ch = Constants.PacMan;
         private ConsoleColor BG = ConsoleColor.DarkRed;
        
-        private static int x;
-        private static int y;
+        public static int x;
+        public static int y;
 
         public PacMan()
         {
