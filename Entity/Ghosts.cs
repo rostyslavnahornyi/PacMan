@@ -200,7 +200,18 @@ namespace PacMan
                     Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
                 }
                 x--;
-                Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
+                if (Field.arr[x, y] == Constants.RandomTeleport)
+                {
+                    new RandomTeleport().Moving();
+                    x = RandomTeleport.randomX;
+                    y = RandomTeleport.randomY;
+                    new Cell().UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
+                } else
+                {
+                    Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
+                }
+                Field.arr[x, y] = Constants.Ghost;
+
                 if (q == 1)
                 {
                     x1--;
@@ -219,7 +230,6 @@ namespace PacMan
                     temp3 = Field.arr[x, y];
                     direction3 = "L";
                 }
-                Field.arr[x, y] = 'A';
             }
             if (toGo == "R")
             {
@@ -233,7 +243,19 @@ namespace PacMan
                     Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
                 }
                 x++;
-                Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
+                if (Field.arr[x, y] == Constants.RandomTeleport)
+                {
+                    new RandomTeleport().Moving();
+                    x = RandomTeleport.randomX;
+                    y = RandomTeleport.randomY;
+                    new Cell().UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
+                }
+                else
+                {
+                    Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
+                }
+                Field.arr[x, y] = Constants.Ghost;
+
                 if (q == 1)
                 {
                     x1++;
@@ -252,7 +274,6 @@ namespace PacMan
                     temp3 = Field.arr[x, y];
                     direction3 = "R";
                 }
-                Field.arr[x, y] = 'A';
             }
             if (toGo == "U")
             {
@@ -266,7 +287,19 @@ namespace PacMan
                     Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
                 }
                 y--;
-                Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
+                if (Field.arr[x, y] == Constants.RandomTeleport)
+                {
+                    new RandomTeleport().Moving();
+                    x = RandomTeleport.randomX;
+                    y = RandomTeleport.randomY;
+                    new Cell().UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
+                }
+                else
+                {
+                    Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
+                }
+                Field.arr[x, y] = Constants.Ghost;
+
                 if (q == 1)
                 {
                     y1--;
@@ -285,7 +318,6 @@ namespace PacMan
                     temp3 = Field.arr[x, y];
                     direction3 = "U";
                 }
-                Field.arr[x, y] = 'A';
             }
             if (toGo == "D")
             {
@@ -299,7 +331,19 @@ namespace PacMan
                     Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
                 }
                 y++;
-                Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
+                if (Field.arr[x, y] == Constants.RandomTeleport)
+                {
+                    new RandomTeleport().Moving();
+                    x = RandomTeleport.randomX;
+                    y = RandomTeleport.randomY;
+                    new Cell().UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
+                }
+                else
+                {
+                    Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
+                }
+                Field.arr[x, y] = Constants.Ghost;
+
                 if (q == 1)
                 {
                     y1++;
@@ -318,11 +362,6 @@ namespace PacMan
                     temp3 = Field.arr[x, y];
                     direction3 = "D";
                 }
-                Field.arr[x, y] = 'A';
-            }
-            if (Field.arr[x2, y2] == ' ')
-            {
-                Runner.Cell.UpdateCell(x2, y2, ' ', ConsoleColor.Black);
             }
         }
     }
