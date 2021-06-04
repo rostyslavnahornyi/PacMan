@@ -20,9 +20,27 @@ namespace PacMan_GUI_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
-            InitializeComponent();
+             InitializeComponent();
+            //label.Content += "123";
+            new asdkfikosd().test();
+        }
+
+        private void CanvasField_KeyDown(object sender, KeyEventArgs e)
+        {
+
+        }
+
+        private void SelectMap1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void SelectMap2(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

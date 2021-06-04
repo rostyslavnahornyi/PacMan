@@ -1,12 +1,45 @@
-﻿<Window x:Class="PacMan_GUI_WPF.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PacMan_GUI_WPF"
+        xmlns:gif ="https://github.com/XamlAnimatedGif/XamlAnimatedGif" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="PacMan_GUI_WPF.MainWindow"
+        WindowStartupLocation="CenterScreen"
+        Background="#cfcfcf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="MainWindow" Height="800" Width="1400"
+        >
+    <Canvas x:Name="CanvasField" Focusable="True" Width="1000" Height="720" Margin="0,0,272,0" Background="Black" KeyDown="CanvasField_KeyDown">
+        <!--<Image gif:AnimationBehavior.SourceUri="Resources/Images/pacman.gif" x:Name="pacman" Width="77" Height="78" Canvas.Left="57" Canvas.Top="42"/>-->
+        <!--<Rectangle x:Name="fuf" Fill="Red" Height="72" Width="64" Canvas.Left="57" Canvas.Top="148"  />-->
+
+
+
+        <GridSplitter Height="768" Width="16" Canvas.Left="1060" Canvas.Top="-24"/>
+        <GridSplitter Height="256" Width="16" Canvas.Left="1196" Canvas.Top="80" RenderTransformOrigin="0.5,0.5">
+            <GridSplitter.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleY="-1"/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </GridSplitter.RenderTransform>
+        </GridSplitter>
+
+
+        <Button Content="Start" Style="{DynamicResource MaterialDesignRaisedButton}" Canvas.Left="1096" Width="216"  />
+        <Button Content="Restart" Style="{DynamicResource MaterialDesignRaisedButton}" Height="32" Width="216" Canvas.Left="1096" Canvas.Top="56" />
+
+
+
+        <Button Panel.ZIndex="1" Style="{DynamicResource MaterialDesignFlatButton}" Canvas.Left="1128" Height="100" Width="145" Canvas.Top="228" Click="SelectMap1"/>
+        <Button Panel.ZIndex="1" Style="{DynamicResource MaterialDesignFlatButton}" Canvas.Left="1128" Height="100" Width="145" Canvas.Top="340" Click="SelectMap2"/>
+        <Image Height="100" Width="194" Source="Resources/images/map1.png" Canvas.Left="1103" Canvas.Top="228"/>
+        <Image Height="100" Width="194" Source="Resources/Images/map1.png" Canvas.Left="1103" Canvas.Top="340"/>
+
+        <Label Name="label" Content="" Height="720" Width="1000" Foreground="White"/>
+    </Canvas>
 </Window>
+ 
