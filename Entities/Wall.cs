@@ -12,15 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using System.Windows.Threading;
 
 namespace PacMan_GUI_WPF
 {
-    class asdkfikosd : MainWindow
+    class Wall
     {
-        public void test()
-        {
-            label.Content += "123";
-        }
+        public static int Width = 15;
+        public static int Height = 15;
+        public static int Stroke = 2;
+        public static Brush StrokeBackground = Brushes.SpringGreen;
     }
 }

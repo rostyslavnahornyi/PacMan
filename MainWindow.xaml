@@ -10,13 +10,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1400"
         >
-    <Canvas x:Name="CanvasField" Focusable="True" Width="1000" Height="720" Margin="0,0,272,0" Background="Black" KeyDown="CanvasField_KeyDown">
-        <!--<Image gif:AnimationBehavior.SourceUri="Resources/Images/pacman.gif" x:Name="pacman" Width="77" Height="78" Canvas.Left="57" Canvas.Top="42"/>-->
-        <!--<Rectangle x:Name="fuf" Fill="Red" Height="72" Width="64" Canvas.Left="57" Canvas.Top="148"  />-->
-
-
-
-        <GridSplitter Height="768" Width="16" Canvas.Left="1060" Canvas.Top="-24"/>
+    <Canvas x:Name="CanvasField" Focusable="True" Width="1000" Height="720" Margin="0,0,272,0" Background="Black" KeyDown="KeyDownCanvas">
+         <GridSplitter Height="768" Width="16" Canvas.Left="1060" Canvas.Top="-24"/>
         <GridSplitter Height="256" Width="16" Canvas.Left="1196" Canvas.Top="80" RenderTransformOrigin="0.5,0.5">
             <GridSplitter.RenderTransform>
                 <TransformGroup>
@@ -29,8 +24,8 @@
         </GridSplitter>
 
 
-        <Button Content="Start" Style="{DynamicResource MaterialDesignRaisedButton}" Canvas.Left="1096" Width="216"  />
-        <Button Content="Restart" Style="{DynamicResource MaterialDesignRaisedButton}" Height="32" Width="216" Canvas.Left="1096" Canvas.Top="56" />
+        <Button Content="Start" Style="{DynamicResource MaterialDesignRaisedButton}" Canvas.Left="1096" Width="216" Click="BtnStart"/>
+        <Button Content="Restart" Style="{DynamicResource MaterialDesignRaisedButton}" Height="32" Width="216" Canvas.Left="1096" Canvas.Top="56" Click="BtnRestart"/>
 
 
 

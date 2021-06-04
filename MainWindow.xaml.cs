@@ -23,14 +23,7 @@ namespace PacMan_GUI_WPF
 
         public MainWindow()
         {
-             InitializeComponent();
-            //label.Content += "123";
-            new asdkfikosd().test();
-        }
-
-        private void CanvasField_KeyDown(object sender, KeyEventArgs e)
-        {
-
+            InitializeComponent();
         }
 
         private void SelectMap1(object sender, RoutedEventArgs e)
@@ -39,6 +32,21 @@ namespace PacMan_GUI_WPF
         }
 
         private void SelectMap2(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnStart(object sender, RoutedEventArgs e)
+        {
+            new Runner(CanvasField);
+        }
+
+        private void BtnRestart(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void KeyDownCanvas(object sender, KeyEventArgs e)
         {
 
         }
