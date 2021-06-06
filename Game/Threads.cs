@@ -16,9 +16,9 @@ namespace PacMan
             Thread pacman = new Thread(PacMan.Moving);
             pacman.Start();
 
-            Thread enemy1 = new Thread(Ghosts.e1);
-            Thread enemy2 = new Thread(Ghosts.e2);
-            Thread enemy3 = new Thread(Ghosts.e3);
+            Thread enemy1 = new Thread(Ghosts.enemy1);
+            Thread enemy2 = new Thread(Ghosts.enemy2);
+            Thread enemy3 = new Thread(Ghosts.enemy3);
             enemy1.Start();
             enemy2.Start();
             enemy3.Start();

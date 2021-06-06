@@ -34,6 +34,13 @@ namespace PacMan
 
                                 Press ENTER to start
 ");
+            switch (Console.ReadKey().Key)
+            {
+                case ConsoleKey.Enter:
+                    new Introduction().Display();
+                    
+                    break;
+            }
         }
     }
 }

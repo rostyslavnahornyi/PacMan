@@ -22,16 +22,13 @@ namespace PacMan
                                                                                 
  
     You finished this game!
-    Press Enter to start again
+    
     Press ESC to finish
 ");
             switch (Console.ReadKey().Key)
             {
                 case ConsoleKey.Escape:
                     Environment.Exit(0);
-                    break;
-                case ConsoleKey.Enter:
-                    new Runner().StartGame();
                     break;
             }
         }

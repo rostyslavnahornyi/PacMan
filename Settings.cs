@@ -10,7 +10,8 @@ namespace PacMan
         public static bool MovingGhosts = true;
 
 
-        public static int EnemySpeed = 1000;
+        public static int EnemySpeed = 200;
         public static int RandomTeleportRespawnTime = 10000;
+        public static int RandomTeleportTimes = 300;
     }
 }

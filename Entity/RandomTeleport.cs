@@ -34,12 +34,15 @@ namespace PacMan
                 }
                 tempCell = Field.arr[x, y];
                 Field.arr[x, y] = Constants.RandomTeleport;
+                Settings.RandomTeleportTimes--;
                 new Cell().UpdateCell(x, y, Constants.RandomTeleport, ConsoleColor.DarkGreen);
 
                 
                 Thread.Sleep(Settings.RandomTeleportRespawnTime);
                 Field.arr[x, y] = tempCell;
                 new Cell().UpdateCell(x, y, tempCell, ConsoleColor.Black);
+
+                if (Settings.RandomTeleportTimes == 0) TeleportRandom = false;
             }
         }
 

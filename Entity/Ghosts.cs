@@ -10,20 +10,23 @@ namespace PacMan
         private char ch = Constants.Ghost;
         private ConsoleColor BG = ConsoleColor.DarkMagenta;
 
-        public static int x1 = 9;
-        public static int y1 = 7;
-        public static string direction1 = "U";
-        public static char temp1 = ' ';
+        private static int x1Pos = 9;
+        private static int y1Pos = 7;
 
-        public static int x2 = 10;
-        public static int y2 = 7;
-        public static string direction2 = "U";
-        public static char temp2 = ' ';
+        private static int x2Pos = 10;
+        private static int y2Pos = 7;
 
-        public static int x3 = 11;
-        public static int y3 = 7;
-        public static string direction3 = "U";
-        public static char temp3 = ' ';
+        private static int x3Pos = 11;
+        private static int y3Pos = 7;
+
+        private static string direction1 = "U";
+        private static string direction2 = "U";
+        private static string direction3 = "U";
+
+
+        private static char tempCell1 = Constants.Space;
+        private static char tempCell2 = Constants.Space;
+        private static char tempCell3 = Constants.Space;
 
         private Random random = new Random();
 
@@ -35,80 +38,82 @@ namespace PacMan
             Console.Write(space);
         }
 
-        public void e1()
+        public void enemy1()
         {
             while (Settings.MovingGhosts)
             {
-                Moving(x1, y1, 1, direction1, temp1);
+                Moving(x1Pos, y1Pos, 1, direction1, tempCell1);
                 Thread.Sleep(Settings.EnemySpeed);
             }
         }
 
-        public void e2()
+        public void enemy2()
         {
             while (Settings.MovingGhosts)
             {
-                Moving(x2, y2, 2, direction2, temp2);
+                Moving(x2Pos, y2Pos, 2, direction2, tempCell2);
                 Thread.Sleep(Settings.EnemySpeed);
             }
         }
 
-        public void e3()
+        public void enemy3()
         {
             while (Settings.MovingGhosts)
             {
-                Moving(x3, y3, 3, direction3, temp3);
+                Moving(x3Pos, y3Pos, 3, direction3, tempCell3);
                 Thread.Sleep(Settings.EnemySpeed);
             }
         }
 
-        public void Moving(int x, int y, int q, string direction, char temp)
+        public void Moving(int x, int y, int queue, string direction, char tempCell)
         {
-            char[] directions = { Field.arr[x - 1, y], Field.arr[x + 1, y], Field.arr[x, y - 1], Field.arr[x, y + 1] };
-
-            string[] ways = new string[2];
             string toGo = null;
-            int wayIndex = 0;
 
-            for (int i = 0; i < directions.Length; i++)
+
+            char[] allDirections = { Field.arr[x - 1, y], Field.arr[x + 1, y], Field.arr[x, y - 1], Field.arr[x, y + 1] };
+            string[] possibleDirections = new string[2];
+            int possiblDirectionsIndex = 0;
+
+
+            for (int i = 0; i < allDirections.Length; i++)
             {
-                if (directions[i] != Constants.Wall && directions[i] != Constants.Ghost && directions[i] != Constants.PacMan) // first
+                if (allDirections[i] != Constants.Wall && allDirections[i] != Constants.Ghost)
                 {
                     if (i == 0 && direction != "R")
                     {
-                        ways[wayIndex] = "L";
-                        wayIndex++;
+                        possibleDirections[possiblDirectionsIndex] = "L";
+                        possiblDirectionsIndex++;
 
                     }
                     if (i == 1 && direction != "L")
                     {
-                        ways[wayIndex] = "R";
-                        wayIndex++;
+                        possibleDirections[possiblDirectionsIndex] = "R";
+                        possiblDirectionsIndex++;
 
                     }
                     if (i == 2 && direction != "D")
                     {
-                        ways[wayIndex] = "U";
-                        wayIndex++;
+                        possibleDirections[possiblDirectionsIndex] = "U";
+                        possiblDirectionsIndex++;
 
                     }
                     if (i == 3 && direction != "U")
                     {
-                        ways[wayIndex] = "D";
-                        wayIndex++;
+                        possibleDirections[possiblDirectionsIndex] = "D";
+                        possiblDirectionsIndex++;
                     }
-                    if (wayIndex == 2)
+                    if (possiblDirectionsIndex == 2)
                     {
                         break;
                     }
                 }
             }
 
-            if (ways[0] == null && ways[1] == null)
+            if (possibleDirections[0] == null && possibleDirections[1] == null)
             {
-                if ((directions[0] != Constants.Wall || directions[0] == Constants.PacMan) && direction == "R")
+                if ((allDirections[0] != Constants.Wall || allDirections[0] == Constants.PacMan) && direction == "R")
                 {
-                    if (directions[1] == Constants.PacMan)
+                    if (allDirections[1] == Constants.PacMan)
                     {
                         Settings.MovingGhosts = false;
                         new End();
@@ -118,9 +123,9 @@ namespace PacMan
                         toGo = "L";
                     }
                 }
-                if ((directions[1] != Constants.Wall || directions[1] == Constants.PacMan) && direction == "L")
+                if ((allDirections[1] != Constants.Wall || allDirections[1] == Constants.PacMan) && direction == "L")
                 {
-                    if (directions[0] == Constants.PacMan)
+                    if (allDirections[0] == Constants.PacMan)
                     {
                         Settings.MovingGhosts = false;
                         new End();
@@ -130,9 +135,9 @@ namespace PacMan
                         toGo = "R";
                     }
                 }
-                if ((directions[2] != Constants.Wall || directions[2] == Constants.PacMan) && direction == "D")
+                if ((allDirections[2] != Constants.Wall || allDirections[2] == Constants.PacMan) && direction == "D")
                 {
-                    if (directions[3] == Constants.PacMan)
+                    if (allDirections[3] == Constants.PacMan)
                     {
                         Settings.MovingGhosts = false;
                         new End();
@@ -142,9 +147,9 @@ namespace PacMan
                         toGo = "U";
                     }
                 }
-                if ((directions[3] != Constants.Wall || directions[3] == Constants.PacMan) && direction == "U")
+                if ((allDirections[3] != Constants.Wall || allDirections[3] == Constants.PacMan) && direction == "U")
                 {
-                    if (directions[2] == Constants.PacMan)
+                    if (allDirections[2] == Constants.PacMan)
                     {
                         Settings.MovingGhosts = false;
                         new End();
@@ -155,52 +160,38 @@ namespace PacMan
                     }
                 }
             }
-            else if (ways[0] == null)
+            else if (possibleDirections[0] == null)
             {
-                toGo = ways[1];
+                toGo = possibleDirections[1];
             }
-            else if (ways[1] == null)
+            else if (possibleDirections[1] == null)
             {
-                toGo = ways[0];
+                toGo = possibleDirections[0];
             }
             else
             {
                 int randomValue = random.Next(2);
-                toGo = ways[random.Next(2)];
-            }
-
-
-
-            if (toGo == "L" && Field.arr[x - 1, y] == 'A')
-            {
-                toGo = "stop";
-            }
-            if (toGo == "R" && Field.arr[x + 1, y] == 'A')
-            {
-                toGo = "stop";
-            }
-            if (toGo == "U" && Field.arr[x, y - 1] == 'A')
-            {
-                toGo = "stop";
-            }
-            if (toGo == "D" && Field.arr[x, y + 1] == 'A')
-            {
-                toGo = "stop";
+                toGo = possibleDirections[random.Next(2)];
             }
 
             direction = toGo;
             if (toGo == "L")
             {
-                Field.arr[x, y] = temp;
-                if (temp == Constants.RandomTeleport)
+                Field.arr[x, y] = tempCell;
+                if (tempCell == Constants.RandomTeleport)
                 {
-                    Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.DarkGreen);
+                    Runner.Cell.UpdateCell(x, y, tempCell, ConsoleColor.DarkGreen);
                 } else
                 {
-                    Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
+                    Runner.Cell.UpdateCell(x, y, tempCell, ConsoleColor.Black);
                 }
                 x--;
-                if (Field.arr[x, y] == Constants.RandomTeleport)
+                if (Field.arr[x, y] == Constants.PacMan)
+                {
+                    Settings.MovingGhosts = false;
+                    new End();
+                }
+                else if (Field.arr[x, y] == Constants.RandomTeleport)
                 {
                     new RandomTeleport().Moving();
                     x = RandomTeleport.randomX;
@@ -210,37 +201,41 @@ namespace PacMan
                 {
                     Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
                 }
-                Field.arr[x, y] = Constants.Ghost;
 
-                if (q == 1)
+                if (queue == 1)
                 {
-                    x1--;
-                    temp1 = Field.arr[x, y];
+                    x1Pos--;
+                    tempCell1 = Field.arr[x, y];
                     direction1 = "L";
                 }
-                if (q == 2)
+                if (queue == 2)
                 {
-                    x2--;
-                    temp2 = Field.arr[x, y];
+                    x2Pos--;
+                    tempCell2 = Field.arr[x, y];
                     direction2 = "L";
                 }
-                if (q == 3)
+                if (queue == 3)
                 {
-                    x3--;
-                    temp3 = Field.arr[x, y];
+                    x3Pos--;
+                    tempCell3 = Field.arr[x, y];
                     direction3 = "L";
                 }
             }
             if (toGo == "R")
             {
-                Field.arr[x, y] = temp;
-                if (temp == Constants.RandomTeleport)
+                Field.arr[x, y] = tempCell;
+                if (Field.arr[x, y] == Constants.PacMan)
                 {
-                    Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.DarkGreen);
+                    Settings.MovingGhosts = false;
+                    new End();
+                }
+                else if (tempCell == Constants.RandomTeleport)
+                {
+                    Runner.Cell.UpdateCell(x, y, tempCell, ConsoleColor.DarkGreen);
                 }
                 else
                 {
-                    Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
+                    Runner.Cell.UpdateCell(x, y, tempCell, ConsoleColor.Black);
                 }
                 x++;
                 if (Field.arr[x, y] == Constants.RandomTeleport)
@@ -254,37 +249,41 @@ namespace PacMan
                 {
                     Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
                 }
-                Field.arr[x, y] = Constants.Ghost;
 
-                if (q == 1)
+                if (queue == 1)
                 {
-                    x1++;
-                    temp1 = Field.arr[x, y];
+                    x1Pos++;
+                    tempCell1 = Field.arr[x, y];
                     direction1 = "R";
                 }
-                if (q == 2)
+                if (queue == 2)
                 {
-                    x2++;
-                    temp2 = Field.arr[x, y];
+                    x2Pos++;
+                    tempCell2 = Field.arr[x, y];
                     direction2 = "R";
                 }
-                if (q == 3)
+                if (queue == 3)
                 {
-                    x3++;
-                    temp3 = Field.arr[x, y];
+                    x3Pos++;
+                    tempCell3 = Field.arr[x, y];
                     direction3 = "R";
                 }
             }
             if (toGo == "U")
             {
-                Field.arr[x, y] = temp;
-                if (temp == Constants.RandomTeleport)
+                Field.arr[x, y] = tempCell;
+                if (Field.arr[x, y] == Constants.PacMan)
                 {
-                    Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.DarkGreen);
+                    Settings.MovingGhosts = false;
+                    new End();
+                }
+                else if (tempCell == Constants.RandomTeleport)
+                {
+                    Runner.Cell.UpdateCell(x, y, tempCell, ConsoleColor.DarkGreen);
                 }
                 else
                 {
-                    Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
+                    Runner.Cell.UpdateCell(x, y, tempCell, ConsoleColor.Black);
                 }
                 y--;
                 if (Field.arr[x, y] == Constants.RandomTeleport)
@@ -298,37 +297,41 @@ namespace PacMan
                 {
                     Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
                 }
-                Field.arr[x, y] = Constants.Ghost;
 
-                if (q == 1)
+                if (queue == 1)
                 {
-                    y1--;
-                    temp1 = Field.arr[x, y];
+                    y1Pos--;
+                    tempCell1 = Field.arr[x, y];
                     direction1 = "U";
                 }
-                if (q == 2)
+                if (queue == 2)
                 {
-                    y2--;
-                    temp2 = Field.arr[x, y];
+                    y2Pos--;
+                    tempCell2 = Field.arr[x, y];
                     direction2 = "U";
                 }
-                if (q == 3)
+                if (queue == 3)
                 {
-                    y3--;
-                    temp3 = Field.arr[x, y];
+                    y3Pos--;
+                    tempCell3 = Field.arr[x, y];
                     direction3 = "U";
                 }
             }
             if (toGo == "D")
             {
-                Field.arr[x, y] = temp;
-                if (temp == Constants.RandomTeleport)
+                Field.arr[x, y] = tempCell;
+                if (Field.arr[x, y] == Constants.PacMan)
                 {
-                    Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.DarkGreen);
+                    Settings.MovingGhosts = false;
+                    new End();
+                }
+                else if (tempCell == Constants.RandomTeleport)
+                {
+                    Runner.Cell.UpdateCell(x, y, tempCell, ConsoleColor.DarkGreen);
                 }
                 else
                 {
-                    Runner.Cell.UpdateCell(x, y, temp, ConsoleColor.Black);
+                    Runner.Cell.UpdateCell(x, y, tempCell, ConsoleColor.Black);
                 }
                 y++;
                 if (Field.arr[x, y] == Constants.RandomTeleport)
@@ -342,24 +345,23 @@ namespace PacMan
                 {
                     Runner.Cell.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
                 }
-                Field.arr[x, y] = Constants.Ghost;
 
-                if (q == 1)
+                if (queue == 1)
                 {
-                    y1++;
-                    temp1 = Field.arr[x, y];
+                    y1Pos++;
+                    tempCell1 = Field.arr[x, y];
                     direction1 = "D";
                 }
-                if (q == 2)
+                if (queue == 2)
                 {
-                    y2++;
-                    temp2 = Field.arr[x, y];
+                    y2Pos++;
+                    tempCell2 = Field.arr[x, y];
                     direction2 = "D";
                 }
-                if (q == 3)
+                if (queue == 3)
                 {
-                    y3++;
-                    temp3 = Field.arr[x, y];
+                    y3Pos++;
+                    tempCell3 = Field.arr[x, y];
                     direction3 = "D";
                 }
             }

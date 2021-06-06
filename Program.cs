@@ -8,6 +8,7 @@ namespace PacMan
         static void Main(string[] args)
         {
             new Runner().Run();
+
             Console.ReadKey();
         }
     }
