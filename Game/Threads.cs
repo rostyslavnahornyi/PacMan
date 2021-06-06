@@ -13,6 +13,7 @@ namespace PacMan
             Ghosts Ghosts = new Ghosts();
             RandomTeleport RandomTeleport = new RandomTeleport();
 
+
             Thread pacman = new Thread(PacMan.Moving);
             pacman.Start();
 

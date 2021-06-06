@@ -170,7 +170,6 @@ namespace PacMan
             }
             else
             {
-                int randomValue = random.Next(2);
                 toGo = possibleDirections[random.Next(2)];
             }
 
@@ -185,7 +184,9 @@ namespace PacMan
                 {
                     Runner.Cell.UpdateCell(x, y, tempCell, ConsoleColor.Black);
                 }
+
                 x--;
+
                 if (Field.arr[x, y] == Constants.PacMan)
                 {
                     Settings.MovingGhosts = false;
@@ -237,7 +238,9 @@ namespace PacMan
                 {
                     Runner.Cell.UpdateCell(x, y, tempCell, ConsoleColor.Black);
                 }
+
                 x++;
+
                 if (Field.arr[x, y] == Constants.RandomTeleport)
                 {
                     new RandomTeleport().Moving();
@@ -285,7 +288,9 @@ namespace PacMan
                 {
                     Runner.Cell.UpdateCell(x, y, tempCell, ConsoleColor.Black);
                 }
+
                 y--;
+
                 if (Field.arr[x, y] == Constants.RandomTeleport)
                 {
                     new RandomTeleport().Moving();
@@ -333,7 +338,9 @@ namespace PacMan
                 {
                     Runner.Cell.UpdateCell(x, y, tempCell, ConsoleColor.Black);
                 }
+
                 y++;
+
                 if (Field.arr[x, y] == Constants.RandomTeleport)
                 {
                     new RandomTeleport().Moving();
