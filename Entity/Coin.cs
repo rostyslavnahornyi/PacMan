@@ -4,17 +4,17 @@ using System.Text;
 
 namespace PacMan 
 {
-    class Coin : FieldBuilder
+    class Coin : Entity
     {
-        private char ch = Constants.Coin;
-        private ConsoleColor BG = ConsoleColor.Black;
-
+        public Coin()
+        {
+            ch = Constants.Coin;
+            Background = ConsoleColor.Black;
+        }
         public override void Display()
         {
-            Console.BackgroundColor = BG;
-            Console.Write(ch);
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.Write(space);
+            Console.BackgroundColor = Background;
+            Console.Write(ch + "  ");
         }
     }
 }

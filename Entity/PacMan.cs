@@ -4,43 +4,110 @@ using System.Text;
 
 namespace PacMan
 {
-    class PacMan : FieldBuilder
-    {
-        private char ch = Constants.PacMan;
-        private ConsoleColor BG = ConsoleColor.DarkRed;
-       
+    class PacMan : Entity
+    {       
         public static int x;
         public static int y;
 
-        public PacMan()
+        public PacMan(int x, int y)
         {
-            FindPacMan();
+            ch = Constants.PacMan;
+            Background = ConsoleColor.DarkRed;
+
+            PacMan.x = x;
+            PacMan.y = y;
         }
 
         public override void Display()
         {
-            Console.BackgroundColor = BG;
+            Console.BackgroundColor = Background;
             Console.Write(ch);
             Console.BackgroundColor = ConsoleColor.Black;
-            Console.Write(space);
+            Console.Write("  ");
         }
 
-        private void FindPacMan()
+        private void MovingTo(int X, int Y)
         {
-            for (int i = 0; i < Field.arr.GetUpperBound(1) + 1; i++)
+            Entity temp;
+            if (Field.arr[x + X, y + Y].ch == Constants.Wall)
             {
-                for (int j = 0; j < Field.arr.GetUpperBound(0) + 1; j++)
+                Renderer.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
+            }
+            else if (Field.arr[x + X, y + Y].ch == Constants.Ghost)
+            {
+                Settings.MovingGhosts = false;
+                IntroScenes.End();
+            }
+            else if (Field.arr[x + X, y + Y].ch == Constants.Coin)
+            {
+                temp = Field.arr[x, y];
+                Field.arr[x, y] = new Space();
+                Renderer.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
+                x += X;
+                y += Y;
+                Field.arr[x, y] = temp;
+                Renderer.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
+                Scores.coins++;
+                new Sound().ON_GettedCoins();
+                if (Scores.coins == Scores.MaxCoins)
                 {
-                    if (Field.arr[j, i] == Constants.PacMan)
-                    {
-                        x = j;
-                        y = i;
-                    }
+                    Settings.MovingGhosts = false;
+                    IntroScenes.Win();
                 }
+            }
+            else if (Field.arr[x + X, y + Y].ch == Constants.BigCoin)
+            {
+                temp = Field.arr[x, y];
+                Field.arr[x, y] = new Space();
+                Renderer.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
+                x += X;
+                y += Y;
+                Field.arr[x, y] = temp;
+                Renderer.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
+                Scores.coins += 3;
+                new Sound().ON_GettedCoins();
+                if (Scores.coins == Scores.MaxCoins)
+                {
+                    Settings.MovingGhosts = false;
+                    IntroScenes.Win();
+                }
+            }
+            else if (Field.arr[x + X, y + Y].ch == Constants.Space)
+            {
+                temp = Field.arr[x, y];
+                Field.arr[x, y] = new Space();
+                Renderer.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
+                x += X;
+                y += Y;
+                Field.arr[x, y] = temp;
+                Renderer.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
+            }
+            else if (Field.arr[x + X, y + Y].ch == Constants.RandomTeleport)
+            {
+                temp = Field.arr[x, y];
+                Field.arr[x, y] = new Space();
+                Renderer.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
+                x += X;
+                y += Y;
+                Field.arr[x, y] = temp;
+                Renderer.UpdateCell(x, y, RandomTeleport.tempCell, ConsoleColor.Black);
+                new RandomTeleport().Loop();
+                x = RandomTeleport.randomX;
+                y = RandomTeleport.randomY;
+                if (Field.arr[x, y].ch == Constants.Coin)
+                {
+                    Scores.coins++;
+                }
+                else if (Field.arr[x, y].ch == Constants.BigCoin)
+                {
+                    Scores.coins += 3;
+                }
+                Field.arr[x, y].ch = Constants.PacMan;
+                Renderer.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
             }
         }
 
-        public void Moving()
+        public override void Loop()
         {
             while (true)
             {
@@ -49,288 +116,22 @@ namespace PacMan
                     ConsoleKeyInfo key = Console.ReadKey();
                     if (key.Key == ConsoleKey.LeftArrow)
                     {
-                        if (Field.arr[x - 1, y] == Constants.Wall)
-                        {
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                        }
-                        else if (Field.arr[x - 1, y] == Constants.Coin)
-                        {
-                            Field.arr[x, y] = Constants.Space;
-                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
-                            x--;
-                            Field.arr[x, y] = Constants.PacMan;
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                            Scores.coins++;
-                            new Sound().ON_GettedCoins();
-                            if (Scores.coins == Scores.MaxCoins)
-                            {
-                                Settings.MovingGhosts = false;
-                                new Win();
-                            }
-                        }
-                        else if (Field.arr[x - 1, y] == Constants.BigCoin)
-                        {
-                            Field.arr[x, y] = Constants.Space;
-                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
-                            x--;
-                            Field.arr[x, y] = Constants.PacMan;
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                            Scores.coins += 3;
-                            new Sound().ON_GettedCoins();
-                            if (Scores.coins == Scores.MaxCoins)
-                            {
-                                Settings.MovingGhosts = false;
-                                new Win();
-                            }
-                        }
-                        else if (Field.arr[x - 1, y] == Constants.Ghost)
-                        {
-                            Settings.MovingGhosts = false;
-                            new End();
-                        }
-                        else if (Field.arr[x - 1, y] == Constants.Space)
-                        {
-                            Field.arr[x, y] = Constants.Space;
-                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
-                            x--;
-                            Field.arr[x, y] = Constants.PacMan;
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                        }
-                        else if (Field.arr[x - 1, y] == Constants.RandomTeleport)
-                        {
-                            Field.arr[x, y] = Constants.Space;
-                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
-                            x--;
-                            Field.arr[x, y] = RandomTeleport.tempCell;
-                            Runner.Cell.UpdateCell(x, y, RandomTeleport.tempCell, ConsoleColor.Black);
-                            new RandomTeleport().Moving();
-                            x = RandomTeleport.randomX;
-                            y = RandomTeleport.randomY;
-                            if (Field.arr[x, y] == Constants.Coin)
-                            {
-                                Scores.coins++;
-                            } else if (Field.arr[x, y] == Constants.BigCoin) {
-                                Scores.coins += 3;
-                            }
-                            Field.arr[x, y] = Constants.PacMan;
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                        }
+                        MovingTo(-1, 0);
                     }
 
                     if (key.Key == ConsoleKey.RightArrow)
                     {
-                        if (Field.arr[x + 1, y] == Constants.Wall)
-                        {
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                        }
-                        else if (Field.arr[x + 1, y] == Constants.Coin)
-                        {
-                            Field.arr[x, y] = Constants.Space;
-                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
-                            x++;
-                            Field.arr[x, y] = Constants.PacMan;
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                            Scores.coins++;
-                            new Sound().ON_GettedCoins();
-                            if (Scores.coins == Scores.MaxCoins)
-                            {
-                                Settings.MovingGhosts = false;
-                                new Win();
-                            }
-                        }
-                        else if (Field.arr[x + 1, y] == Constants.BigCoin)
-                        {
-                            Field.arr[x, y] = Constants.Space;
-                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
-                            x++;
-                            Field.arr[x, y] = Constants.PacMan;
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                            Scores.coins += 3;
-                            new Sound().ON_GettedCoins();
-                            if (Scores.coins == Scores.MaxCoins)
-                            {
-                                Settings.MovingGhosts = false;
-                                new Win();
-                            }
-                        }
-                        else if (Field.arr[x + 1, y] == Constants.Ghost)
-                        {
-                            Settings.MovingGhosts = false;
-                            new End();
-                        }
-                        else if (Field.arr[x + 1, y] == Constants.Space)
-                        {
-                            Field.arr[x, y] = Constants.Space;
-                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
-                            x++;
-                            Field.arr[x, y] = Constants.PacMan;
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                        }
-                        else if (Field.arr[x + 1, y] == Constants.RandomTeleport)
-                        {
-                            Field.arr[x, y] = Constants.Space;
-                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
-                            x++;
-                            Field.arr[x, y] = RandomTeleport.tempCell;
-                            Runner.Cell.UpdateCell(x, y, RandomTeleport.tempCell, ConsoleColor.Black);
-                            new RandomTeleport().Moving();
-                            x = RandomTeleport.randomX;
-                            y = RandomTeleport.randomY;
-                            if (Field.arr[x, y] == Constants.Coin)
-                            {
-                                Scores.coins++;
-                            }
-                            else if (Field.arr[x, y] == Constants.BigCoin)
-                            {
-                                Scores.coins += 3;
-                            }
-                            Field.arr[x, y] = Constants.PacMan;
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                        }
+                        MovingTo(1, 0);
                     }
 
                     if (key.Key == ConsoleKey.UpArrow)
                     {
-                        if (Field.arr[x, y - 1] == Constants.Wall)
-                        {
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                        }
-                        else if (Field.arr[x, y - 1] == Constants.Coin)
-                        {
-                            Field.arr[x, y] = Constants.Space;
-                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
-                            y--;
-                            Field.arr[x, y] = Constants.PacMan;
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                            Scores.coins++;
-                            new Sound().ON_GettedCoins();
-                            if (Scores.coins == Scores.MaxCoins)
-                            {
-                                Settings.MovingGhosts = false;
-                                new Win();
-                            }
-                        }
-                        else if (Field.arr[x, y - 1] == Constants.BigCoin)
-                        {
-                            Field.arr[x, y] = Constants.Space;
-                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
-                            y--;
-                            Field.arr[x, y] = Constants.PacMan;
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                            Scores.coins += 3;
-                            new Sound().ON_GettedCoins();
-                            if (Scores.coins == Scores.MaxCoins)
-                            {
-                                Settings.MovingGhosts = false;
-                                new Win();
-                            }
-                        }
-                        else if (Field.arr[x, y - 1] == Constants.Ghost)
-                        {
-                            Settings.MovingGhosts = false;
-                            new End();
-                        }
-                        else if (Field.arr[x, y - 1] == Constants.Space)
-                        {
-                            Field.arr[x, y] = Constants.Space;
-                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
-                            y--;
-                            Field.arr[x, y] = Constants.PacMan;
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                        }
-                        else if (Field.arr[x, y - 1] == Constants.RandomTeleport)
-                        {
-                            Field.arr[x, y] = Constants.Space;
-                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
-                            y--;
-                            Field.arr[x, y] = RandomTeleport.tempCell;
-                            Runner.Cell.UpdateCell(x, y, RandomTeleport.tempCell, ConsoleColor.Black);
-                            new RandomTeleport().Moving();
-                            x = RandomTeleport.randomX;
-                            y = RandomTeleport.randomY;
-                            if (Field.arr[x, y] == Constants.Coin)
-                            {
-                                Scores.coins++;
-                            }
-                            else if (Field.arr[x, y] == Constants.BigCoin)
-                            {
-                                Scores.coins += 3;
-                            }
-                            Field.arr[x, y] = Constants.PacMan;
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                        }
+                        MovingTo(0, -1);
                     }
 
                     if (key.Key == ConsoleKey.DownArrow)
                     {
-                        if (Field.arr[x, y + 1] == Constants.Wall)
-                        {
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                        }
-                        else if (Field.arr[x, y + 1] == Constants.Coin)
-                        {
-                            Field.arr[x, y] = Constants.Space;
-                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
-                            y++;
-                            Field.arr[x, y] = Constants.PacMan;
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                            Scores.coins++;
-                            new Sound().ON_GettedCoins();
-                            if (Scores.coins == Scores.MaxCoins)
-                            {
-                                Settings.MovingGhosts = false;
-                                new Win();
-                            }
-                        }
-                        else if (Field.arr[x, y + 1] == Constants.BigCoin)
-                        {
-                            Field.arr[x, y] = Constants.Space;
-                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
-                            y++;
-                            Field.arr[x, y] = Constants.PacMan;
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                            Scores.coins += 3;
-                            new Sound().ON_GettedCoins();
-                            if (Scores.coins == Scores.MaxCoins)
-                            {
-                                Settings.MovingGhosts = false;
-                                new Win();
-                            }
-                        }
-                        else if (Field.arr[x, y + 1] == Constants.Ghost)
-                        {
-                            Settings.MovingGhosts = false;
-                            new End();
-                        }
-                        else if (Field.arr[x, y + 1] == Constants.Space)
-                        {
-                            Field.arr[x, y] = Constants.Space;
-                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
-                            y++;
-                            Field.arr[x, y] = Constants.PacMan;
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                        }
-                        else if (Field.arr[x, y + 1] == Constants.RandomTeleport)
-                        {
-                            Field.arr[x, y] = Constants.Space;
-                            Runner.Cell.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
-                            y++;
-                            Field.arr[x, y] = RandomTeleport.tempCell;
-                            Runner.Cell.UpdateCell(x, y, RandomTeleport.tempCell, ConsoleColor.Black);
-                            new RandomTeleport().Moving();
-                            x = RandomTeleport.randomX;
-                            y = RandomTeleport.randomY;
-                            if (Field.arr[x, y] == Constants.Coin)
-                            {
-                                Scores.coins++;
-                            }
-                            else if (Field.arr[x, y] == Constants.BigCoin)
-                            {
-                                Scores.coins += 3;
-                            }
-                            Field.arr[x, y] = Constants.PacMan;
-                            Runner.Cell.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
-                        }
+                        MovingTo(0, 1);
                     }
                 }
             }

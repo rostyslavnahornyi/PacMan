@@ -7,25 +7,15 @@ namespace PacMan
 {
     class Threads
     {
-        public Threads()
+        public void ON()
         {
-            PacMan PacMan = new PacMan();
-            Ghosts Ghosts = new Ghosts();
-            RandomTeleport RandomTeleport = new RandomTeleport();
+            int[] pacmanCoordinates = Field.FindPacmanCoordinates();
+            int[][] ghostsCoordinates = Field.FindGhostsCoordinates();
 
-
-            Thread pacman = new Thread(PacMan.Moving);
-            pacman.Start();
-
-            Thread enemy1 = new Thread(Ghosts.enemy1);
-            Thread enemy2 = new Thread(Ghosts.enemy2);
-            Thread enemy3 = new Thread(Ghosts.enemy3);
-            enemy1.Start();
-            enemy2.Start();
-            enemy3.Start();
-
-            Thread randomTeleport = new Thread(RandomTeleport.Create);
-            randomTeleport.Start();
+            new Thread(Field.arr[pacmanCoordinates[1], pacmanCoordinates[0]].Loop).Start();
+            new Thread(Field.arr[ghostsCoordinates[0][0], ghostsCoordinates[0][1]].Loop).Start();
+            new Thread(Field.arr[ghostsCoordinates[2][0], ghostsCoordinates[2][1]].Loop).Start();
+            new Thread(Field.arr[ghostsCoordinates[1][0], ghostsCoordinates[1][1]].Loop).Start();
         }
     }
 }

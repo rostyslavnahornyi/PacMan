@@ -8,7 +8,7 @@ namespace PacMan
     class Field
     {
         private static string[] lines = File.ReadAllLines("../../../Resources/map1.txt");
-        public static char[,] arr = new char[lines[0].Length, lines.Length];
+        public static Entity[,] arr = new Entity[lines[0].Length, lines.Length];
 
 
 
@@ -18,7 +18,30 @@ namespace PacMan
             {
                 for (int j = 0; j < lines.Length; j++)
                 {
-                    arr[i, j] = lines[j][i];
+                    if (lines[j][i] == Constants.PacMan)
+                    {
+                        arr[i, j] = new PacMan(i, j);
+                    }
+                    if (lines[j][i] == Constants.Ghost)
+                    {
+                        arr[i, j] = new Ghost(i, j);
+                    }
+                    if (lines[j][i] == Constants.Wall)
+                    {
+                        arr[i, j] = new Wall();
+                    }
+                    if (lines[j][i] == Constants.BigCoin)
+                    {
+                        arr[i, j] = new BigCoin();
+                    }
+                    if (lines[j][i] == Constants.Coin)
+                    {
+                        arr[i, j] = new Coin();
+                    }
+                    if (lines[j][i] == Constants.RandomTeleport)
+                    {
+                        arr[i, j] = new RandomTeleport();
+                    }
                 }
             }
         }
@@ -27,55 +50,92 @@ namespace PacMan
         {
             Console.ResetColor();
             Console.Clear();
-            string space = "  ";
 
             for (int y = 0; y < arr.GetUpperBound(1) + 1; y++)
             {
                 for (int x = 0; x < arr.GetUpperBound(0) + 1; x++)
                 {
-                    if (arr[x, y] == Constants.Coin)
+                    if (arr[x, y].ch == Constants.Coin)
                     {
-                        new Coin().Display();
+                        arr[x, y].Display();
                     }
-                    else if (arr[x, y] == Constants.BigCoin)
+                    else if (arr[x, y].ch == Constants.BigCoin)
                     {
-                        new BigCoin().Display();
+                        arr[x, y].Display();
                     }
-                    else if (arr[x, y] == Constants.PacMan)
+                    else if (arr[x, y].ch == Constants.PacMan)
                     {
-                        new PacMan().Display();
+                        arr[x, y].Display();
                     }
-                    else if (arr[x, y] == Constants.Ghost)
+                    else if (arr[x, y].ch == Constants.Ghost)
                     {
-                        new Ghosts().Display();
+                        arr[x, y].Display();
                     }
-                    else if (arr[x, y] != Constants.Wall)
+                    else if (arr[x, y].ch == Constants.Wall)
                     {
-                        Console.BackgroundColor = ConsoleColor.Black;
-                        Console.Write(arr[x, y] + space);
-                    }
-
-                    if (x != arr.GetUpperBound(0))
-                    {
-                        if (arr[x, y] == Constants.Wall && arr[x + 1, y] == Constants.Wall)
-                        {
-                            new Wall().DisplayFullColor();
-                        }
-                        else if (arr[x, y] == Constants.Wall)
-                        {
-                            new Wall().Display();
-                        }
-                    }
-                    else
-                    {
-                        Console.BackgroundColor = ConsoleColor.DarkBlue;
-                        Console.Write(Constants.Wall);
-                        break;
+                        new Wall().Display(x, y, arr);
                     }
                 }
-                Console.BackgroundColor = ConsoleColor.Black;
+
+                Console.ResetColor();
                 Console.WriteLine();
             }
+        }
+
+        public static int[] FindPacmanCoordinates()
+        {
+            int[] arr = new int[2];
+            for (int i = 0; i < Field.arr.GetUpperBound(1) + 1; i++)
+            {
+                for (int j = 0; j < Field.arr.GetUpperBound(0) + 1; j++)
+                {
+                    if (Field.arr[j, i].ch == Constants.PacMan)
+                    {
+                        arr[0] = i;
+                        arr[1] = j;
+                    }
+                }
+            }
+            return arr;
+        }
+
+        public static int[][] FindGhostsCoordinates()
+        {
+            int[][] arr = new int[3][]; // number of ghosts, coordinates
+            arr[0] = new int[2];
+            arr[1] = new int[2];
+            arr[2] = new int[2];
+            int numberGhost = 0;
+            for (int i = 0; i < Field.arr.GetUpperBound(1) + 1; i++)
+            {
+                for (int j = 0; j < Field.arr.GetUpperBound(0) + 1; j++)
+                {
+                    if (Field.arr[j, i].ch == Constants.Ghost)
+                    {
+                        arr[numberGhost][0] = j;
+                        arr[numberGhost][1] = i;
+                        numberGhost++;
+                    }
+                }
+            }
+            return arr;
+        }
+
+        public static int[] FindRandomTeleportCoordinates()
+        {
+            int[] arr = new int[2];
+            for (int i = 0; i < Field.arr.GetUpperBound(1) + 1; i++)
+            {
+                for (int j = 0; j < Field.arr.GetUpperBound(0) + 1; j++)
+                {
+                    if (Field.arr[j, i].ch == Constants.RandomTeleport)
+                    {
+                        arr[0] = i;
+                        arr[1] = j;
+                    }
+                }
+            }
+            return arr;
         }
     }
 }

@@ -4,23 +4,41 @@ using System.Text;
 
 namespace PacMan
 {
-    class Wall : FieldBuilder
+    class Wall : Entity
     {
-        private char ch = Constants.Wall;
-        private ConsoleColor BG = ConsoleColor.DarkBlue;
+        public Wall()
+        {
+            ch = Constants.Wall;
+            Background = ConsoleColor.DarkBlue;
+        }
 
         public override void Display()
         {
-            Console.BackgroundColor = BG;
+            Console.BackgroundColor = Background;
             Console.Write(ch);
             Console.BackgroundColor = ConsoleColor.Black;
-            Console.Write(space);
+            Console.Write("  ");
         }
 
-        public void DisplayFullColor()
+        public void Display(int x, int y, Entity[,] arr)
         {
-            Console.BackgroundColor = ConsoleColor.DarkBlue;
-            Console.Write(ch + space);
+            if (x != arr.GetUpperBound(0))
+            {
+                if (arr[x, y].ch == Constants.Wall && arr[x + 1, y].ch == Constants.Wall)
+                {
+                    Console.BackgroundColor = ConsoleColor.DarkBlue;
+                    Console.Write(ch + "  ");
+                }
+                else if (arr[x, y].ch == Constants.Wall)
+                {
+                    Display();
+                }
+            }
+            else
+            {
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.Write(ch);
+            }
         }
     }
 }

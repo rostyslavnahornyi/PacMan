@@ -4,14 +4,13 @@ using System.Text;
 
 namespace PacMan
 {
-    class BigCoin : Entity
+    class Space : Entity
     {
-        public BigCoin()
+        public Space()
         {
-            ch = Constants.BigCoin;
+            ch = Constants.Space;
             Background = ConsoleColor.Black;
         }
-
         public override void Display()
         {
             Console.BackgroundColor = Background;

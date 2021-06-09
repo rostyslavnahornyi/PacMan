@@ -4,14 +4,12 @@ using System.Text;
 
 namespace PacMan
 {
-    class Cell
+    class Renderer
     {
-        static object locker = new object();
-        private DisplayInfo Info = new DisplayInfo();
-
-        public void UpdateCell(int x, int y, char ch, ConsoleColor color)
+        public static void UpdateCell(int x, int y, char ch, ConsoleColor color)
         {
-            lock (locker)
+            DisplayInfo info = new DisplayInfo();
+            lock (Util.locker)
             {
                 Console.BackgroundColor = color;
                 Console.SetCursorPosition(x * 3, y);
@@ -20,8 +18,9 @@ namespace PacMan
                 Console.Write("  ");
                 Console.SetCursorPosition(x * 3, y);
                 Console.ResetColor();
-                Info.Score();
-                Info.Coordinates();
+
+                info.Score();
+                info.Coordinates();
             }
         }
     }

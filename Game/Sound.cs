@@ -14,17 +14,17 @@ namespace PacMan
             
         public void ON_StartScene()
         {
-            StartScene.Play();
+            //StartScene.Play();
         }
 
         public void ON_GettedCoins()
         {
-            GettingCoins.PlaySync();
+            //GettingCoins.PlaySync();
         }
 
         public void ON_EndScene()
         {
-            EndScene.Play();
+            //EndScene.Play();
         }
     }
 }

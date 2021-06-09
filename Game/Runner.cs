@@ -6,36 +6,29 @@ namespace PacMan
 {
     class Runner
     {
-        public static Cell Cell = new Cell();
-        private DisplayInfo Info = new DisplayInfo();
+
         public void Run()
         {
-            new CustomConsole(100, 25);
-            new Start();
-            ConsoleKeyInfo key = Console.ReadKey();
-            if (key.Key == ConsoleKey.Enter)
-            {
-                StartGame();
-            }
+            Console.SetWindowSize(100, 25);
+            IntroScenes.Start();
 
         }
 
-        public void StartGame()
+        public static void StartGame()
         {
-            Settings.MovingGhosts = true;
+            DisplayInfo info = new DisplayInfo();
+            Threads threads = new Threads();
+            Scores scores = new Scores();
+            Field field = new Field();
 
-            new CustomConsole(100, 16);
+            Console.SetWindowSize(100, 16);
 
-            Field Field = new Field();
-            Field.Fill();
-            Field.Print();
-
-            new Scores();
-
-            Info.Score();
-            Info.Coordinates();
-
-            new Threads();
+            field.Fill();
+            field.Print();
+            scores.FindAllCoins();
+            info.Score();
+            info.Coordinates();
+            threads.ON();
         }
     }
 }
