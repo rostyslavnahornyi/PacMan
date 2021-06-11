@@ -7,6 +7,7 @@ namespace PacMan_GUI_WPF
         public Runner(Canvas CanvasField)
         {
             new Field(CanvasField);
+            Scores.FindAllCoins();
         }
     }
 }

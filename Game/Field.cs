@@ -20,18 +20,20 @@ namespace PacMan_GUI_WPF
 {
     class Field
     {
-        private int sizeMapX = 49;
-        private int sizeMapY = 35;
-
         public static string SelectedMap = "map1";
 
         private static string[] txtLines;
-        public static char[,] entitiesArr;
+        public static Entity[,] entitiesArr;
 
-        private static double PosLeft;
+        public static int sizeMapX = 49;
+        public static int sizeMapY = 35;
+
+        public static int marginEntity = 1;
+
+        private static int PosLeft;
         private static int PosTop;
 
-        private static int number = 1;
+        private static int numberGhost = 1;
 
         Canvas CanvasField;
 
@@ -43,69 +45,102 @@ namespace PacMan_GUI_WPF
             Draw();
         }
 
-
-        private void Draw()
+        private void FillArr()
         {
-            for (int y = entitiesArr.GetUpperBound(1); y >= 0; y--)
+            txtLines = File.ReadAllLines($"../../Resources/Maps/{SelectedMap}.txt");
+            entitiesArr = new Entity[txtLines[0].Length, txtLines.Length];
+
+            for (int i = 0; i < txtLines[0].Length; i++)
+            {
+                for (int j = 0; j < txtLines.Length; j++)
+                {
+                    if (txtLines[j][i] == Constants.PacMan)
+                    {
+                        entitiesArr[i, j] = new Pacman();
+                    }
+                    if (txtLines[j][i] == Constants.Ghost)
+                    {
+                        entitiesArr[i, j] = new Ghosts(i, j, numberGhost);
+                        numberGhost++;
+                    }
+                    if (txtLines[j][i] == Constants.Wall)
+                    {
+                        entitiesArr[i, j] = new Wall();
+                    }
+                    if (txtLines[j][i] == Constants.Coin)
+                    {
+                        entitiesArr[i, j] = new Coin();
+                    }
+                }
+            }
+            numberGhost = 1;
+            PosLeft = (((int)CanvasField.ActualWidth - Entity.Width * sizeMapX - sizeMapX) / 2) + marginEntity;
+            PosTop = (((int)CanvasField.ActualHeight - Entity.Height * sizeMapY - sizeMapY) / 2) + marginEntity;
+        }
+
+        public void Draw()
+        {
+            for (int y = 0; y < entitiesArr.GetUpperBound(1) + 1; y++)
             {
                 for (int x = 0; x < entitiesArr.GetUpperBound(0) + 1; x++)
                 {
-                    if (entitiesArr[x, y] == Constants.Wall)
+                    if (entitiesArr[x, y].ch == Constants.Wall)
                     {
                         Rectangle rectangle = new Rectangle()
                         {
                             Name = "Wall",
-                            Width = Wall.Width,
-                            Height = Wall.Height,
+                            Width = Entity.Width,
+                            Height = Entity.Height,
                             Stroke = Wall.StrokeBackground,
                             StrokeThickness = Wall.Stroke
                         };
                         Canvas.SetLeft(rectangle, PosLeft);
                         Canvas.SetTop(rectangle, PosTop);
                         CanvasField.Children.Add(rectangle);
-                    }else  if (entitiesArr[x, y] == Constants.Coin)
+                    }
+                    else if (entitiesArr[x, y].ch == Constants.Coin)
                     {
                         Ellipse ellipse = new Ellipse()
                         {
                             Name = "Coin",
-                            Width = Coin.Width,
-                            Height = Coin.Height,
+                            Width = Coin._Width,
+                            Height = Coin._Height,
                             Fill = Coin.Background
                         };
-                        Canvas.SetLeft(ellipse, PosLeft + 4);
-                        Canvas.SetTop(ellipse, PosTop + 4);
+                        Canvas.SetLeft(ellipse, PosLeft + 6);
+                        Canvas.SetTop(ellipse, PosTop + 6);
                         CanvasField.Children.Add(ellipse);
                     }
-                    else if (entitiesArr[x, y] == Constants.PacMan)
+                    else if (entitiesArr[x, y].ch == Constants.PacMan)
                     {
                         Image image = new Image()
                         {
                             Name = "Pacman",
-                            Width = Pacman.Width,
-                            Height = Pacman.Height
+                            Width = Entity.Width,
+                            Height = Entity.Height
 
                         };
-                        string url = "C:/Users/Rostyslav/Desktop/GIT/PacMan/Resources/Images/pacman.gif";
-                        AnimationBehavior.SetSourceUri(image, new Uri(url));
+                        AnimationBehavior.SetSourceUri(image, new Uri("C:/Users/Rostyslav/Desktop/GIT/PacMan/Resources/Images/pacman.gif"));
                         Canvas.SetLeft(image, PosLeft);
                         Canvas.SetTop(image, PosTop);
+                        Canvas.SetZIndex(image, 3);
                         CanvasField.Children.Add(image);
-                    }else  if (entitiesArr[x, y] == Constants.Ghost)
+                    }
+                    else if (entitiesArr[x, y].ch == Constants.Ghost)
                     {
                         Image image = new Image()
                         {
-                            Name = "Pacman",
-                            Width = Pacman.Width,
-                            Height = Pacman.Height
-
+                            Name = $"Ghost{numberGhost}",
+                            Width = Entity.Width,
+                            Height = Entity.Height,
                         };
-                        string url = $"C:/Users/Rostyslav/Desktop/GIT/PacMan/Resources/Images/ghost{number.ToString()}.gif";
-                        AnimationBehavior.SetSourceUri(image, new Uri(url));
+                        AnimationBehavior.SetSourceUri(image, new Uri($"C:/Users/Rostyslav/Desktop/GIT/PacMan/Resources/Images/ghost{numberGhost.ToString()}.gif"));
                         Canvas.SetLeft(image, PosLeft);
                         Canvas.SetTop(image, PosTop);
+                        Canvas.SetZIndex(image, 3);
                         CanvasField.Children.Add(image);
-
-                        number++;
+                        
+                        numberGhost++;
                     }
                     else
                     {
@@ -121,34 +156,50 @@ namespace PacMan_GUI_WPF
                         Canvas.SetTop(rectangle, PosTop);
                         CanvasField.Children.Add(rectangle);
                     }
-                    PosLeft += Wall.Width + 1;
+                    PosLeft += Entity.Width + marginEntity;
                 }
-                PosLeft = (((int)CanvasField.ActualWidth - Wall.Width * sizeMapX - sizeMapX) / 2) + 1;
-                PosTop += Wall.Height + 1;
+                PosLeft = (((int)CanvasField.ActualWidth - Entity.Width * Field.sizeMapX - Field.sizeMapX) / 2) + marginEntity;
+                PosTop += Entity.Height + marginEntity;
             }
-            number = 1;
+            numberGhost = 1;
         }
 
-        private void FillArr()
+        public static int[] FindPacmanCoordinates()
         {
-            txtLines = File.ReadAllLines($"../../Resources/Maps/{SelectedMap}.txt");
-            entitiesArr =  new char[txtLines[0].Length, txtLines.Length];
-
-            for (int i = 0; i < txtLines[0].Length; i++)
+            int[] arr = new int[2];
+            for (int i = 0; i < Field.entitiesArr.GetUpperBound(1) + 1; i++)
             {
-                for (int j = 0; j < txtLines.Length; j++)
+                for (int j = 0; j < Field.entitiesArr.GetUpperBound(0) + 1; j++)
                 {
-                    entitiesArr[i, j] = txtLines[j][i];
+                    if (Field.entitiesArr[j, i].ch == Constants.PacMan)
+                    {
+                        arr[0] = j;
+                        arr[1] = i;
+                    }
                 }
             }
-
-            PosLeft = (((int)CanvasField.ActualWidth - Wall.Width * sizeMapX - sizeMapX) / 2) + 1;
-            PosTop = (((int)CanvasField.ActualHeight - Wall.Height * sizeMapY - sizeMapY) / 2) + 1;
+            return arr;
         }
 
-        public void Clear()
+        public static int[][] FindGhostsCoordinates()
         {
-
+            int[][] arr = new int[3][]; // number of ghosts, coordinates
+            arr[0] = new int[2];
+            arr[1] = new int[2];
+            arr[2] = new int[2];
+            for (int i = 0; i < Field.entitiesArr.GetUpperBound(1) + 1; i++)
+            {
+                for (int j = 0; j < Field.entitiesArr.GetUpperBound(0) + 1; j++)
+                {                    
+                    if (Field.entitiesArr[j, i].ch == Constants.Ghost)
+                    {
+                        Ghosts ghost = (Ghosts)Field.entitiesArr[j, i];
+                        arr[ghost.queue - 1][0] = j;
+                        arr[ghost.queue - 1][1] = i;
+                    }
+                }
+            }
+            return arr;
         }
     }
 }

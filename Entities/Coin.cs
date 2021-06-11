@@ -7,10 +7,18 @@ using System.Windows.Media;
 
 namespace PacMan_GUI_WPF
 {
-    class Coin
+    class Coin : Entity
     {
-        public static int Width = 15 / 2;
-        public static int Height = 15 / 2;
+        public static int _Width;
+        public static int _Height;
+        public Coin()
+        {
+            ch = Constants.Coin;
+
+            _Width = Width / 3;
+            _Height = Height / 3;            
+        }
+
         public static Brush Background = Brushes.Yellow;
     }
 }

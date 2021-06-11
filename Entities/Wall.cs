@@ -16,11 +16,14 @@ using System.Windows.Threading;
 
 namespace PacMan_GUI_WPF
 {
-    class Wall
+    class Wall : Entity
     {
-        public static int Width = 15;
-        public static int Height = 15;
         public static int Stroke = 2;
-        public static Brush StrokeBackground = Brushes.SpringGreen;
+        public static Brush StrokeBackground = Brushes.DarkBlue;
+
+        public Wall()
+        {
+            ch = Constants.Wall;
+        }
     }
 }

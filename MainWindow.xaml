@@ -10,8 +10,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1400"
         >
-    <Canvas x:Name="CanvasField" Focusable="True" Width="1000" Height="720" Margin="0,0,272,0" Background="Black" KeyDown="KeyDownCanvas">
-         <GridSplitter Height="768" Width="16" Canvas.Left="1060" Canvas.Top="-24"/>
+    <Canvas x:Name="CanvasField" Focusable="True" Width="1000" Height="720" Margin="0,0,272,0" Background="Black" KeyDown="CanvasKeyDown" x:FieldModifier="public">
+        <GridSplitter Height="768" Width="16" Canvas.Left="1060" Canvas.Top="-24"/>
         <GridSplitter Height="256" Width="16" Canvas.Left="1196" Canvas.Top="80" RenderTransformOrigin="0.5,0.5">
             <GridSplitter.RenderTransform>
                 <TransformGroup>
@@ -24,17 +24,28 @@
         </GridSplitter>
 
 
-        <Button Content="Start" Style="{DynamicResource MaterialDesignRaisedButton}" Canvas.Left="1096" Width="216" Click="BtnStart"/>
-        <Button Content="Restart" Style="{DynamicResource MaterialDesignRaisedButton}" Height="32" Width="216" Canvas.Left="1096" Canvas.Top="56" Click="BtnRestart"/>
+        <Button Content="Start" Style="{DynamicResource MaterialDesignRaisedButton}" Canvas.Left="1096" Width="216" Click="BtnStart" Canvas.Top="35"/>
+        <Button Content="Restart" Style="{DynamicResource MaterialDesignRaisedButton}" Height="32" Width="216" Canvas.Left="1096" Canvas.Top="87" Click="BtnRestart"/>
+        <Button Content="Setting" Style="{DynamicResource MaterialDesignRaisedButton}" Height="32" Width="216" Canvas.Left="1096" Canvas.Top="138" Click="BtnRestart"/>
 
 
 
-        <Button Panel.ZIndex="1" Style="{DynamicResource MaterialDesignFlatButton}" Canvas.Left="1128" Height="100" Width="145" Canvas.Top="228" Click="SelectMap1"/>
-        <Button Panel.ZIndex="1" Style="{DynamicResource MaterialDesignFlatButton}" Canvas.Left="1128" Height="100" Width="145" Canvas.Top="340" Click="SelectMap2"/>
-        <Image Height="100" Width="194" Source="Resources/images/map1.png" Canvas.Left="1103" Canvas.Top="228"/>
-        <Image Height="100" Width="194" Source="Resources/Images/map1.png" Canvas.Left="1103" Canvas.Top="340"/>
+        <Button Panel.ZIndex="1" Background="White" Style="{DynamicResource MaterialDesignFlatButton}" Canvas.Left="1128" Height="54" Width="145" Canvas.Top="241" Click="SelectMap1">
+            <Label Content="Map 1" Canvas.Left="1148" Canvas.Top="284" Panel.ZIndex="1" Width="60" FontSize="16"/>
+        </Button>
 
-        <Label Name="label" Content="" Height="720" Width="1000" Foreground="White"/>
+        <Button Panel.ZIndex="1" Background="White" Style="{DynamicResource MaterialDesignFlatButton}" Canvas.Left="1128" Height="54" Width="145" Canvas.Top="321" Click="SelectMap2">
+            <Label Content="Map 2" Canvas.Left="1148" Canvas.Top="365" Panel.ZIndex="1" Width="60" FontSize="16"/>
+        </Button>
+        <StackPanel  Panel.ZIndex="5" x:Name="Win" Visibility="Hidden" Width="1000" Height="720" Background="White">
+            <Image Source="Resources/Images/smile-win.png" Height="442" Width="998" Margin="1,0"/>
+            <TextBlock TextWrapping="Wrap" Text="YOU WON!!!" FontSize="100" TextAlignment="Center" Height="305"/>
+        </StackPanel>
+        <StackPanel Panel.ZIndex="5" x:Name="End" Visibility="Hidden" Width="1000" Height="720" Background="White">
+            <Image Source="Resources/Images/smile-end.png" Height="442" Width="998" Margin="1,0"/>
+            <TextBlock TextWrapping="Wrap" Text="YOU LOSE !!!" FontSize="100" TextAlignment="Center" Height="305"/>
+        </StackPanel>
+
     </Canvas>
 </Window>
  
