@@ -18,9 +18,9 @@ namespace PacMan_GUI_WPF
         public static void Start()
         {            
             pacman.Interval = new TimeSpan(0, 0, 0, 0, 250);
-            ghost1.Interval = new TimeSpan(0, 0, 0, 0, 350);
-            ghost2.Interval = new TimeSpan(0, 0, 0, 0, 350);
-            ghost3.Interval = new TimeSpan(0, 0, 0, 0, 350);
+            ghost1.Interval = new TimeSpan(0, 0, 0, 0, Settings.speedGhosts);
+            ghost2.Interval = new TimeSpan(0, 0, 0, 0, Settings.speedGhosts);
+            ghost3.Interval = new TimeSpan(0, 0, 0, 0, Settings.speedGhosts);
             pacman.Start();
             ghost1.Start();
             ghost2.Start();

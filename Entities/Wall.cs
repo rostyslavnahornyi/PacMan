@@ -19,7 +19,7 @@ namespace PacMan_GUI_WPF
     class Wall : Entity
     {
         public static int Stroke = 2;
-        public static Brush StrokeBackground = Brushes.DarkBlue;
+        public static Brush StrokeBackground = Brushes.Navy;
 
         public Wall()
         {

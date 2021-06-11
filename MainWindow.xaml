@@ -24,19 +24,12 @@
         </GridSplitter>
 
 
-        <Button Content="Start" Style="{DynamicResource MaterialDesignRaisedButton}" Canvas.Left="1096" Width="216" Click="BtnStart" Canvas.Top="35"/>
-        <Button Content="Restart" Style="{DynamicResource MaterialDesignRaisedButton}" Height="32" Width="216" Canvas.Left="1096" Canvas.Top="87" Click="BtnRestart"/>
-        <Button Content="Setting" Style="{DynamicResource MaterialDesignRaisedButton}" Height="32" Width="216" Canvas.Left="1096" Canvas.Top="138" Click="BtnRestart"/>
+        <Button x:Name="ButtonStart" Content="Start" Style="{DynamicResource MaterialDesignRaisedButton}" Canvas.Left="1096" Width="216" Click="BtnStart" Canvas.Top="2"/>
+        <Button x:Name="ButtonRestart" IsEnabled="False" Content="Restart" Style="{DynamicResource MaterialDesignRaisedButton}" Height="32" Width="216" Canvas.Left="1096" Canvas.Top="49" Click="BtnRestart"/>
+        <Button x:Name="ButtonSetting" IsEnabled="True"  Content="Setting" Style="{DynamicResource MaterialDesignRaisedButton}" Height="32" Width="216" Canvas.Left="1096" Canvas.Top="101" Click="BtnSetting"/>
+        <Button x:Name="ButtonFAQ" Content="FAQ" Style="{DynamicResource MaterialDesignRaisedButton}" Height="32" Width="216" Canvas.Left="1096" Canvas.Top="152" Click="BtnFAQ"/>
 
 
-
-        <Button Panel.ZIndex="1" Background="White" Style="{DynamicResource MaterialDesignFlatButton}" Canvas.Left="1128" Height="54" Width="145" Canvas.Top="241" Click="SelectMap1">
-            <Label Content="Map 1" Canvas.Left="1148" Canvas.Top="284" Panel.ZIndex="1" Width="60" FontSize="16"/>
-        </Button>
-
-        <Button Panel.ZIndex="1" Background="White" Style="{DynamicResource MaterialDesignFlatButton}" Canvas.Left="1128" Height="54" Width="145" Canvas.Top="321" Click="SelectMap2">
-            <Label Content="Map 2" Canvas.Left="1148" Canvas.Top="365" Panel.ZIndex="1" Width="60" FontSize="16"/>
-        </Button>
         <StackPanel  Panel.ZIndex="5" x:Name="Win" Visibility="Hidden" Width="1000" Height="720" Background="White">
             <Image Source="Resources/Images/smile-win.png" Height="442" Width="998" Margin="1,0"/>
             <TextBlock TextWrapping="Wrap" Text="YOU WON!!!" FontSize="100" TextAlignment="Center" Height="305"/>
@@ -45,6 +38,28 @@
             <Image Source="Resources/Images/smile-end.png" Height="442" Width="998" Margin="1,0"/>
             <TextBlock TextWrapping="Wrap" Text="YOU LOSE !!!" FontSize="100" TextAlignment="Center" Height="305"/>
         </StackPanel>
+
+
+        <Border Height="493" Background="#FF673AB7" Width="216" Canvas.Left="1096" Canvas.Top="227" CornerRadius="20 ">
+            <Canvas>
+                <Border Background="Black" CornerRadius="20" Height="88" Width="216"/>
+                <Rectangle Fill="Black" Height="16" Width="216" Canvas.Top="72"></Rectangle>
+                <Label  Content="Dashboard" Foreground="Gray" Canvas.Top="19" Width="164" FontWeight="Bold" FontStyle="Italic" FontSize="30" Canvas.Left="28"/>
+            </Canvas>
+        </Border>
+
+        <Canvas x:Name="BlackBGCanvas" Background="Black" Height="720" Width="1000"></Canvas>
+        <Canvas IsEnabled="False" x:Name="BlackBG" Background="Black" Opacity="0" Height="834" Width="1132" Canvas.Left="-72" Canvas.Top="-24">
+        </Canvas>
+        <Canvas IsEnabled="False" Opacity="0" Panel.ZIndex="6" x:Name="SettingsPoppup" Background="White"  Height="324" Width="664" Canvas.Left="178" Canvas.Top="184">
+            <Label FontSize="20" Content="Select the difficulty of the game" Canvas.Top="52" Width="292" Canvas.Left="186"/>
+            <CheckBox x:Name="CheckboxDiffEasy" Content="Easy" Canvas.Left="186" Canvas.Top="103"/>
+            <CheckBox x:Name="CheckboxDiffMedium" Content="Medium" Canvas.Left="291" Canvas.Top="103" Width="74"/>
+            <CheckBox x:Name="CheckboxDiffHard" Content="Hard" Canvas.Left="405" Canvas.Top="103"/>
+
+        </Canvas>
+        <Label Name="LabelCoins" FontSize="28" Foreground="White" FontFamily="Comic Sans MS" FontWeight="Bold" Content="Coins : " Height="57" Canvas.Left="1107" Canvas.Top="333" Width="194"/>
+        <Label Name="LabelAttempts" FontSize="26" Foreground="White" FontFamily="Comic Sans MS" FontWeight="Bold" Content="Attempts : " Height="57" Canvas.Left="1107" Canvas.Top="410" Width="194"/>
 
     </Canvas>
 </Window>

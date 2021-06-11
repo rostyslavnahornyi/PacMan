@@ -60,7 +60,7 @@ namespace PacMan_GUI_WPF
                     }
                     if (txtLines[j][i] == Constants.Ghost)
                     {
-                        entitiesArr[i, j] = new Ghosts(i, j, numberGhost);
+                        entitiesArr[i, j] = new Ghost(i, j, numberGhost);
                         numberGhost++;
                     }
                     if (txtLines[j][i] == Constants.Wall)
@@ -193,7 +193,7 @@ namespace PacMan_GUI_WPF
                 {                    
                     if (Field.entitiesArr[j, i].ch == Constants.Ghost)
                     {
-                        Ghosts ghost = (Ghosts)Field.entitiesArr[j, i];
+                        Ghost ghost = (Ghost)Field.entitiesArr[j, i];
                         arr[ghost.queue - 1][0] = j;
                         arr[ghost.queue - 1][1] = i;
                     }

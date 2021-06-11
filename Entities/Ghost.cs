@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PacMan_GUI_WPF
 {
-    class Ghosts : Entity
+    class Ghost : Entity
     {
         public int x;
         public int y;
@@ -15,20 +15,7 @@ namespace PacMan_GUI_WPF
         public  string direction = "UP";
         public  Entity tempCell = new Space();
 
-        //public static int x2 = 24;
-        //public static int y2 = 17;
-
-        //public static string direction2 = "UP";
-        //public static Entity tempCell2 = new Space();
-
-        //public static int x3 = 25;
-        //public static int y3 = 17;
-
-        //public static string direction3 = "UP";
-        //public static Entity tempCell3 = new Space();
-
-
-        public Ghosts(int x, int y, int q)
+        public Ghost(int x, int y, int q)
         {
             this.x = x;
             this.y = y;

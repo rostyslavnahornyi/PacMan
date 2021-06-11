@@ -13,6 +13,8 @@ namespace PacMan_GUI_WPF
 
         public static void FindAllCoins()
         {
+            allCoins = 0;
+            currentCoins = 0;
             for (int y = 0; y < Field.entitiesArr.GetUpperBound(1) + 1; y++)
             {
                 for (int x = 0; x < Field.entitiesArr.GetUpperBound(0) + 1; x++)

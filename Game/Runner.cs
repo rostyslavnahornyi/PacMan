@@ -8,6 +8,7 @@ namespace PacMan_GUI_WPF
         {
             new Field(CanvasField);
             Scores.FindAllCoins();
+            Settings.gameIsStarted = true;
         }
     }
 }

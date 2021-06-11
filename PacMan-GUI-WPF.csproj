@@ -68,7 +68,7 @@
     </ApplicationDefinition>
     <Compile Include="Entities\Coin.cs" />
     <Compile Include="Entities\Entity.cs" />
-    <Compile Include="Entities\Ghosts.cs" />
+    <Compile Include="Entities\Ghost.cs" />
     <Compile Include="Entities\Pacman.cs" />
     <Compile Include="Entities\Space.cs" />
     <Compile Include="Entities\Wall.cs" />
@@ -76,8 +76,9 @@
     <Compile Include="Game\IntroScenes.cs" />
     <Compile Include="Game\Runner.cs" />
     <Compile Include="Game\Scores.cs" />
+    <Compile Include="Game\Settings.cs" />
     <Compile Include="Game\Threading.cs" />
-    <Compile Include="Constants.cs" />
+    <Compile Include="Game\Constants.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

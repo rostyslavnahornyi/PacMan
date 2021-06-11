@@ -18,10 +18,6 @@ namespace PacMan_GUI_WPF
         public Pacman()
         {
             ch = Constants.PacMan;
-        }
-
-        
-
-        
+        }             
     }
 }
