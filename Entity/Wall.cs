@@ -12,7 +12,7 @@ namespace PacMan
             Background = ConsoleColor.DarkBlue;
         }
 
-        public override void Display()
+        public override void Print()
         {
             Console.BackgroundColor = Background;
             Console.Write(ch);
@@ -20,24 +20,16 @@ namespace PacMan
             Console.Write("  ");
         }
 
-        public void Display(int x, int y, Entity[,] arr)
+        public void PrintInField(char rightChar)
         {
-            if (x != arr.GetUpperBound(0))
+            if (rightChar == Constants.Wall)
             {
-                if (arr[x, y].ch == Constants.Wall && arr[x + 1, y].ch == Constants.Wall)
-                {
-                    Console.BackgroundColor = ConsoleColor.DarkBlue;
-                    Console.Write(ch + "  ");
-                }
-                else if (arr[x, y].ch == Constants.Wall)
-                {
-                    Display();
-                }
+                Console.BackgroundColor = ConsoleColor.DarkBlue;
+                Console.Write(ch + "  ");
             }
             else
             {
-                Console.BackgroundColor = ConsoleColor.DarkBlue;
-                Console.Write(ch);
+                Print();
             }
         }
     }

@@ -7,8 +7,8 @@ namespace PacMan
 {
     class RandomTeleport : Entity
     {
-        private int Width = Field.arr.GetUpperBound(0) + 1;
-        private int Height = Field.arr.GetUpperBound(1) + 1;
+        private int Width = Field.entities.GetUpperBound(0) + 1;
+        private int Height = Field.entities.GetUpperBound(1) + 1;
 
         public bool TeleportRandom = true;
         public static int randomX;
@@ -21,7 +21,7 @@ namespace PacMan
             Background = ConsoleColor.DarkGreen;
         }
 
-        public override void Display()
+        public override void Print()
         {
             while (TeleportRandom)
             {
@@ -31,19 +31,19 @@ namespace PacMan
                 {
                     x = Util.random.Next(Width);
                     y = Util.random.Next(Height);
-                    if (Field.arr[x, y].ch != Constants.RandomTeleport && Field.arr[x, y].ch != Constants.PacMan && Field.arr[x, y].ch != Constants.Ghost && Field.arr[x, y].ch != Constants.Wall)
+                    if (Field.entities[x, y].ch != Constants.RandomTeleport && Field.entities[x, y].ch != Constants.PacMan && Field.entities[x, y].ch != Constants.Ghost && Field.entities[x, y].ch != Constants.Wall)
                     {
                         break;
                     }
                 }
-                tempCell = Field.arr[x, y].ch;
-                Field.arr[x, y].ch = Constants.RandomTeleport;
+                tempCell = Field.entities[x, y].ch;
+                Field.entities[x, y].ch = Constants.RandomTeleport;
                 Settings.RandomTeleportTimes--;
                 Renderer.UpdateCell(x, y, Constants.RandomTeleport, ConsoleColor.DarkGreen);
 
                 
                 Thread.Sleep(Settings.RandomTeleportRespawnTime);
-                Field.arr[x, y].ch = tempCell;
+                Field.entities[x, y].ch = tempCell;
                 Renderer.UpdateCell(x, y, tempCell, ConsoleColor.Black);
 
                 if (Settings.RandomTeleportTimes == 0) TeleportRandom = false;
@@ -56,7 +56,7 @@ namespace PacMan
             {
                 randomX = Util.random.Next(Width);
                 randomY = Util.random.Next(Height);
-                if (Field.arr[randomX, randomY].ch != Constants.PacMan && Field.arr[randomX, randomY].ch != Constants.Ghost && Field.arr[randomX, randomY].ch != Constants.Wall)
+                if (Field.entities[randomX, randomY].ch != Constants.PacMan && Field.entities[randomX, randomY].ch != Constants.Ghost && Field.entities[randomX, randomY].ch != Constants.Wall)
                 {
                     break;
                 }

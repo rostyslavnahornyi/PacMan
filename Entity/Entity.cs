@@ -9,7 +9,7 @@ namespace PacMan
         public char ch;
         public ConsoleColor Background;
 
-        public abstract void Display();
+        public abstract void Print();
         public virtual void Loop()
         {
 

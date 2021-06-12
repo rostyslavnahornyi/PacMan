@@ -11,7 +11,7 @@ namespace PacMan
             ch = Constants.Space;
             Background = ConsoleColor.Black;
         }
-        public override void Display()
+        public override void Print()
         {
             Console.BackgroundColor = Background;
             Console.Write(ch + "  ");

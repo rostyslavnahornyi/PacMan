@@ -12,7 +12,7 @@ namespace PacMan
             Background = ConsoleColor.Black;
         }
 
-        public override void Display()
+        public override void Print()
         {
             Console.BackgroundColor = Background;
             Console.Write(ch + "  ");

@@ -18,7 +18,7 @@ namespace PacMan
             PacMan.y = y;
         }
 
-        public override void Display()
+        public override void Print()
         {
             Console.BackgroundColor = Background;
             Console.Write(ch);
@@ -29,40 +29,40 @@ namespace PacMan
         private void MovingTo(int X, int Y)
         {
             Entity temp;
-            if (Field.arr[x + X, y + Y].ch == Constants.Wall)
+            if (Field.entities[x + X, y + Y].ch == Constants.Wall)
             {
                 Renderer.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
             }
-            else if (Field.arr[x + X, y + Y].ch == Constants.Ghost)
+            else if (Field.entities[x + X, y + Y].ch == Constants.Ghost)
             {
                 Settings.MovingGhosts = false;
                 IntroScenes.End();
             }
-            else if (Field.arr[x + X, y + Y].ch == Constants.Coin)
+            else if (Field.entities[x + X, y + Y].ch == Constants.Coin)
             {
-                temp = Field.arr[x, y];
-                Field.arr[x, y] = new Space();
+                temp = Field.entities[x, y];
+                Field.entities[x, y] = new Space();
                 Renderer.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
                 x += X;
                 y += Y;
-                Field.arr[x, y] = temp;
+                Field.entities[x, y] = temp;
                 Renderer.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
                 Scores.coins++;
                 new Sound().ON_GettedCoins();
                 if (Scores.coins == Scores.MaxCoins)
                 {
-                    Settings.MovingGhosts = false;
+                    Settings.MovingGhosts = false; // в функциональность классов
                     IntroScenes.Win();
                 }
             }
-            else if (Field.arr[x + X, y + Y].ch == Constants.BigCoin)
+            else if (Field.entities[x + X, y + Y].ch == Constants.BigCoin)
             {
-                temp = Field.arr[x, y];
-                Field.arr[x, y] = new Space();
+                temp = Field.entities[x, y];
+                Field.entities[x, y] = new Space();
                 Renderer.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
                 x += X;
                 y += Y;
-                Field.arr[x, y] = temp;
+                Field.entities[x, y] = temp;
                 Renderer.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
                 Scores.coins += 3;
                 new Sound().ON_GettedCoins();
@@ -72,37 +72,37 @@ namespace PacMan
                     IntroScenes.Win();
                 }
             }
-            else if (Field.arr[x + X, y + Y].ch == Constants.Space)
+            else if (Field.entities[x + X, y + Y].ch == Constants.Space)
             {
-                temp = Field.arr[x, y];
-                Field.arr[x, y] = new Space();
+                temp = Field.entities[x, y];
+                Field.entities[x, y] = new Space();
                 Renderer.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
                 x += X;
                 y += Y;
-                Field.arr[x, y] = temp;
+                Field.entities[x, y] = temp;
                 Renderer.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
             }
-            else if (Field.arr[x + X, y + Y].ch == Constants.RandomTeleport)
+            else if (Field.entities[x + X, y + Y].ch == Constants.RandomTeleport)
             {
-                temp = Field.arr[x, y];
-                Field.arr[x, y] = new Space();
+                temp = Field.entities[x, y];
+                Field.entities[x, y] = new Space();
                 Renderer.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
                 x += X;
                 y += Y;
-                Field.arr[x, y] = temp;
+                Field.entities[x, y] = temp;
                 Renderer.UpdateCell(x, y, RandomTeleport.tempCell, ConsoleColor.Black);
                 new RandomTeleport().Loop();
                 x = RandomTeleport.randomX;
                 y = RandomTeleport.randomY;
-                if (Field.arr[x, y].ch == Constants.Coin)
+                if (Field.entities[x, y].ch == Constants.Coin)
                 {
                     Scores.coins++;
                 }
-                else if (Field.arr[x, y].ch == Constants.BigCoin)
+                else if (Field.entities[x, y].ch == Constants.BigCoin)
                 {
                     Scores.coins += 3;
                 }
-                Field.arr[x, y].ch = Constants.PacMan;
+                Field.entities[x, y].ch = Constants.PacMan;
                 Renderer.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
             }
         }

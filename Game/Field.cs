@@ -8,7 +8,7 @@ namespace PacMan
     class Field
     {
         private static string[] lines = File.ReadAllLines("../../../Resources/map1.txt");
-        public static Entity[,] arr = new Entity[lines[0].Length, lines.Length];
+        public static Entity[,] entities = new Entity[lines[0].Length, lines.Length];
 
 
 
@@ -20,27 +20,27 @@ namespace PacMan
                 {
                     if (lines[j][i] == Constants.PacMan)
                     {
-                        arr[i, j] = new PacMan(i, j);
+                        entities[i, j] = new PacMan(i, j);
                     }
                     if (lines[j][i] == Constants.Ghost)
                     {
-                        arr[i, j] = new Ghost(i, j);
+                        entities[i, j] = new Ghost(i, j);
                     }
                     if (lines[j][i] == Constants.Wall)
                     {
-                        arr[i, j] = new Wall();
+                        entities[i, j] = new Wall();
                     }
                     if (lines[j][i] == Constants.BigCoin)
                     {
-                        arr[i, j] = new BigCoin();
+                        entities[i, j] = new BigCoin();
                     }
                     if (lines[j][i] == Constants.Coin)
                     {
-                        arr[i, j] = new Coin();
+                        entities[i, j] = new Coin();
                     }
                     if (lines[j][i] == Constants.RandomTeleport)
                     {
-                        arr[i, j] = new RandomTeleport();
+                        entities[i, j] = new RandomTeleport();
                     }
                 }
             }
@@ -51,32 +51,20 @@ namespace PacMan
             Console.ResetColor();
             Console.Clear();
 
-            for (int y = 0; y < arr.GetUpperBound(1) + 1; y++)
+            for (int y = 0; y < entities.GetUpperBound(1) + 1; y++)
             {
-                for (int x = 0; x < arr.GetUpperBound(0) + 1; x++)
+                for (int x = 0; x < entities.GetUpperBound(0) + 1; x++)
                 {
-                    if (arr[x, y].ch == Constants.Coin)
+                    
+                    if (entities[x, y].ch == Constants.Wall)
                     {
-                        arr[x, y].Display();
-                    }
-                    else if (arr[x, y].ch == Constants.BigCoin)
+                        char rightChar = (x < Field.entities.GetUpperBound(0) ? Field.entities[x + 1, y].ch : '\0');
+                        ((Wall)entities[x, y]).PrintInField(rightChar);
+                    } else
                     {
-                        arr[x, y].Display();
-                    }
-                    else if (arr[x, y].ch == Constants.PacMan)
-                    {
-                        arr[x, y].Display();
-                    }
-                    else if (arr[x, y].ch == Constants.Ghost)
-                    {
-                        arr[x, y].Display();
-                    }
-                    else if (arr[x, y].ch == Constants.Wall)
-                    {
-                        new Wall().Display(x, y, arr);
+                        entities[x, y].Print();
                     }
                 }
-
                 Console.ResetColor();
                 Console.WriteLine();
             }
@@ -85,11 +73,11 @@ namespace PacMan
         public static int[] FindPacmanCoordinates()
         {
             int[] arr = new int[2];
-            for (int i = 0; i < Field.arr.GetUpperBound(1) + 1; i++)
+            for (int i = 0; i < Field.entities.GetUpperBound(1) + 1; i++)
             {
-                for (int j = 0; j < Field.arr.GetUpperBound(0) + 1; j++)
+                for (int j = 0; j < Field.entities.GetUpperBound(0) + 1; j++)
                 {
-                    if (Field.arr[j, i].ch == Constants.PacMan)
+                    if (Field.entities[j, i].ch == Constants.PacMan)
                     {
                         arr[0] = i;
                         arr[1] = j;
@@ -106,11 +94,11 @@ namespace PacMan
             arr[1] = new int[2];
             arr[2] = new int[2];
             int numberGhost = 0;
-            for (int i = 0; i < Field.arr.GetUpperBound(1) + 1; i++)
+            for (int i = 0; i < Field.entities.GetUpperBound(1) + 1; i++)
             {
-                for (int j = 0; j < Field.arr.GetUpperBound(0) + 1; j++)
+                for (int j = 0; j < Field.entities.GetUpperBound(0) + 1; j++)
                 {
-                    if (Field.arr[j, i].ch == Constants.Ghost)
+                    if (Field.entities[j, i].ch == Constants.Ghost)
                     {
                         arr[numberGhost][0] = j;
                         arr[numberGhost][1] = i;
@@ -124,11 +112,11 @@ namespace PacMan
         public static int[] FindRandomTeleportCoordinates()
         {
             int[] arr = new int[2];
-            for (int i = 0; i < Field.arr.GetUpperBound(1) + 1; i++)
+            for (int i = 0; i < Field.entities.GetUpperBound(1) + 1; i++)
             {
-                for (int j = 0; j < Field.arr.GetUpperBound(0) + 1; j++)
+                for (int j = 0; j < Field.entities.GetUpperBound(0) + 1; j++)
                 {
-                    if (Field.arr[j, i].ch == Constants.RandomTeleport)
+                    if (Field.entities[j, i].ch == Constants.RandomTeleport)
                     {
                         arr[0] = i;
                         arr[1] = j;

@@ -11,7 +11,7 @@ namespace PacMan
         private int y;
 
         private string direction = "UP";
-        private Entity tempCell = new Space();
+        private Entity cellUnderGhost = new Space();
 
         public Ghost(int x, int y)
         {
@@ -21,7 +21,7 @@ namespace PacMan
             this.x = x;
             this.y = y;
         }
-        public override void Display()
+        public override void Print()
         {
             Console.BackgroundColor = Background;
             Console.Write(ch);
@@ -34,7 +34,7 @@ namespace PacMan
             string toGo = null;
 
 
-            char[] neighbourCells = { Field.arr[x - 1, y].ch, Field.arr[x + 1, y].ch, Field.arr[x, y - 1].ch, Field.arr[x, y + 1].ch };
+            char[] neighbourCells = { Field.entities[x - 1, y].ch, Field.entities[x + 1, y].ch, Field.entities[x, y - 1].ch, Field.entities[x, y + 1].ch };
             string[] possibleDirections = new string[2];
             int possibleDirectionsIndex = 0;
 
@@ -95,26 +95,25 @@ namespace PacMan
 
         private void MovingTo(int X, int Y, string _direction)
         {
-            Entity tempGhost = Field.arr[x, y];
-            if (tempCell.ch == Constants.RandomTeleport)
+            if (cellUnderGhost.ch == Constants.RandomTeleport)
             {
-                Renderer.UpdateCell(x, y, tempCell.ch, ConsoleColor.DarkGreen);
+                Renderer.UpdateCell(x, y, cellUnderGhost.ch, ConsoleColor.DarkGreen);
             }
             else
             {
-                Renderer.UpdateCell(x, y, tempCell.ch, ConsoleColor.Black);
+                Renderer.UpdateCell(x, y, cellUnderGhost.ch, ConsoleColor.Black);
             }
-            Field.arr[x, y] = tempCell;
+            Field.entities[x, y] = cellUnderGhost;
 
             x += X;
             y += Y;
 
-            if (Field.arr[x, y].ch == Constants.PacMan)
+            if (Field.entities[x, y].ch == Constants.PacMan)
             {
                 Settings.MovingGhosts = false;
                 IntroScenes.End();
             }
-            else if (Field.arr[x, y].ch == Constants.RandomTeleport)
+            else if (Field.entities[x, y].ch == Constants.RandomTeleport)
             {
                 new RandomTeleport().Loop();
                 x = RandomTeleport.randomX;
@@ -125,8 +124,8 @@ namespace PacMan
             {
                 Renderer.UpdateCell(x, y, Constants.Ghost, ConsoleColor.DarkMagenta);
             }
-            tempCell = Field.arr[x, y];
-            Field.arr[x, y] = tempGhost;
+            cellUnderGhost = Field.entities[x, y];
+            Field.entities[x, y] = this;
             direction = _direction;
         }
 
