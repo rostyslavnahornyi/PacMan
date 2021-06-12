@@ -333,7 +333,7 @@ namespace PacMan_GUI_WPF
             ButtonRestart.IsEnabled = false;
             ButtonSetting.IsEnabled = false;
             Settings.attempts++;
-            LabelAttempts.Content = $"Attempts : 1{Settings.attempts}";
+            LabelAttempts.Content = $"Attempts : {Settings.attempts}";
         }
 
         private void BtnSetting(object sender, RoutedEventArgs e)

@@ -121,7 +121,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\map1.png" />
     <Resource Include="Resources\Images\pacman.gif" />
     <Resource Include="Resources\Maps\map1.txt" />
   </ItemGroup>

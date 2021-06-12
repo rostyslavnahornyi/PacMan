@@ -1,5 +1,6 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        Icon="Resources/Images/ghost1.gif"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -8,7 +9,7 @@
         WindowStartupLocation="CenterScreen"
         Background="#cfcfcf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1400"
+        Title="PACMAN" Height="800" Width="1400"
         >
     <Canvas x:Name="CanvasField" Focusable="True" Width="1000" Height="720" Margin="0,0,272,0" Background="Black" KeyDown="CanvasKeyDown" x:FieldModifier="public">
         <GridSplitter Height="768" Width="16" Canvas.Left="1060" Canvas.Top="-24"/>
