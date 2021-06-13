@@ -9,7 +9,7 @@ namespace PacMan
     {
         private SoundPlayer StartScene = new SoundPlayer(@"../../../Resources/start.wav");
         private SoundPlayer GettingCoins = new SoundPlayer(@"../../../Resources/coins.wav");
-        private SoundPlayer EndScene = new SoundPlayer(@"../../../Resources/gettingCoins.wav");
+        private SoundPlayer EndScene = new SoundPlayer(@"../../../Resources/end.wav");
 
             
         public void ON_StartScene()

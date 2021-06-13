@@ -89,7 +89,7 @@ Pac-Man (с англ. — «Пакман») — аркадная видео�
 
         public static void End()
         {
-            new Sound().ON_GettedCoins();
+            new Sound().ON_EndScene();
             Console.ResetColor();
             Console.Clear();
             Console.SetWindowSize(100, 20);
@@ -110,12 +110,14 @@ Pac-Man (с англ. — «Пакман») — аркадная видео�
 
                                Thanks for the game!
                                
-                               Press ESC to finish
+                               Press ESC to close the game
 ");
             switch (Console.ReadKey().Key)
             {
                 case ConsoleKey.Escape:
                     Environment.Exit(0);
+                    break;
+                case ConsoleKey.Spacebar:
                     break;
             }
         }
