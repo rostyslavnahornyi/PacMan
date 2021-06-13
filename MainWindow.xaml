@@ -31,14 +31,11 @@
         <Button x:Name="ButtonFAQ" Content="FAQ" Style="{DynamicResource MaterialDesignRaisedButton}" Height="32" Width="216" Canvas.Left="1096" Canvas.Top="152" Click="BtnFAQ"/>
 
 
-        <StackPanel  Panel.ZIndex="5" x:Name="Win" Visibility="Hidden" Width="1000" Height="720" Background="White">
-            <Image Source="Resources/Images/smile-win.png" Height="442" Width="998" Margin="1,0"/>
-            <TextBlock TextWrapping="Wrap" Text="YOU WON!!!" FontSize="100" TextAlignment="Center" Height="305"/>
-        </StackPanel>
         <StackPanel Panel.ZIndex="5" x:Name="End" Visibility="Hidden" Width="1000" Height="720" Background="White">
             <Image Source="Resources/Images/smile-end.png" Height="442" Width="998" Margin="1,0"/>
             <TextBlock TextWrapping="Wrap" Text="YOU LOSE !!!" FontSize="100" TextAlignment="Center" Height="305"/>
         </StackPanel>
+        <MediaElement x:Name="Win" Panel.ZIndex="10" LoadedBehavior="Manual" Source="Resources/Win.mp4" Height="700" Width="1000" Canvas.Top="10" IsMuted="True" Volume="0"/>
 
 
         <Border Height="493" Background="#FF673AB7" Width="216" Canvas.Left="1096" Canvas.Top="227" CornerRadius="20 ">

@@ -22,3 +22,5 @@ C:\Users\Rostyslav\Desktop\GIT\PacMan\bin\Debug\MaterialDesignThemes.Wpf.xml
 C:\Users\Rostyslav\Desktop\GIT\PacMan\bin\Debug\XamlAnimatedGif.pdb
 C:\Users\Rostyslav\Desktop\GIT\PacMan\obj\Debug\App.baml
 C:\Users\Rostyslav\Desktop\GIT\PacMan\obj\Debug\PacMan-GUI-WPF.csproj.CopyComplete
+C:\Users\Rostyslav\Desktop\GIT\PacMan\obj\Debug\PacMan-GUI-WPF_Content.g.cs
+C:\Users\Rostyslav\Desktop\GIT\PacMan\bin\Debug\Resources\Win.mp4

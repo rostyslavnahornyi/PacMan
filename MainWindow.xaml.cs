@@ -139,6 +139,8 @@ namespace PacMan_GUI_WPF
             {
                 Threading.Stop();
                 Win.Visibility = Visibility.Visible;
+                Win.LoadedBehavior = MediaState.Manual;
+                Win.Play();
                 Settings.gameIsStarted = false;
                 ButtonRestart.IsEnabled = true;
                 ButtonSetting.IsEnabled = true;
