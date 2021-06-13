@@ -120,7 +120,7 @@ namespace PacMan_GUI_WPF
                             Height = Entity.Height
 
                         };
-                        AnimationBehavior.SetSourceUri(image, new Uri("C:/Users/Rostyslav/Desktop/GIT/PacMan/Resources/Images/pacman.gif"));
+                        AnimationBehavior.SetSourceUri(image, new Uri("C:/Users/Rostyslav/Desktop/GIT/PacMan/Resources/Images/pacman.gif")); // добавить текущую папку + путь к файл
                         Canvas.SetLeft(image, PosLeft);
                         Canvas.SetTop(image, PosTop);
                         Canvas.SetZIndex(image, 3);

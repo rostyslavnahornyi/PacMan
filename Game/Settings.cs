@@ -10,6 +10,7 @@ namespace PacMan_GUI_WPF
     {
         public static bool gameIsStarted = false;
         public static bool settingPoppupEnabled = false;
+        public static bool FAQPoppupEnabled = false;
 
         public static int speedGhosts = 1000;
         public static int attempts = 1;

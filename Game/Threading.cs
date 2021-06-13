@@ -9,6 +9,8 @@ namespace PacMan_GUI_WPF
 {
     class Threading
     {
+        public static DispatcherTimer timer = new DispatcherTimer();     
+
         public static DispatcherTimer pacman = new DispatcherTimer();
         public static DispatcherTimer ghost1 = new DispatcherTimer();
         public static DispatcherTimer ghost2 = new DispatcherTimer();
@@ -21,6 +23,8 @@ namespace PacMan_GUI_WPF
             ghost1.Interval = new TimeSpan(0, 0, 0, 0, Settings.speedGhosts);
             ghost2.Interval = new TimeSpan(0, 0, 0, 0, Settings.speedGhosts);
             ghost3.Interval = new TimeSpan(0, 0, 0, 0, Settings.speedGhosts);
+            timer.Interval = new TimeSpan(0, 0, 0, 1);
+            timer.Start();
             pacman.Start();
             ghost1.Start();
             ghost2.Start();
@@ -30,6 +34,7 @@ namespace PacMan_GUI_WPF
 
         public static void Stop()
         {
+            timer.Stop();
             pacman.Stop();
             ghost1.Stop();
             ghost2.Stop();

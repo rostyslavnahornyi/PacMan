@@ -10,9 +10,14 @@ namespace PacMan_GUI_WPF
     {
         public static int allCoins = 0;
         public static int currentCoins = 0;
+        public static int steps = 0;
+
+        public static int secondsTimer;
+        public static int minutesTimer;
 
         public static void FindAllCoins()
         {
+            steps = 0;
             allCoins = 0;
             currentCoins = 0;
             for (int y = 0; y < Field.entitiesArr.GetUpperBound(1) + 1; y++)

@@ -121,7 +121,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\pacman.gif" />
+    <Resource Include="Resources\Images\pacman.gif">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Maps\map1.txt" />
   </ItemGroup>
   <ItemGroup>

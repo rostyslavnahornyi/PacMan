@@ -52,15 +52,32 @@
         <Canvas x:Name="BlackBGCanvas" Background="Black" Height="720" Width="1000"></Canvas>
         <Canvas IsEnabled="False" x:Name="BlackBG" Background="Black" Opacity="0" Height="834" Width="1132" Canvas.Left="-72" Canvas.Top="-24">
         </Canvas>
+
+
+
+        <Canvas IsEnabled="False" Opacity="0" Panel.ZIndex="6" x:Name="FAQPoppup" Background="White"  Height="324" Width="664" Canvas.Left="178" Canvas.Top="184">
+            <Label Content="System requirements(minimum): " FontSize="20"  Canvas.Top="10" Canvas.Left="10"></Label>
+            <Label Content="Pac-Man (from English - &quot;Pacman&quot;) is an arcade video game developed by the Japanese&#xA;company and released in 1980. The player's task is to control Pacman to eat&#xA;all points in the maze, avoiding meeting with ghosts who are chasing the hero.&#xA;Pacman movement - arrows." FontSize="16"  Canvas.Top="50" Canvas.Left="10" Height="94"></Label>
+            <Label Content="System requirements(minimum): " FontSize="20"  Canvas.Top="166" Canvas.Left="10"></Label>
+            <Label Content="Operating system: Windows 7 32-bit" FontSize="20"  Canvas.Top="206" Canvas.Left="10" Width="400"></Label>
+            <Label Content="RAM: 120MB" FontSize="20"  Canvas.Top="246" Canvas.Left="10" Width="400"></Label>
+            <Label Content="Disk space: 1,5MB" FontSize="20"  Canvas.Top="281" Canvas.Left="10" Width="400"></Label>
+        </Canvas>
+
         <Canvas IsEnabled="False" Opacity="0" Panel.ZIndex="6" x:Name="SettingsPoppup" Background="White"  Height="324" Width="664" Canvas.Left="178" Canvas.Top="184">
             <Label FontSize="20" Content="Select the difficulty of the game" Canvas.Top="52" Width="292" Canvas.Left="186"/>
             <CheckBox x:Name="CheckboxDiffEasy" Content="Easy" Canvas.Left="186" Canvas.Top="103"/>
             <CheckBox x:Name="CheckboxDiffMedium" Content="Medium" Canvas.Left="291" Canvas.Top="103" Width="74"/>
             <CheckBox x:Name="CheckboxDiffHard" Content="Hard" Canvas.Left="405" Canvas.Top="103"/>
-
         </Canvas>
+
+
+
+
         <Label Name="LabelCoins" FontSize="28" Foreground="White" FontFamily="Comic Sans MS" FontWeight="Bold" Content="Coins : " Height="57" Canvas.Left="1107" Canvas.Top="333" Width="194"/>
-        <Label Name="LabelAttempts" FontSize="26" Foreground="White" FontFamily="Comic Sans MS" FontWeight="Bold" Content="Attempts : " Height="57" Canvas.Left="1107" Canvas.Top="410" Width="194"/>
+        <Label Name="LabelAttempts" FontSize="26" Foreground="White" FontFamily="Comic Sans MS" FontWeight="Bold" Content="Attempts : " Height="57" Canvas.Left="1107" Canvas.Top="390" Width="194"/>
+        <Label Name="LabelSteps" FontSize="26" Foreground="White" FontFamily="Comic Sans MS" FontWeight="Bold" Content="Steps : " Height="57" Canvas.Left="1107" Canvas.Top="447" Width="194"/>
+        <Label Name="LabelTime" FontSize="26" Foreground="White" FontFamily="Comic Sans MS" FontWeight="Bold" Content="Time: 00:00" Height="57" Canvas.Left="1107" Canvas.Top="663" Width="194"/>
 
     </Canvas>
 </Window>
