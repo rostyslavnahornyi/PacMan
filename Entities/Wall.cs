@@ -20,6 +20,7 @@ namespace PacMan_GUI_WPF
     {
         public static int Stroke = 2;
         public static Brush StrokeBackground = Brushes.Navy;
+        public static Brush StrokeBackgroundBoundary = Brushes.Salmon;
 
         public Wall()
         {

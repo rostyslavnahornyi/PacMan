@@ -84,6 +84,7 @@ namespace PacMan_GUI_WPF
                     Field.entitiesArr[Pacman.x, Pacman.y] = temp;
                     Scores.currentCoins++;
                     LabelCoins.Content = $"Coins : {Scores.allCoins - Scores.currentCoins}";
+                    LabelScore.Content = $"Score : {Scores.currentCoins}";
                     _MovingEntityTo(direction, "Pacman");
                 }
                 else if (Field.entitiesArr[Pacman.x + X, Pacman.y + Y].ch == Constants.Space)
@@ -290,6 +291,8 @@ namespace PacMan_GUI_WPF
             Threading.ghost3.Tick += _Ghost3Loop;
             Threading.Start();
             LabelCoins.Content = $"Coins : {Scores.allCoins}";
+            LabelScore.Content = $"Score : {Scores.currentCoins}";
+            ButtonStart.IsEnabled = false;
         }
 
         private void _Ghost1Loop(object sender, EventArgs e) 
@@ -369,6 +372,9 @@ namespace PacMan_GUI_WPF
             if (Settings.settingPoppupEnabled == false && Settings.gameIsStarted == false)
             {
                 Threading.Stop();
+
+                ButtonStart.IsEnabled = false;
+
                 BlackBG.IsEnabled = true;
                 BlackBG.Opacity = 0.5;
 
@@ -391,6 +397,9 @@ namespace PacMan_GUI_WPF
                 {
                     ButtonRestart.IsEnabled = true;
                 }
+
+                ButtonStart.IsEnabled = true;
+
                 BlackBG.IsEnabled = false;
                 BlackBG.Opacity = 0;
 
@@ -409,24 +418,38 @@ namespace PacMan_GUI_WPF
 
             if (CheckboxDiffEasy.IsChecked == true)
             {
-                CheckboxDiffMedium.IsChecked = false;
-                CheckboxDiffHard.IsChecked = false;
-
                 Settings.speedGhosts = 1000;
             }
             if (CheckboxDiffMedium.IsChecked == true)
             {
-                CheckboxDiffEasy.IsChecked = false;
-                CheckboxDiffHard.IsChecked = false;
-
                 Settings.speedGhosts = 500;
             }
             if (CheckboxDiffHard.IsChecked == true)
             {
-                CheckboxDiffMedium.IsChecked = false;
-                CheckboxDiffEasy.IsChecked = false;
-
                 Settings.speedGhosts = 250;
+            }
+
+            if (CheckboxBlue.IsChecked == true)
+            {
+                Wall.StrokeBackground = Brushes.Navy;
+            }
+            if (CheckboxRed.IsChecked == true)
+            {
+                Wall.StrokeBackground = Brushes.DarkRed;
+            }
+            if (CheckboxGreen.IsChecked == true)
+            {
+                Wall.StrokeBackground = Brushes.DarkGreen;
+            }
+            if (CheckboxArrow.IsChecked == true)
+            {
+                Settings.hotkeysMovingArrows = true;
+                Settings.hotkeysMovingWasd = false;
+            }
+            if (CheckboxWasd.IsChecked == true)
+            {
+                Settings.hotkeysMovingArrows = false;
+                Settings.hotkeysMovingWasd = true;
             }
         }
 
@@ -444,7 +467,7 @@ namespace PacMan_GUI_WPF
                 FAQPoppup.IsEnabled = true;
                 FAQPoppup.Opacity = 1;
 
-
+                Settings.gameIsStarted = false;
                 Settings.FAQPoppupEnabled = true;
 
             }
@@ -459,6 +482,7 @@ namespace PacMan_GUI_WPF
                 FAQPoppup.IsEnabled = false;
                 FAQPoppup.Opacity = 0;
 
+                Settings.gameIsStarted = true;
                 Settings.FAQPoppupEnabled = false;
                 Threading.Start();
             }
@@ -517,31 +541,62 @@ namespace PacMan_GUI_WPF
             }
         }
 
+        private void BtnClose(object sender, RoutedEventArgs e)
+        {
+            if (Settings.gameIsStarted == true)
+            {
+                this.Close(); 
+            }
+        }
 
         private void CanvasKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Left )
+            if (Settings.hotkeysMovingArrows == true)
             {
-                Pacman.goRight = Pacman.goUp = Pacman.goDown = false;
-                Pacman.goLeft = true;
+                if (e.Key == Key.Left)
+                {
+                    Pacman.goRight = Pacman.goUp = Pacman.goDown = false;
+                    Pacman.goLeft = true;
+                }
+                if (e.Key == Key.Right)
+                {
+                    Pacman.goLeft = Pacman.goUp = Pacman.goDown = false;
+                    Pacman.goRight = true;
+                }
+                if (e.Key == Key.Up)
+                {
+                    Pacman.goDown = Pacman.goLeft = Pacman.goRight = false;
+                    Pacman.goUp = true;
+                }
+                if (e.Key == Key.Down)
+                {
+                    Pacman.goUp = Pacman.goLeft = Pacman.goRight = false;
+                    Pacman.goDown = true;
+                }
             }
 
-            if (e.Key == Key.Right )
+            if (Settings.hotkeysMovingWasd == true)
             {
-                Pacman.goLeft = Pacman.goUp = Pacman.goDown = false; 
-                Pacman.goRight = true; 
-            }
-
-            if (e.Key == Key.Up )
-            {
-                Pacman.goDown = Pacman.goLeft = Pacman.goRight = false;
-                Pacman.goUp = true;
-            }
-
-            if (e.Key == Key.Down )
-            {
-                Pacman.goUp = Pacman.goLeft = Pacman.goRight = false;
-                Pacman.goDown = true;
+                if (e.Key == Key.A)
+                {
+                    Pacman.goRight = Pacman.goUp = Pacman.goDown = false;
+                    Pacman.goLeft = true;
+                }
+                if (e.Key == Key.D)
+                {
+                    Pacman.goLeft = Pacman.goUp = Pacman.goDown = false;
+                    Pacman.goRight = true;
+                }
+                if (e.Key == Key.W)
+                {
+                    Pacman.goDown = Pacman.goLeft = Pacman.goRight = false;
+                    Pacman.goUp = true;
+                }
+                if (e.Key == Key.S)
+                {
+                    Pacman.goUp = Pacman.goLeft = Pacman.goRight = false;
+                    Pacman.goDown = true;
+                }
             }
         }
     }

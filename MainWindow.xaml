@@ -25,10 +25,11 @@
         </GridSplitter>
 
 
-        <Button x:Name="ButtonStart" Content="Start" Style="{DynamicResource MaterialDesignRaisedButton}" Canvas.Left="1096" Width="216" Click="BtnStart" Canvas.Top="2"/>
-        <Button x:Name="ButtonRestart" IsEnabled="False" Content="Restart" Style="{DynamicResource MaterialDesignRaisedButton}" Height="32" Width="216" Canvas.Left="1096" Canvas.Top="49" Click="BtnRestart"/>
-        <Button x:Name="ButtonSetting" IsEnabled="True"  Content="Setting" Style="{DynamicResource MaterialDesignRaisedButton}" Height="32" Width="216" Canvas.Left="1096" Canvas.Top="101" Click="BtnSetting"/>
-        <Button x:Name="ButtonFAQ" Content="FAQ" Style="{DynamicResource MaterialDesignRaisedButton}" Height="32" Width="216" Canvas.Left="1096" Canvas.Top="152" Click="BtnFAQ"/>
+        <Button x:Name="ButtonStart" IsEnabled="True" Content="Start" Style="{DynamicResource MaterialDesignRaisedButton}" Canvas.Left="1096" Width="216" Click="BtnStart" Canvas.Top="2" Height="25"/>
+        <Button x:Name="ButtonRestart" IsEnabled="False" Content="Restart" Style="{DynamicResource MaterialDesignRaisedButton}" Height="25" Width="216" Canvas.Left="1096" Canvas.Top="32" Click="BtnRestart"/>
+        <Button x:Name="ButtonSetting" IsEnabled="True"  Content="Setting" Style="{DynamicResource MaterialDesignRaisedButton}" Height="28" Width="216" Canvas.Left="1096" Canvas.Top="62" Click="BtnSetting"/>
+        <Button x:Name="ButtonFAQ" Content="FAQ" Style="{DynamicResource MaterialDesignRaisedButton}" Height="25" Width="216" Canvas.Left="1096" Canvas.Top="95" Click="BtnFAQ"/>
+        <Button x:Name="ButtonClose" Content="Give up and quit" Style="{DynamicResource MaterialDesignRaisedButton}" Height="27" Width="216" Canvas.Left="1096" Canvas.Top="125" Click="BtnClose"/>
 
 
         <StackPanel Panel.ZIndex="5" x:Name="End" Visibility="Hidden" Width="1000" Height="720" Background="White">
@@ -61,19 +62,27 @@
             <Label Content="Disk space: 1,5MB" FontSize="20"  Canvas.Top="281" Canvas.Left="10" Width="400"></Label>
         </Canvas>
 
-        <Canvas IsEnabled="False" Opacity="0" Panel.ZIndex="6" x:Name="SettingsPoppup" Background="White"  Height="324" Width="664" Canvas.Left="178" Canvas.Top="184">
-            <Label FontSize="20" Content="Select the difficulty of the game" Canvas.Top="52" Width="292" Canvas.Left="186"/>
-            <CheckBox x:Name="CheckboxDiffEasy" Content="Easy" Canvas.Left="186" Canvas.Top="103"/>
-            <CheckBox x:Name="CheckboxDiffMedium" Content="Medium" Canvas.Left="291" Canvas.Top="103" Width="74"/>
-            <CheckBox x:Name="CheckboxDiffHard" Content="Hard" Canvas.Left="405" Canvas.Top="103"/>
+        <Canvas IsEnabled="True" Opacity="0" Panel.ZIndex="6" x:Name="SettingsPoppup" Background="White"  Height="324" Width="664" Canvas.Left="178" Canvas.Top="184">
+            <Label FontSize="20" Content="Select the difficulty of the game" Canvas.Top="19" Width="292" Canvas.Left="186"/>
+            <CheckBox x:Name="CheckboxDiffEasy" Content="Easy" Canvas.Left="186" Canvas.Top="70"/>
+            <CheckBox x:Name="CheckboxDiffMedium" Content="Medium" Canvas.Left="291" Canvas.Top="70" Width="74"/>
+            <CheckBox x:Name="CheckboxDiffHard" Content="Hard" Canvas.Left="405" Canvas.Top="70"/>
+            <Label FontSize="20" Content="Select the color of walls" Canvas.Top="129" Width="214" Canvas.Left="216"/>
+            <CheckBox x:Name="CheckboxBlue" Content="Blue" Canvas.Left="186" Canvas.Top="190"/>
+            <CheckBox x:Name="CheckboxRed" Content="Red" Canvas.Left="291" Canvas.Top="187"/>
+            <CheckBox x:Name="CheckboxGreen" Content="Green" Canvas.Left="405" Canvas.Top="187"/>
+            <Label FontSize="20" Content="Keyboard shortcut" Canvas.Top="222" Width="214" Canvas.Left="216"/>
+            <CheckBox x:Name="CheckboxWasd" Content="WASD" Canvas.Left="216" Canvas.Top="281"/>
+            <CheckBox x:Name="CheckboxArrow" Content="ARROWS" Canvas.Left="333" Canvas.Top="281"/>
         </Canvas>
 
 
 
 
         <Label Name="LabelCoins" FontSize="28" Foreground="White" FontFamily="Comic Sans MS" FontWeight="Bold" Content="Coins : " Height="57" Canvas.Left="1107" Canvas.Top="333" Width="194"/>
-        <Label Name="LabelAttempts" FontSize="26" Foreground="White" FontFamily="Comic Sans MS" FontWeight="Bold" Content="Attempts : " Height="57" Canvas.Left="1107" Canvas.Top="390" Width="194"/>
-        <Label Name="LabelSteps" FontSize="26" Foreground="White" FontFamily="Comic Sans MS" FontWeight="Bold" Content="Steps : " Height="57" Canvas.Left="1107" Canvas.Top="447" Width="194"/>
+        <Label Name="LabelScore" FontSize="28" Foreground="White" FontFamily="Comic Sans MS" FontWeight="Bold" Content="Score : " Height="57" Canvas.Left="1107" Canvas.Top="390" Width="194"/>
+        <Label Name="LabelAttempts" FontSize="26" Foreground="White" FontFamily="Comic Sans MS" FontWeight="Bold" Content="Attempts : " Height="57" Canvas.Left="1107" Canvas.Top="455" Width="194"/>
+        <Label Name="LabelSteps" FontSize="26" Foreground="White" FontFamily="Comic Sans MS" FontWeight="Bold" Content="Steps : " Height="57" Canvas.Left="1107" Canvas.Top="517" Width="194"/>
         <Label Name="LabelTime" FontSize="26" Foreground="White" FontFamily="Comic Sans MS" FontWeight="Bold" Content="Time: 00:00" Height="57" Canvas.Left="1107" Canvas.Top="663" Width="194"/>
 
     </Canvas>

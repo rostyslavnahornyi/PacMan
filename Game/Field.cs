@@ -86,17 +86,33 @@ namespace PacMan_GUI_WPF
                 {
                     if (entitiesArr[x, y].ch == Constants.Wall)
                     {
-                        Rectangle rectangle = new Rectangle()
+                        if (x == 0 || x == entitiesArr.GetUpperBound(0) || y == 0 || y == entitiesArr.GetUpperBound(1))
                         {
-                            Name = "Wall",
-                            Width = Entity.Width,
-                            Height = Entity.Height,
-                            Stroke = Wall.StrokeBackground,
-                            StrokeThickness = Wall.Stroke
-                        };
-                        Canvas.SetLeft(rectangle, PosLeft);
-                        Canvas.SetTop(rectangle, PosTop);
-                        CanvasField.Children.Add(rectangle);
+                            Rectangle rectangle = new Rectangle()
+                            {
+                                Name = "Wall",
+                                Width = Entity.Width,
+                                Height = Entity.Height,
+                                Stroke = Wall.StrokeBackgroundBoundary,
+                                StrokeThickness = Wall.Stroke
+                            };
+                            Canvas.SetLeft(rectangle, PosLeft);
+                            Canvas.SetTop(rectangle, PosTop);
+                            CanvasField.Children.Add(rectangle);
+                        } else
+                        {
+                            Rectangle rectangle = new Rectangle()
+                            {
+                                Name = "Wall",
+                                Width = Entity.Width,
+                                Height = Entity.Height,
+                                Stroke = Wall.StrokeBackground,
+                                StrokeThickness = Wall.Stroke
+                            };
+                            Canvas.SetLeft(rectangle, PosLeft);
+                            Canvas.SetTop(rectangle, PosTop);
+                            CanvasField.Children.Add(rectangle);
+                        }                        
                     }
                     else if (entitiesArr[x, y].ch == Constants.Coin)
                     {
