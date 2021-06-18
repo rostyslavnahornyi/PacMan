@@ -61,8 +61,6 @@ namespace PacMan
                     break;
                 }
             }
-        }
-
-        
+        }        
     }
 }

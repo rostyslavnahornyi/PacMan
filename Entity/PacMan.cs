@@ -33,8 +33,7 @@ namespace PacMan
                 Renderer.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
             }
             else if (Field.entities[x + X, y + Y].ch == Constants.Ghost)
-            {
-                Settings.MovingGhosts = false;
+            {               
                 IntroScenes.End();
             }
             else if (Field.entities[x + X, y + Y].ch == Constants.Coin)
@@ -49,7 +48,6 @@ namespace PacMan
                 new Sound().ON_GettedCoins();
                 if (Scores.coins == Scores.MaxCoins)
                 {
-                    Settings.MovingGhosts = false; // в функциональность классов
                     IntroScenes.Win();
                 }
             }
@@ -65,7 +63,6 @@ namespace PacMan
                 new Sound().ON_GettedCoins();
                 if (Scores.coins == Scores.MaxCoins)
                 {
-                    Settings.MovingGhosts = false;
                     IntroScenes.Win();
                 }
             }
@@ -88,7 +85,9 @@ namespace PacMan
                 Renderer.UpdateCell(x, y, RandomTeleport.cellUnderTeleport, ConsoleColor.Black);
                 new RandomTeleport().Loop();
                 x = RandomTeleport.randomX;
-                y = RandomTeleport.randomY;
+                y = RandomTeleport.randomY;                
+                Field.entities[x, y].ch = Constants.PacMan;
+                Renderer.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
                 if (Field.entities[x, y].ch == Constants.Coin)
                 {
                     Scores.coins++;
@@ -97,8 +96,6 @@ namespace PacMan
                 {
                     Scores.coins += 3;
                 }
-                Field.entities[x, y].ch = Constants.PacMan;
-                Renderer.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
             }
         }
 

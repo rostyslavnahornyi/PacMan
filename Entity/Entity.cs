@@ -10,9 +10,6 @@ namespace PacMan
         public ConsoleColor Background;
 
         public abstract void Print();
-        public virtual void Loop()
-        {
-
-        }
+        public virtual void Loop() { }
     }
 }

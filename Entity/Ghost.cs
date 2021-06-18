@@ -86,7 +86,6 @@ namespace PacMan
 
             if (Field.entities[x, y].ch == Constants.PacMan)
             {
-                Settings.MovingGhosts = false;
                 IntroScenes.End();
             }
             else if (Field.entities[x, y].ch == Constants.RandomTeleport)

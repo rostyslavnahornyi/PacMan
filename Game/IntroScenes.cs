@@ -89,6 +89,7 @@ Pac-Man (с англ. — «Пакман») — аркадная видео�
 
         public static void End()
         {
+            Settings.MovingGhosts = false;
             new Sound().ON_EndScene();
             Console.ResetColor();
             Console.Clear();
@@ -124,6 +125,7 @@ Pac-Man (с англ. — «Пакман») — аркадная видео�
 
         public static void Win()
         {
+            Settings.MovingGhosts = false;
             Console.ResetColor();
             Console.Clear();
             Console.WriteLine(@"
