@@ -28,7 +28,6 @@ namespace PacMan
 
         private void MovingTo(int X, int Y)
         {
-            Entity temp;
             if (Field.entities[x + X, y + Y].ch == Constants.Wall)
             {
                 Renderer.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
@@ -40,12 +39,11 @@ namespace PacMan
             }
             else if (Field.entities[x + X, y + Y].ch == Constants.Coin)
             {
-                temp = Field.entities[x, y];
                 Field.entities[x, y] = new Space();
                 Renderer.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
                 x += X;
                 y += Y;
-                Field.entities[x, y] = temp;
+                Field.entities[x, y] = this;
                 Renderer.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
                 Scores.coins++;
                 new Sound().ON_GettedCoins();
@@ -57,12 +55,11 @@ namespace PacMan
             }
             else if (Field.entities[x + X, y + Y].ch == Constants.BigCoin)
             {
-                temp = Field.entities[x, y];
                 Field.entities[x, y] = new Space();
                 Renderer.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
                 x += X;
                 y += Y;
-                Field.entities[x, y] = temp;
+                Field.entities[x, y] = this;
                 Renderer.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
                 Scores.coins += 3;
                 new Sound().ON_GettedCoins();
@@ -74,23 +71,21 @@ namespace PacMan
             }
             else if (Field.entities[x + X, y + Y].ch == Constants.Space)
             {
-                temp = Field.entities[x, y];
                 Field.entities[x, y] = new Space();
                 Renderer.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
                 x += X;
                 y += Y;
-                Field.entities[x, y] = temp;
+                Field.entities[x, y] = new PacMan(x, y);
                 Renderer.UpdateCell(x, y, Constants.PacMan, ConsoleColor.DarkRed);
             }
             else if (Field.entities[x + X, y + Y].ch == Constants.RandomTeleport)
             {
-                temp = Field.entities[x, y];
                 Field.entities[x, y] = new Space();
                 Renderer.UpdateCell(x, y, Constants.Space, ConsoleColor.Black);
                 x += X;
                 y += Y;
-                Field.entities[x, y] = temp;
-                Renderer.UpdateCell(x, y, RandomTeleport.tempCell, ConsoleColor.Black);
+                Field.entities[x, y] = this;
+                Renderer.UpdateCell(x, y, RandomTeleport.cellUnderTeleport, ConsoleColor.Black);
                 new RandomTeleport().Loop();
                 x = RandomTeleport.randomX;
                 y = RandomTeleport.randomY;

@@ -13,7 +13,7 @@ namespace PacMan
         public bool TeleportRandom = true;
         public static int randomX;
         public static int randomY;
-        public static char tempCell;
+        public static char cellUnderTeleport;
 
         public RandomTeleport()
         {
@@ -36,15 +36,15 @@ namespace PacMan
                         break;
                     }
                 }
-                tempCell = Field.entities[x, y].ch;
+                cellUnderTeleport = Field.entities[x, y].ch;
                 Field.entities[x, y].ch = Constants.RandomTeleport;
                 Settings.RandomTeleportTimes--;
                 Renderer.UpdateCell(x, y, Constants.RandomTeleport, ConsoleColor.DarkGreen);
 
                 
                 Thread.Sleep(Settings.RandomTeleportRespawnTime);
-                Field.entities[x, y].ch = tempCell;
-                Renderer.UpdateCell(x, y, tempCell, ConsoleColor.Black);
+                Field.entities[x, y].ch = cellUnderTeleport;
+                Renderer.UpdateCell(x, y, cellUnderTeleport, ConsoleColor.Black);
 
                 if (Settings.RandomTeleportTimes == 0) TeleportRandom = false;
             }

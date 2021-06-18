@@ -31,66 +31,42 @@ namespace PacMan
 
         private string RandomizeNextDirection()
         {
+
             string toGo = null;
 
-
             char[] neighbourCells = { Field.entities[x - 1, y].ch, Field.entities[x + 1, y].ch, Field.entities[x, y - 1].ch, Field.entities[x, y + 1].ch };
-            string[] possibleDirections = new string[2];
-            int possibleDirectionsIndex = 0;
-
-            if (neighbourCells[0] != Constants.Wall && neighbourCells[0] != Constants.Ghost && direction != "RIGHT")
+            List<string> possibleDirections = new List<string>();
+            for (int i = 0; i < neighbourCells.Length; i++)
             {
-                possibleDirections[possibleDirectionsIndex] = "LEFT";
-                possibleDirectionsIndex++;
-            }
-            if (neighbourCells[1] != Constants.Wall && neighbourCells[1] != Constants.Ghost && direction != "LEFT")
-            {
-                possibleDirections[possibleDirectionsIndex] = "RIGHT";
-                possibleDirectionsIndex++;
-            }
-            if (neighbourCells[2] != Constants.Wall && neighbourCells[2] != Constants.Ghost && direction != "DOWN")
-            {
-                possibleDirections[possibleDirectionsIndex] = "UP";
-                possibleDirectionsIndex++;
-            }
-            if (neighbourCells[3] != Constants.Wall && neighbourCells[3] != Constants.Ghost && direction != "UP")
-            {
-                possibleDirections[possibleDirectionsIndex] = "DOWN";
-            }
-
-            if (possibleDirections[0] == null && possibleDirections[1] == null)
-            {
-                if ((neighbourCells[0] != Constants.Wall || neighbourCells[0] == Constants.PacMan) && neighbourCells[0] != Constants.Ghost && direction == "RIGHT")
+                if (neighbourCells[i] != Constants.Wall && neighbourCells[i] != Constants.Ghost)
                 {
-                    toGo = "LEFT";
-                }
-                if ((neighbourCells[1] != Constants.Wall || neighbourCells[1] == Constants.PacMan) && neighbourCells[1] != Constants.Ghost && direction == "LEFT")
-                {
-                    toGo = "RIGHT";
-                }
-                if ((neighbourCells[2] != Constants.Wall || neighbourCells[2] == Constants.PacMan) && neighbourCells[2] != Constants.Ghost && direction == "DOWN")
-                {
-                    toGo = "UP";
-                }
-                if ((neighbourCells[3] != Constants.Wall || neighbourCells[3] == Constants.PacMan) && neighbourCells[3] != Constants.Ghost && direction == "UP")
-                {
-                    toGo = "DOWN";
+                    if (i == 0 && direction != "RIGHT")
+                    {
+                        possibleDirections.Add("LEFT");
+                    }
+                    if (i == 1 && direction != "LEFT")
+                    {
+                        possibleDirections.Add("RIGHT");
+                    }
+                    if (i == 2 && direction != "DOWN")
+                    {
+                        possibleDirections.Add("UP");
+                    }
+                    if (i == 3 && direction != "UP")
+                    {
+                        possibleDirections.Add("DOWN");
+                    }
                 }
             }
-            else if (possibleDirections[0] == null)
+            if (possibleDirections.Count == 0)
             {
-                toGo = possibleDirections[1];
-            }
-            else if (possibleDirections[1] == null)
-            {
-                toGo = possibleDirections[0];
+                return toGo;
             }
             else
             {
-                toGo = possibleDirections[Util.random.Next(2)];
-            }
-
-            return toGo;
+                toGo = possibleDirections[Util.random.Next(possibleDirections.Count)];
+                return toGo;
+            }            
         }
 
         private void MovingTo(int X, int Y, string _direction)
