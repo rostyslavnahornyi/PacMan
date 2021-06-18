@@ -15,7 +15,7 @@ namespace PacMan_GUI_WPF
         public static bool hotkeysMovingArrows = true;
         public static bool hotkeysMovingWasd = false;
 
-        public static int speedGhosts = 1000;
+        public static int speedGhosts = 50;
         public static int attempts = 1;
     }
 }

@@ -10,10 +10,11 @@ namespace PacMan_GUI_WPF
 {
     class Pacman : Entity
     {
+
         public static int x;
         public static int y;
 
-        public static bool goLeft, goRight, goDown, goUp; 
+        public static string direction = "STOP";
 
         public Pacman()
         {

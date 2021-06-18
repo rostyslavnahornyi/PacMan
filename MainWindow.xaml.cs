@@ -24,10 +24,44 @@ namespace PacMan_GUI_WPF
 
     public partial class MainWindow : Window
     {
-        int seconds, minutes;
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void PrintSpace(int X, int Y)
+        {
+            Rectangle rectangle = new Rectangle()
+            {
+                Name = "Space",
+                Width = Entity.Width,
+                Height = Entity.Height,
+                Fill = Space.Background
+            };
+            int x = X * (Entity.Width + Field.marginEntity) + (((int)CanvasField.ActualWidth - Entity.Width * Field.sizeMapX - Field.sizeMapX) / 2) + Field.marginEntity;
+            int y = Y * (Entity.Width + Field.marginEntity) + (((int)CanvasField.ActualHeight - Entity.Height * Field.sizeMapY - Field.sizeMapY) / 2) + Field.marginEntity;
+            Canvas.SetLeft(rectangle, x);
+            Canvas.SetTop(rectangle, y);
+            CanvasField.Children.Add(rectangle);
+            Canvas.SetZIndex(rectangle, 2);
+        }
+
+        private void PrintCoin(int X, int Y)
+        {
+            Ellipse ellipse = new Ellipse()
+            {
+                Name = "Coin",
+                Width = Coin._Width,
+                Height = Coin._Height,
+                Fill = Coin.Background
+            };
+            int x = X * (Entity.Width + Field.marginEntity) + (((int)CanvasField.ActualWidth - Entity.Width * Field.sizeMapX - Field.sizeMapX) / 2) + Field.marginEntity;
+            int y = Y * (Entity.Width + Field.marginEntity) + (((int)CanvasField.ActualHeight - Entity.Height * Field.sizeMapY - Field.sizeMapY) / 2) + Field.marginEntity;
+            Canvas.SetLeft(ellipse, x + 6);
+            Canvas.SetTop(ellipse, y + 6);
+            CanvasField.Children.Add(ellipse);
+            Canvas.SetZIndex(ellipse, 2);
         }
 
         private void PacmanLoop(object sender, EventArgs e)
@@ -42,18 +76,25 @@ namespace PacMan_GUI_WPF
                 }
             }
 
-            Entity temp; // rename
-            void MovingTo(int X, int Y, string direction)
+            if (Pacman.direction == "RIGHT" && Field.entitiesArr[Pacman.x + 1, Pacman.y].ch != Constants.Wall)
             {
-                if (Field.entitiesArr[Pacman.x, Pacman.y].ch == Constants.Ghost)
-                {
-                    Threading.Stop();
-                    End.Visibility = Visibility.Visible;
-                    Settings.gameIsStarted = false;
-                    ButtonRestart.IsEnabled = true;
-                    ButtonSetting.IsEnabled = true;
+                MovingTo(1, 0, "RIGHT");
+            }
+            else if (Pacman.direction == "LEFT" && Field.entitiesArr[Pacman.x - 1, Pacman.y].ch != Constants.Wall)
+            {
+                MovingTo(-1, 0, "LEFT");
+            }
+            else if (Pacman.direction == "UP" && Field.entitiesArr[Pacman.x, Pacman.y - 1].ch != Constants.Wall)
+            {
+                MovingTo(0, -1, "UP");
+            }
+            else if (Pacman.direction == "DOWN" && Field.entitiesArr[Pacman.x, Pacman.y + 1].ch != Constants.Wall)
+            {
+                MovingTo(0, 1, "DOWN");
+            }
 
-                }
+            void MovingTo(int X, int Y, string direction)
+            {       
                 if (Field.entitiesArr[Pacman.x + X, Pacman.y + Y].ch == Constants.Ghost)
                 {
                     Threading.Stop();
@@ -64,37 +105,25 @@ namespace PacMan_GUI_WPF
                 }
                 else if (Field.entitiesArr[Pacman.x + X, Pacman.y + Y].ch == Constants.Coin)
                 {
-                    temp = Field.entitiesArr[Pacman.x, Pacman.y]; // to method
                     Field.entitiesArr[Pacman.x, Pacman.y] = new Space();
                     Pacman.x += X;
                     Pacman.y += Y;
-                    Rectangle rectangle = new Rectangle()
-                    {
-                        Name = "Space",
-                        Width = Entity.Width,
-                        Height = Entity.Height,
-                        Fill = Space.Background
-                    };
-                    int x = Pacman.x * (Entity.Width + Field.marginEntity) + (((int)CanvasField.ActualWidth - Entity.Width * Field.sizeMapX - Field.sizeMapX) / 2) + Field.marginEntity;
-                    int y = Pacman.y * (Entity.Width + Field.marginEntity) + (((int)CanvasField.ActualHeight - Entity.Height * Field.sizeMapY - Field.sizeMapY) / 2) + Field.marginEntity;
-                    Canvas.SetLeft(rectangle, x);
-                    Canvas.SetTop(rectangle, y);
-                    CanvasField.Children.Add(rectangle);
-                    Canvas.SetZIndex(rectangle, 2);
-                    Field.entitiesArr[Pacman.x, Pacman.y] = temp;
+                    PrintSpace(Pacman.x, Pacman.y);
+                    Field.entitiesArr[Pacman.x, Pacman.y] = new Pacman();
+
                     Scores.currentCoins++;
                     LabelCoins.Content = $"Coins : {Scores.allCoins - Scores.currentCoins}";
                     LabelScore.Content = $"Score : {Scores.currentCoins}";
-                    _MovingEntityTo(direction, "Pacman");
+
+                    MovingEntityTo(direction, "Pacman");
                 }
                 else if (Field.entitiesArr[Pacman.x + X, Pacman.y + Y].ch == Constants.Space)
                 {
-                    temp = Field.entitiesArr[Pacman.x, Pacman.y];
                     Field.entitiesArr[Pacman.x, Pacman.y] = new Space();
                     Pacman.x += X;
                     Pacman.y += Y;
-                    Field.entitiesArr[Pacman.x, Pacman.y] = temp;
-                    _MovingEntityTo(direction, "Pacman");
+                    Field.entitiesArr[Pacman.x, Pacman.y] = new Pacman();
+                    MovingEntityTo(direction, "Pacman");
                 }
 
                 int Angle = 0;
@@ -115,26 +144,10 @@ namespace PacMan_GUI_WPF
                     Angle = 90;
                 }
                 pacman.RenderTransform = new RotateTransform(Angle, Entity.Width / 2, Entity.Height / 2);
+
                 Scores.steps++;
                 LabelSteps.Content = $"Steps : {Scores.steps}";
-            }
-
-            if (Pacman.goRight && Field.entitiesArr[Pacman.x + 1, Pacman.y].ch != Constants.Wall)
-            {
-                MovingTo(1, 0, "RIGHT");
-            }
-            else if (Pacman.goLeft && Field.entitiesArr[Pacman.x - 1, Pacman.y].ch != Constants.Wall)
-            {
-                MovingTo(-1, 0, "LEFT");
-            }
-            else if (Pacman.goUp && Field.entitiesArr[Pacman.x, Pacman.y - 1].ch != Constants.Wall)
-            {
-                MovingTo(0, -1, "UP");
-            }
-            else if (Pacman.goDown && Field.entitiesArr[Pacman.x, Pacman.y + 1].ch != Constants.Wall)
-            {
-                MovingTo(0, 1, "DOWN");
-            }
+            }            
 
             if (Scores.currentCoins == Scores.allCoins)
             {
@@ -154,79 +167,6 @@ namespace PacMan_GUI_WPF
                 string toGo = ghost.RandomizeNextDirection();
                 ghost.direction = toGo;
 
-                void MoveTo(int X, int Y)
-                {
-                    if (Field.entitiesArr[ghost.x, ghost.y].ch == Constants.PacMan)
-                    {
-                        Threading.Stop();
-                        End.Visibility = Visibility.Visible;
-                        Settings.gameIsStarted = false;
-                        ButtonRestart.IsEnabled = true;
-                        ButtonSetting.IsEnabled = true;
-                    }
-                    if (Field.entitiesArr[ghost.x + X, ghost.y + Y].ch != Constants.Wall)
-                    {
-                        if (ghost.tempCell.ch == Constants.Coin)
-                        {
-                            Ellipse ellipse = new Ellipse()
-                            {
-                                Name = "Coin",
-                                Width = Coin._Width,
-                                Height = Coin._Height,
-                                Fill = Coin.Background
-                            };
-                            int x = ghost.x * (Entity.Width + Field.marginEntity) + (((int)CanvasField.ActualWidth - Entity.Width * Field.sizeMapX - Field.sizeMapX) / 2) + Field.marginEntity;
-                            int y = ghost.y * (Entity.Width + Field.marginEntity) + (((int)CanvasField.ActualHeight - Entity.Height * Field.sizeMapY - Field.sizeMapY) / 2) + Field.marginEntity;
-                            Canvas.SetLeft(ellipse, x + 6);
-                            Canvas.SetTop(ellipse, y + 6);
-                            CanvasField.Children.Add(ellipse);
-                            Canvas.SetZIndex(ellipse, 2);
-                        }
-                        if (ghost.tempCell.ch == Constants.Space)
-                        {
-                            Rectangle rectangle = new Rectangle()
-                            {
-                                Name = "Space",
-                                Width = Entity.Width,
-                                Height = Entity.Height,
-                                Fill = Space.Background
-                            };
-                            int _x = ghost.x * (Entity.Width + Field.marginEntity) + (((int)CanvasField.ActualWidth - Entity.Width * Field.sizeMapX - Field.sizeMapX) / 2) + Field.marginEntity;
-                            int _y = ghost.y * (Entity.Width + Field.marginEntity) + (((int)CanvasField.ActualHeight - Entity.Height * Field.sizeMapY - Field.sizeMapY) / 2) + Field.marginEntity;
-                            Canvas.SetLeft(rectangle, _x);
-                            Canvas.SetTop(rectangle, _y);
-                            CanvasField.Children.Add(rectangle);
-                            Canvas.SetZIndex(rectangle, 2);
-                        }
-                        Entity tempGhost = Field.entitiesArr[ghost.x, ghost.y];
-                        Field.entitiesArr[ghost.x, ghost.y] = ghost.tempCell;
-                        ghost.x += X;
-                        ghost.y += Y;
-                        if (Field.entitiesArr[ghost.x + X, ghost.y + Y].ch == Constants.PacMan)
-                        {
-                            Threading.Stop();
-                            End.Visibility = Visibility.Visible;
-                            Settings.gameIsStarted = false;
-                            ButtonRestart.IsEnabled = true;
-                            ButtonSetting.IsEnabled = true;
-                        }
-                        else
-                        {
-                            _MovingEntityTo(toGo, $"Ghost{numberGhost}");
-                        }
-                        ghost.tempCell = Field.entitiesArr[ghost.x, ghost.y];
-                        if (ghost.tempCell.ch == Constants.PacMan)
-                        {
-                            Threading.Stop();
-                            End.Visibility = Visibility.Visible;
-                            Settings.gameIsStarted = false;
-                            ButtonRestart.IsEnabled = true;
-                            ButtonSetting.IsEnabled = true;
-                        }
-                        Field.entitiesArr[ghost.x, ghost.y] = tempGhost;
-                    }
-                }
-
                 if (Field.entitiesArr[ghost.x, ghost.y].ch != Constants.Wall)
                 {
                     if (toGo == "LEFT")
@@ -244,52 +184,58 @@ namespace PacMan_GUI_WPF
                     if (toGo == "DOWN")
                     {
                         MoveTo(0, 1);
-
                     }
                 }
-            }
-        }
-        private void _MovingEntityTo(string direction, string name)
-        {
-            UIElement element = null;
-            foreach (var el in CanvasField.Children.OfType<Image>())
-            {
-                if (el.Name == name)
+
+                void MoveTo(int X, int Y)
                 {
-                    element = el;
-                    break;
-                }
-            }
+                    if (Field.entitiesArr[ghost.x + X, ghost.y + Y].ch != Constants.Wall)
+                    {
+                        if (ghost.previousCell.ch == Constants.Coin)
+                        {
+                            PrintCoin(ghost.x, ghost.y);
+                        }
+                        if (ghost.previousCell.ch == Constants.Space)
+                        {
+                            PrintSpace(ghost.x, ghost.y);
+                        }
+                        Entity currentGhost = Field.entitiesArr[ghost.x, ghost.y];
+                        Field.entitiesArr[ghost.x, ghost.y] = ghost.previousCell;
 
-            if (direction == "RIGHT")
-            {
-                Canvas.SetLeft(element, Canvas.GetLeft(element) + (Entity.Width + Field.marginEntity));
-            }
-            if (direction == "LEFT")
-            {
-                Canvas.SetLeft(element, Canvas.GetLeft(element) - (Entity.Width + Field.marginEntity));
-            }
-            if (direction == "UP")
-            {
-                Canvas.SetTop(element, Canvas.GetTop(element) - (Entity.Height + Field.marginEntity));
-            }
-            if (direction == "DOWN")
-            {
-                Canvas.SetTop(element, Canvas.GetTop(element) + (Entity.Height + Field.marginEntity));
-            }
-        }
+                        ghost.x += X;
+                        ghost.y += Y;
 
-
+                        if (Field.entitiesArr[ghost.x + X, ghost.y + Y].ch == Constants.PacMan)
+                        {
+                            Threading.Stop();
+                            End.Visibility = Visibility.Visible;
+                            Settings.gameIsStarted = false;
+                            ButtonRestart.IsEnabled = true;
+                            ButtonSetting.IsEnabled = true;
+                        }
+                        else
+                        {
+                            MovingEntityTo(toGo, $"Ghost{numberGhost}");
+                        }
+                        ghost.previousCell = Field.entitiesArr[ghost.x, ghost.y];
+                        Field.entitiesArr[ghost.x, ghost.y] = currentGhost;
+                    }
+                }                
+            }
+        }        
         void Start()
         {
             Pacman.x = Field.FindPacmanCoordinates()[0];
             Pacman.y = Field.FindPacmanCoordinates()[1];
+
             Threading.timer.Tick += dtTicker;
             Threading.pacman.Tick += PacmanLoop;
             Threading.ghost1.Tick += _Ghost1Loop;
             Threading.ghost2.Tick += _Ghost2Loop;
             Threading.ghost3.Tick += _Ghost3Loop;
+
             Threading.Start();
+
             LabelCoins.Content = $"Coins : {Scores.allCoins}";
             LabelScore.Content = $"Score : {Scores.currentCoins}";
             ButtonStart.IsEnabled = false;
@@ -311,7 +257,6 @@ namespace PacMan_GUI_WPF
             GhostLoop(ghost, "3");
         }
 
-
         private void BtnStart(object sender, RoutedEventArgs e)
         {
             new Runner(CanvasField);
@@ -322,7 +267,6 @@ namespace PacMan_GUI_WPF
             ButtonSetting.IsEnabled = false;
             LabelAttempts.Content = $"Attempts : {Settings.attempts}";
         }
-
         private void dtTicker(object sender, EventArgs e)
         {
             Scores.secondsTimer++;
@@ -339,11 +283,10 @@ namespace PacMan_GUI_WPF
                 LabelTime.Content = $"Time: 0{Scores.minutesTimer}:{Scores.secondsTimer}";
             }
         }
-
         private void BtnRestart(object sender, RoutedEventArgs e)
         {
             Threading.Stop();
-            Pacman.goLeft = Pacman.goRight = Pacman.goUp = Pacman.goDown = false;
+            Pacman.direction = "STOP";
 
             Threading.timer.Tick -= dtTicker;
             Threading.pacman.Tick -= PacmanLoop;
@@ -351,7 +294,7 @@ namespace PacMan_GUI_WPF
             Threading.ghost2.Tick -= _Ghost2Loop;
             Threading.ghost3.Tick -= _Ghost3Loop;
 
-            ClearElementsXaml();
+            ClearElementsCanvas();
 
             if (Win.IsVisible == true) Win.Visibility = Visibility.Hidden;
             if (End.IsVisible == true) End.Visibility = Visibility.Hidden;
@@ -366,7 +309,6 @@ namespace PacMan_GUI_WPF
             Settings.attempts++;
             LabelAttempts.Content = $"Attempts : {Settings.attempts}";
         }
-
         private void BtnSetting(object sender, RoutedEventArgs e)
         {
             if (Settings.settingPoppupEnabled == false && Settings.gameIsStarted == false)
@@ -452,7 +394,6 @@ namespace PacMan_GUI_WPF
                 Settings.hotkeysMovingWasd = true;
             }
         }
-
         private void BtnFAQ(object sender, RoutedEventArgs e)
         {
             if (Settings.FAQPoppupEnabled == false && Settings.settingPoppupEnabled == false)
@@ -487,8 +428,16 @@ namespace PacMan_GUI_WPF
                 Threading.Start();
             }
         }
+        private void BtnClose(object sender, RoutedEventArgs e)
+        {
+            if (Settings.gameIsStarted == true)
+            {
+                this.Close();
+            }
+        }
 
-        private void ClearElementsXaml()
+
+        private void ClearElementsCanvas()
         {
             int coins = 0;
             int rects = 0;
@@ -540,38 +489,54 @@ namespace PacMan_GUI_WPF
                 }
             }
         }
-
-        private void BtnClose(object sender, RoutedEventArgs e)
+        private void MovingEntityTo(string direction, string name)
         {
-            if (Settings.gameIsStarted == true)
+            UIElement element = null;
+            foreach (var el in CanvasField.Children.OfType<Image>())
             {
-                this.Close(); 
+                if (el.Name == name)
+                {
+                    element = el;
+                    break;
+                }
+            }
+
+            if (direction == "RIGHT")
+            {
+                Canvas.SetLeft(element, Canvas.GetLeft(element) + (Entity.Width + Field.marginEntity));
+            }
+            if (direction == "LEFT")
+            {
+                Canvas.SetLeft(element, Canvas.GetLeft(element) - (Entity.Width + Field.marginEntity));
+            }
+            if (direction == "UP")
+            {
+                Canvas.SetTop(element, Canvas.GetTop(element) - (Entity.Height + Field.marginEntity));
+            }
+            if (direction == "DOWN")
+            {
+                Canvas.SetTop(element, Canvas.GetTop(element) + (Entity.Height + Field.marginEntity));
             }
         }
-
         private void CanvasKeyDown(object sender, KeyEventArgs e)
         {
             if (Settings.hotkeysMovingArrows == true)
             {
                 if (e.Key == Key.Left)
                 {
-                    Pacman.goRight = Pacman.goUp = Pacman.goDown = false;
-                    Pacman.goLeft = true;
+                    Pacman.direction = "LEFT";
                 }
                 if (e.Key == Key.Right)
                 {
-                    Pacman.goLeft = Pacman.goUp = Pacman.goDown = false;
-                    Pacman.goRight = true;
+                    Pacman.direction = "RIGHT";
                 }
                 if (e.Key == Key.Up)
                 {
-                    Pacman.goDown = Pacman.goLeft = Pacman.goRight = false;
-                    Pacman.goUp = true;
+                    Pacman.direction = "UP";
                 }
                 if (e.Key == Key.Down)
                 {
-                    Pacman.goUp = Pacman.goLeft = Pacman.goRight = false;
-                    Pacman.goDown = true;
+                    Pacman.direction = "DOWN";
                 }
             }
 
@@ -579,23 +544,19 @@ namespace PacMan_GUI_WPF
             {
                 if (e.Key == Key.A)
                 {
-                    Pacman.goRight = Pacman.goUp = Pacman.goDown = false;
-                    Pacman.goLeft = true;
+                    Pacman.direction = "LEFT";
                 }
                 if (e.Key == Key.D)
                 {
-                    Pacman.goLeft = Pacman.goUp = Pacman.goDown = false;
-                    Pacman.goRight = true;
+                    Pacman.direction = "RIGHT";
                 }
                 if (e.Key == Key.W)
                 {
-                    Pacman.goDown = Pacman.goLeft = Pacman.goRight = false;
-                    Pacman.goUp = true;
+                    Pacman.direction = "UP";
                 }
                 if (e.Key == Key.S)
                 {
-                    Pacman.goUp = Pacman.goLeft = Pacman.goRight = false;
-                    Pacman.goDown = true;
+                    Pacman.direction = "DOWN";
                 }
             }
         }

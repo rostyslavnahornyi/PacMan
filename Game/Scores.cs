@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace PacMan_GUI_WPF
 {
@@ -14,6 +15,12 @@ namespace PacMan_GUI_WPF
 
         public static int secondsTimer;
         public static int minutesTimer;
+
+        Canvas canvas;
+        public Scores(Canvas canvas)
+        {
+            this.canvas = canvas;
+        }
 
         public static void FindAllCoins()
         {
@@ -27,6 +34,11 @@ namespace PacMan_GUI_WPF
                     if (Field.entitiesArr[x, y].ch == Constants.Coin) allCoins++;
                 }
             }
+        }
+
+        public void UpdateScores()
+        {
+            
         }
     }
 }

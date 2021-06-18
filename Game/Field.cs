@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -45,7 +46,7 @@ namespace PacMan_GUI_WPF
             Draw();
         }
 
-        private void FillArr()
+        public void FillArr()
         {
             txtLines = File.ReadAllLines($"../../Resources/Maps/{SelectedMap}.txt");
             entitiesArr = new Entity[txtLines[0].Length, txtLines.Length];
@@ -136,7 +137,14 @@ namespace PacMan_GUI_WPF
                             Height = Entity.Height
 
                         };
+
+                        //string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                        //UriBuilder uri = new UriBuilder(codeBase);
+                        //string path = Uri.UnescapeDataString(uri.Path);
+                        //path = System.IO.Path.GetDirectoryName(path);
+                        //AnimationBehavior.SetSourceUri(image, new Uri(path + "Resources/Images/pacman.gif")); // добавить текущую папку + путь к файл
                         AnimationBehavior.SetSourceUri(image, new Uri("C:/Users/Rostyslav/Desktop/GIT/PacMan/Resources/Images/pacman.gif")); // добавить текущую папку + путь к файл
+
                         Canvas.SetLeft(image, PosLeft);
                         Canvas.SetTop(image, PosTop);
                         Canvas.SetZIndex(image, 3);
