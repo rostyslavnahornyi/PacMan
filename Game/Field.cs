@@ -138,12 +138,8 @@ namespace PacMan_GUI_WPF
 
                         };
 
-                        //string codeBase = Assembly.GetExecutingAssembly().CodeBase;
-                        //UriBuilder uri = new UriBuilder(codeBase);
-                        //string path = Uri.UnescapeDataString(uri.Path);
-                        //path = System.IO.Path.GetDirectoryName(path);
-                        //AnimationBehavior.SetSourceUri(image, new Uri(path + "Resources/Images/pacman.gif")); // добавить текущую папку + путь к файл
-                        AnimationBehavior.SetSourceUri(image, new Uri("C:/Users/Rostyslav/Desktop/GIT/PacMan/Resources/Images/pacman.gif")); // добавить текущую папку + путь к файл
+                        string path = Directory.GetCurrentDirectory();
+                        AnimationBehavior.SetSourceUri(image, new Uri(path + "/Resources/Images/pacman.gif")); // добавить текущую папку + путь к файл
 
                         Canvas.SetLeft(image, PosLeft);
                         Canvas.SetTop(image, PosTop);
@@ -158,7 +154,8 @@ namespace PacMan_GUI_WPF
                             Width = Entity.Width,
                             Height = Entity.Height,
                         };
-                        AnimationBehavior.SetSourceUri(image, new Uri($"C:/Users/Rostyslav/Desktop/GIT/PacMan/Resources/Images/ghost{numberGhost.ToString()}.gif"));
+                        string path = Directory.GetCurrentDirectory();
+                        AnimationBehavior.SetSourceUri(image, new Uri(path + $"/Resources/Images/ghost{numberGhost.ToString()}.gif"));
                         Canvas.SetLeft(image, PosLeft);
                         Canvas.SetTop(image, PosTop);
                         Canvas.SetZIndex(image, 3);

@@ -120,25 +120,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\pacman.gif">
+    <None Include="Resources\Images\pacman.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </None>
     <Resource Include="Resources\Maps\map1.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\ghost1.gif">
+    <None Include="Resources\Images\ghost1.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\ghost2.gif">
+    <None Include="Resources\Images\ghost2.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Images\ghost3.gif">
+    <None Include="Resources\Images\ghost3.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\smile-end.png" />

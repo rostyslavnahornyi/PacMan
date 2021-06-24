@@ -30,6 +30,23 @@ namespace PacMan_GUI_WPF
             InitializeComponent();
         }
 
+       /* private void Print(int X, int Y, int Magrin, Entity _Entity)
+        {
+            Shape rectangle = new Shape()
+            {
+                Name = "Space",
+                Width = _Entity.Width,
+                Height = _Entity.Height,
+                Fill = _Entity.Background
+            };
+            int x = X * (Entity.Width + Field.marginEntity) + (((int)CanvasField.ActualWidth - Entity.Width * Field.sizeMapX - Field.sizeMapX) / 2) + Field.marginEntity;
+            int y = Y * (Entity.Width + Field.marginEntity) + (((int)CanvasField.ActualHeight - Entity.Height * Field.sizeMapY - Field.sizeMapY) / 2) + Field.marginEntity;
+            Canvas.SetLeft(rectangle, x + Margin);
+            Canvas.SetTop(rectangle, y + Margin);
+            CanvasField.Children.Add(rectangle);
+            Canvas.SetZIndex(rectangle, 2);
+        }
+*/
         private void PrintSpace(int X, int Y)
         {
             Rectangle rectangle = new Rectangle()
@@ -428,6 +445,7 @@ namespace PacMan_GUI_WPF
                 Threading.Start();
             }
         }
+
         private void BtnClose(object sender, RoutedEventArgs e)
         {
             if (Settings.gameIsStarted == true)
@@ -435,7 +453,6 @@ namespace PacMan_GUI_WPF
                 this.Close();
             }
         }
-
 
         private void ClearElementsCanvas()
         {
