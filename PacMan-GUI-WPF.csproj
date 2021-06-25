@@ -73,6 +73,7 @@
     <Compile Include="Entities\Space.cs" />
     <Compile Include="Entities\Wall.cs" />
     <Compile Include="Game\Field.cs" />
+    <Compile Include="Entities\RandomWall.cs" />
     <Compile Include="Game\Runner.cs" />
     <Compile Include="Game\Scores.cs" />
     <Compile Include="Game\Settings.cs" />

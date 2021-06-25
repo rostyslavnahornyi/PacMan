@@ -13,6 +13,7 @@ namespace PacMan_GUI_WPF
         public static int Height = 15;
 
         public char ch;
+        public bool Passability;
 
         public virtual void Loop() { }
         public virtual string RandomizeNextDirection() { return null; }

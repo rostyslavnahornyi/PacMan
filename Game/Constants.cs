@@ -11,6 +11,7 @@ namespace PacMan_GUI_WPF
         public const char Wall = '#';
         public const char Coin = '.';
         public const char Space = ' ';
+        public const char RandomWall = '$';
 
         public const char Ghost = 'A';
         public const char PacMan = '@';

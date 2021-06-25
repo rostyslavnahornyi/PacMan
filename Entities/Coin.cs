@@ -14,6 +14,7 @@ namespace PacMan_GUI_WPF
         public Coin()
         {
             ch = Constants.Coin;
+            Passability = true;
 
             _Width = Width / 3;
             _Height = Height / 3;            

@@ -72,6 +72,10 @@ namespace PacMan_GUI_WPF
                     {
                         entitiesArr[i, j] = new Coin();
                     }
+                    if (txtLines[j][i] == Constants.RandomWall)
+                    {
+                        entitiesArr[i, j] = new RandomWall();
+                    }
                 }
             }
             numberGhost = 1;
@@ -114,6 +118,22 @@ namespace PacMan_GUI_WPF
                             Canvas.SetTop(rectangle, PosTop);
                             CanvasField.Children.Add(rectangle);
                         }                        
+                    }
+                    else if (entitiesArr[x, y].ch == Constants.RandomWall)
+                    {
+                        {
+                            Rectangle rectangle = new Rectangle()
+                            {
+                                Name = "RandomWall",
+                                Width = Entity.Width,
+                                Height = Entity.Height,
+                                Stroke = RandomWall.StrokeBackground,
+                                StrokeThickness = RandomWall.Stroke
+                            };
+                            Canvas.SetLeft(rectangle, PosLeft);
+                            Canvas.SetTop(rectangle, PosTop);
+                            CanvasField.Children.Add(rectangle);
+                        }
                     }
                     else if (entitiesArr[x, y].ch == Constants.Coin)
                     {

@@ -20,6 +20,8 @@ namespace PacMan_GUI_WPF
             this.x = x;
             this.y = y;
             queue = q;
+
+            Passability = false;
             ch = Constants.Ghost;
         }
 
@@ -27,11 +29,11 @@ namespace PacMan_GUI_WPF
         {
             string toGo = null;
 
-            char[] neighbourCells = { Field.entitiesArr[x - 1, y].ch, Field.entitiesArr[x + 1, y].ch, Field.entitiesArr[x, y - 1].ch, Field.entitiesArr[x, y + 1].ch };
+            Entity[] neighbourCells = { Field.entitiesArr[x - 1, y], Field.entitiesArr[x + 1, y], Field.entitiesArr[x, y - 1], Field.entitiesArr[x, y + 1] };
             List<string> possibleDirections = new List<string>();
             for (int i = 0; i < neighbourCells.Length; i++)
             {
-                if (neighbourCells[i] != Constants.Wall && neighbourCells[i] != Constants.Ghost)
+                if (neighbourCells[i].Passability == true) 
                 {
                     if (i == 0 && direction != "RIGHT")
                     {

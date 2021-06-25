@@ -13,6 +13,7 @@ namespace PacMan_GUI_WPF
 
         public Space()
         {
+            Passability = true;
             ch = Constants.Space;
         }
     }

@@ -250,12 +250,27 @@ namespace PacMan_GUI_WPF
             Threading.ghost1.Tick += _Ghost1Loop;
             Threading.ghost2.Tick += _Ghost2Loop;
             Threading.ghost3.Tick += _Ghost3Loop;
+            Threading.randomWall.Tick += RandomWallLoop;
 
             Threading.Start();
 
             LabelCoins.Content = $"Coins : {Scores.allCoins}";
             LabelScore.Content = $"Score : {Scores.currentCoins}";
             ButtonStart.IsEnabled = false;
+        }
+
+        private void RandomWallLoop(object sender, EventArgs e)
+        {
+            foreach(Entity x in Field.entitiesArr)
+            {
+                if (x.ch == Constants.RandomWall && x.Passability == true)
+                {
+                    x.Passability = false;
+                } else if (x.ch == Constants.RandomWall && x.Passability == false)
+                {
+                    x.Passability = true;
+                }
+            }
         }
 
         private void _Ghost1Loop(object sender, EventArgs e) 

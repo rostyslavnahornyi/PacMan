@@ -10,7 +10,7 @@ namespace PacMan_GUI_WPF
     class Threading
     {
         public static DispatcherTimer timer = new DispatcherTimer();
-        public static DispatcherTimer flickerWall = new DispatcherTimer();
+        public static DispatcherTimer randomWall = new DispatcherTimer();
 
         public static DispatcherTimer pacman = new DispatcherTimer();
         public static DispatcherTimer ghost1 = new DispatcherTimer();
@@ -25,6 +25,7 @@ namespace PacMan_GUI_WPF
             ghost2.Interval = new TimeSpan(0, 0, 0, 0, Settings.speedGhosts);
             ghost3.Interval = new TimeSpan(0, 0, 0, 0, Settings.speedGhosts);
             timer.Interval = new TimeSpan(0, 0, 0, 1);
+            randomWall.Interval = new TimeSpan(0, 0, 0, 0, 3000);
 
 
             timer.Start();
@@ -32,6 +33,7 @@ namespace PacMan_GUI_WPF
             ghost1.Start();
             ghost2.Start();
             ghost3.Start();
+            randomWall.Start();
         }
 
         public static void Stop()
@@ -41,6 +43,7 @@ namespace PacMan_GUI_WPF
             ghost1.Stop();
             ghost2.Stop();
             ghost3.Stop();
+            randomWall.Stop();
         }
     }
 }

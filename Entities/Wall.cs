@@ -24,6 +24,7 @@ namespace PacMan_GUI_WPF
 
         public Wall()
         {
+            Passability = false;
             ch = Constants.Wall;
         }
     }
