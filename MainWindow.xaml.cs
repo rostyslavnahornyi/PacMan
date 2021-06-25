@@ -181,6 +181,7 @@ namespace PacMan_GUI_WPF
         {
             lock (Util.locker)
             {
+                Field.FindGhostsCoordinates();
                 string toGo = ghost.RandomizeNextDirection();
                 ghost.direction = toGo;
 
@@ -244,12 +245,13 @@ namespace PacMan_GUI_WPF
         {
             Pacman.x = Field.FindPacmanCoordinates()[0];
             Pacman.y = Field.FindPacmanCoordinates()[1];
+            Field.FindGhostsCoordinates();
 
             Threading.timer.Tick += dtTicker;
             Threading.pacman.Tick += PacmanLoop;
-            Threading.ghost1.Tick += _Ghost1Loop;
-            Threading.ghost2.Tick += _Ghost2Loop;
-            Threading.ghost3.Tick += _Ghost3Loop;
+            Threading.ghost1.Tick += (sender, e) => GhostLoop((Ghost)Field.entitiesArr[Ghost.Ghost1.Item1, Ghost.Ghost1.Item2], "1");
+            Threading.ghost2.Tick += (sender, e) => GhostLoop((Ghost)Field.entitiesArr[Ghost.Ghost2.Item1, Ghost.Ghost2.Item2], "2");
+            Threading.ghost3.Tick += (sender, e) => GhostLoop((Ghost)Field.entitiesArr[Ghost.Ghost3.Item1, Ghost.Ghost3.Item2], "3");
             Threading.randomWall.Tick += RandomWallLoop;
 
             Threading.Start();
@@ -273,7 +275,7 @@ namespace PacMan_GUI_WPF
             }
         }
 
-        private void _Ghost1Loop(object sender, EventArgs e) 
+       /* private void _Ghost1Loop(object sender, EventArgs e) 
         {
             Ghost ghost = (Ghost)Field.entitiesArr[Field.FindGhostsCoordinates()[0][0], Field.FindGhostsCoordinates()[0][1]];
             GhostLoop(ghost, "1");
@@ -287,7 +289,7 @@ namespace PacMan_GUI_WPF
         {
             Ghost ghost = (Ghost)Field.entitiesArr[Field.FindGhostsCoordinates()[2][0], Field.FindGhostsCoordinates()[2][1]];
             GhostLoop(ghost, "3");
-        }
+        }*/
 
         private void BtnStart(object sender, RoutedEventArgs e)
         {
@@ -322,9 +324,9 @@ namespace PacMan_GUI_WPF
 
             Threading.timer.Tick -= dtTicker;
             Threading.pacman.Tick -= PacmanLoop;
-            Threading.ghost1.Tick -= _Ghost1Loop;
-            Threading.ghost2.Tick -= _Ghost2Loop;
-            Threading.ghost3.Tick -= _Ghost3Loop;
+            Threading.ghost1.Tick -= (_sender, _e) => GhostLoop((Ghost)Field.entitiesArr[Ghost.Ghost1.Item1, Ghost.Ghost1.Item2], "1");
+            Threading.ghost2.Tick -= (_sender, _e) => GhostLoop((Ghost)Field.entitiesArr[Ghost.Ghost2.Item1, Ghost.Ghost2.Item2], "2");
+            Threading.ghost3.Tick -= (_sender, _e) => GhostLoop((Ghost)Field.entitiesArr[Ghost.Ghost3.Item1, Ghost.Ghost3.Item2], "3");
 
             ClearElementsCanvas();
 

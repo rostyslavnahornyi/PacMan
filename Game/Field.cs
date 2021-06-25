@@ -222,12 +222,8 @@ namespace PacMan_GUI_WPF
             return arr;
         }
 
-        public static int[][] FindGhostsCoordinates()
+        public static void FindGhostsCoordinates()
         {
-            int[][] arr = new int[3][]; // number of ghosts, coordinates
-            arr[0] = new int[2];
-            arr[1] = new int[2];
-            arr[2] = new int[2];
             for (int i = 0; i < Field.entitiesArr.GetUpperBound(1) + 1; i++)
             {
                 for (int j = 0; j < Field.entitiesArr.GetUpperBound(0) + 1; j++)
@@ -235,12 +231,24 @@ namespace PacMan_GUI_WPF
                     if (Field.entitiesArr[j, i].ch == Constants.Ghost)
                     {
                         Ghost ghost = (Ghost)Field.entitiesArr[j, i];
-                        arr[ghost.queue - 1][0] = j;
-                        arr[ghost.queue - 1][1] = i;
+                        if (ghost.queue == 1)
+                        {
+                            Ghost.Ghost1.Item1 = j;
+                            Ghost.Ghost1.Item2 = i;
+                        }
+                        if (ghost.queue == 2)
+                        {
+                            Ghost.Ghost2.Item1 = j;
+                            Ghost.Ghost2.Item2 = i;
+                        }
+                        if (ghost.queue == 3)
+                        {
+                            Ghost.Ghost3.Item1 = j;
+                            Ghost.Ghost3.Item2 = i;
+                        }
                     }
                 }
             }
-            return arr;
         }
     }
 }

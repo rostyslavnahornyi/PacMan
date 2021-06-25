@@ -19,8 +19,13 @@ namespace PacMan_GUI_WPF
         public int y;
         public int queue;
 
-        public  string direction = "UP";
-        public  Entity previousCell = new Space();
+        public string direction = "UP";
+        public Entity previousCell = new Space();
+
+
+        public static (int, int) Ghost1;
+        public static (int, int) Ghost2;
+        public static (int, int) Ghost3;
 
         public Ghost(int x, int y, int q)
         {
@@ -42,22 +47,6 @@ namespace PacMan_GUI_WPF
             {
                 if (neighbourCells[i].Passability == true) 
                 {
-                    /*if (i == 0 && direction != "RIGHT")
-                    {
-                        possibleDirections.Add("LEFT");
-                    }
-                    if (i == 1 && direction != "LEFT")
-                    {
-                        possibleDirections.Add("RIGHT");
-                    }
-                    if (i == 2 && direction != "DOWN")
-                    {
-                        possibleDirections.Add("UP");
-                    }
-                    if (i == 3 && direction != "UP")
-                    {
-                        possibleDirections.Add("DOWN");
-                    }*/                    
                     if (direction != (((Direction)(Math.Abs(i - 2))).ToString()))
                     {
                         possibleDirections.Add(((Direction)i).ToString());
